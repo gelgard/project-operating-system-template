@@ -1,0 +1,21 @@
+Now, based on the already created architecture and product files, build the full implementation plan.
+
+Requirements:
+
+- break the project into stages
+- break each stage into small AI tasks
+- numbering must remain linear
+- tasks must be small and verifiable
+- for each task include:
+    - goal
+    - why this matters
+    - files to create/update
+    - acceptance criteria
+    - manual test direction
+- start with architecture and foundation tasks
+- then implementation tasks
+- then API / UI / integration tasks
+- if there is a real-time / live / background layer, separate it as an additive branch
+
+Do not start implementation.
+First generate only the full roadmap and the list of AI tasks.

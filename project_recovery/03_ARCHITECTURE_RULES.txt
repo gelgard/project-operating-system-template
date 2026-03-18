@@ -1,0 +1,12 @@
+ARCHITECTURE RULES
+
+1. Architecture-first workflow is mandatory
+2. Recovery files are part of the active source-of-truth layer
+3. AI task execution must remain structured and deterministic
+4. Template-repo must remain universal, not project-specific
+5. Template-repo updates must transfer only methodology-level changes
+6. Protected governance files must be excluded from the normal automatic template update flow
+7. The command "обнови template-repo" must use:
+   - project_recovery/12_TEMPLATE_REPO_UPDATE_COMMAND.txt
+8. The command "собери canonical template-repo" must build the full canonical template operating system repository
+9. The command "обнови архитектурные файлы" belongs to current-project safe sync, not template sync

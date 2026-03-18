@@ -1,0 +1,21 @@
+CANONICAL TEMPLATE REPO BUILD COMMAND
+
+Command:
+"собери canonical template-repo"
+
+Purpose:
+Build or rebuild the full canonical universal template repository.
+
+This command must be used when:
+- the current template repository is incomplete
+- the current template repository is immature
+- a full canonical replacement package is needed
+- the user wants a guaranteed complete operating-system template
+
+Main rule:
+The canonical build must reproduce methodology, not project-specific architecture.
+
+Output:
+- summary
+- full canonical file set
+- archive ready for 1:1 replacement

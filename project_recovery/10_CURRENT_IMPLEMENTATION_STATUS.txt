@@ -1,0 +1,14 @@
+CURRENT IMPLEMENTATION STATUS
+
+Canonical template model active.
+
+Current template capabilities include:
+- architecture-first startup model
+- source-of-truth file structure
+- AI task workflow
+- recovery workflow
+- response format rules
+- executable prompt files in a separate prompts layer
+- safe current-project architecture sync command
+- safe incremental template-repo sync command
+- full canonical template-repo build command

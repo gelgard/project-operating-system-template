@@ -1,170 +1,60 @@
-# 🚀 Как начать новый проект на основе этого шаблона
+# How To Start A New Project
 
-Этот репозиторий — не просто шаблон кода.  
-Это **Project Operating System** для работы с AI.
+## Main Idea
 
-Ниже — краткая инструкция, как правильно запустить новый проект, чтобы не сломать архитектуру и процесс.
+This repository is used to reproduce the **way a project is run**.
+It is not used to copy the content of any one project.
 
----
+A new project may differ substantially:
+- in technologies
+- in architecture
+- in product type
+- in complexity
+- in deployment model
 
-## 📌 Шаг 1 — Создать новый репозиторий из шаблона
+What must remain the same is the operating method.
 
-1. Открой template-репозиторий
-2. Нажми **Use this template**
-3. Создай новый repository
-4. Выбери:
-   - имя проекта
-   - public/private
-   - owner
+## What Must Be Reproduced
 
----
+After creating a new project from this template and executing the prompt sequence from `README.md`, the new project must receive:
+- architecture-first startup
+- source-of-truth files
+- implementation plan
+- recovery system
+- AI task workflow
+- response format rules
+- detailed terminal testing discipline
+- architecture / plan / recovery synchronization logic
 
-## 📌 Шаг 2 — Клонировать репозиторий
+## What Must Not Be Carried Over
 
-git clone <YOUR_NEW_REPO_URL>
-cd <PROJECT_NAME>
+The template must not carry over:
+- project-specific domain entities
+- project-specific stages
+- project-specific AI task numbering
+- project-specific product architecture
+- project-specific product content
 
----
+## Current Project Commands You Should Use After Project Startup
 
-## 📌 Шаг 3 — Описать проект AI
+Once a new project is created from this template and the prompt sequence has been executed, the working project should support commands like:
 
-Открой новый чат и вставь:
+### 1. `обнови архитектурные файлы`
+Use this to safely synchronize architecture, plan, and recovery files with the current real implementation state.
 
-### Prompt 1 — Project Intake
+### 2. `восстанови контекст проекта`
+Use this to restore the project state in a new chat from source-of-truth files and current code.
 
-Опиши проект своими словами.
+### 3. `дай следующую AI task`
+Use this to continue implementation strictly in the established AI task format.
 
-⚠️ Важно:
-- не проси код
-- не начинай реализацию
-- цель — определить архитектуру и стратегию
+These are project-level operating commands, not template-maintenance commands.
 
----
+## How To Start
 
-## 📌 Шаг 4 — Сгенерировать foundation layer
-
-Используй:
-
-### Prompt 2 — Architecture Foundation
-
-Сгенерируй:
-
-- AI_CONTEXT.md
-- архитектуру
-- product layer
-- planning
-- базовые recovery файлы
-
-⚠️ До этого момента:
-👉 НИКАКОГО кода
-
----
-
-## 📌 Шаг 5 — Построить полный план
-
-Используй:
-
-### Prompt 3 — Plan Decomposition
-
-Результат:
-
-- полный roadmap
-- список AI задач
-- линейная нумерация
-- разбивка на маленькие шаги
-
----
-
-## 📌 Шаг 6 — Подготовить recovery систему
-
-Используй:
-
-### Prompt 4 — Recovery Setup
-
-Результат:
-
-- полный набор recovery файлов
-- возможность восстановить проект в новом чате 1:1
-
----
-
-## 📌 Шаг 7 — Зафиксировать базу
-
-Перед началом разработки:
-
-git add .
-git commit -m "foundation: architecture + plan + recovery"
-git push
-
----
-
-## 📌 Шаг 8 — Начать реализацию
-
-Используй:
-
-### Prompt 5 — Start Implementation
-
-⚠️ Важно:
-- строго по AI tasks
-- строго по формату
-- без прыжков вперёд
-
----
-
-## 📌 Шаг 9 — Рабочий режим
-
-Для дальнейшей работы:
-
-### Prompt 6 — Continue
-
-Используется постоянно для получения следующей задачи
-
----
-
-## 📌 Шаг 10 — Восстановление (если чат потерян)
-
-1. Загрузи архив проекта
-2. Вставь:
-
-### Prompt 7 — Recovery
-
-Результат:
-- AI полностью восстановит контекст
-- продолжит работу с того же места
-
----
-
-## ⚠️ Критические правила
-
-### ❌ Нельзя:
-- начинать код до архитектуры
-- пропускать этапы
-- объединять большие задачи
-- нарушать numbering
-- менять формат ответов
-
-### ✅ Обязательно:
-- маленькие задачи
-- тестируемость
-- обновление архитектуры
-- обновление recovery файлов
-- фиксировать изменения в git
-
----
-
-## 🎯 Цель системы
-
-Каждый проект должен быть:
-
-- предсказуемым
-- управляемым
-- восстанавливаемым
-- масштабируемым
-- понятным как человеку, так и AI
-
----
-
-## 💡 Совет
-
-Если сомневаешься — не кодь.  
-Сначала обнови архитектуру и план.
+1. create a new repository from this template
+2. execute prompts in the order defined in `README.md`
+3. get the foundation first
+4. then the plan
+5. then the recovery layer
+6. only then begin implementation

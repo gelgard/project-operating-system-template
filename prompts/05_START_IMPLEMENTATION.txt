@@ -1,0 +1,25 @@
+Now continue working strictly according to the established plan / architecture / recovery / response format.
+
+Start from the first open AI task.
+
+The format of every response must be exactly:
+
+1. AI Task XXX — Name
+2. Stage / Substage / Goal
+3. full ai_tasks/XXX_...md file
+4. exact prompt for Cursor
+5. expected files
+6. detailed testing instructions
+7. what to send back
+8. completion criteria
+9. next step (brief)
+
+If testing is terminal-related:
+- describe it in detail
+- step by step
+- so that everything can be executed fully from the terminal without guessing
+- use cat > file <<'EOF' ... EOF if a temporary file is needed
+
+Do not break numbering.
+Do not break architecture.
+Do not start several large tasks at once.

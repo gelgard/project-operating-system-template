@@ -1,0 +1,14 @@
+RESPONSE FORMAT RULES
+
+For normal template update:
+- classify changes into project-specific vs methodology-level
+- transfer only methodology-level changes
+- exclude protected governance files from automatic update scope
+- use project_recovery/12_TEMPLATE_REPO_UPDATE_COMMAND.txt
+- update source-of-truth template files first
+- human-readable guides second
+- return archive ready for 1:1 replacement
+
+For canonical template build:
+- use project_recovery/13_CANONICAL_TEMPLATE_REPO_BUILD_COMMAND.txt
+- return the full canonical template repository, ready for 1:1 replacement

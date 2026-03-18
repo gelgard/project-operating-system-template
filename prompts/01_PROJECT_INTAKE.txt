@@ -1,0 +1,21 @@
+I am starting a new project and want to run it using the same system as my main project.
+
+The work must not be chaotic. It must follow a project operating system with:
+- architecture first
+- source-of-truth files mandatory
+- recovery files mandatory
+- implementation only through small AI tasks
+- every step must be small, verifiable, and testable
+- architecture files must always stay up to date
+- a new chat must be able to restore full context 1:1 from the recovery prompt
+
+Based on my project description:
+1. extract product identity
+2. propose the correct architectural direction
+3. propose a suitable technology stack
+4. identify the internal engineering name and the public product name if both are needed
+5. identify risks and unknowns
+6. do not start coding
+7. first propose the structure of the source-of-truth files, recovery system, and implementation plan
+
+The response must be structured and professional.
