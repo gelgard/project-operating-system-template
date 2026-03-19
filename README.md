@@ -4,176 +4,181 @@
 
 This repository is a reusable operating system for AI-assisted software projects.
 
-Its main purpose is not to store one project's architecture.
-Its purpose is to let you create **any future project** — regardless of complexity, architecture, purpose, or technology stack — while preserving the same disciplined operating model.
+It allows you to start any new project (web, mobile, backend, desktop, hybrid) with:
 
-Projects created from this template may differ substantially from each other.
-
-What must remain the same is the method:
-
-- architecture-first startup
-- source-of-truth files
-- implementation planning
-- staged AI tasks
-- recovery across chats
-- strict response formats
-- safe architecture / plan / recovery synchronization
-- machine-readable context projection
-- predictable project governance
+- architecture-first approach
+- full source-of-truth documentation
+- recovery system (chat-safe)
+- strict AI task execution model
+- consistent response format
+- incremental, test-driven development
 
 ---
 
-## Main Goal of This Template
+## What You Get
 
-Using this repository and the prompt sequence described below, you must be able to create a new project that works according to the same principles, rules, process discipline, and execution model as the reference workflow — **without inheriting the specific architecture of any one project**.
+This template ensures:
 
-In other words:
-- reuse the methodology
-- do not reuse project-specific content
-
----
-
-## Context Projection Layer
-
-Projects created from this template must also support a machine-readable context projection layer.
-
-That layer must produce:
-
-- `contextJSON/json_spec.md`
-- `contextJSON/json_<timestamp>.json`
-
-The JSON snapshot must be populated, not skeletal.
-
-It must contain enough aggregated information for an external application to visualize:
-
-- architecture file tree
-- file purposes
-- file update rules
-- architecture dependencies
-- plan structure
-- AI task statuses
-- roadmap with current position
-- management summary
-- customer-facing current status summary
-- last-iteration summary
+- identical project structure across all projects
+- no loss of context between chats
+- deterministic development workflow
+- full architectural visibility
+- scalable team onboarding
 
 ---
 
-## Prompt Files
+## Repository Structure
 
-Executable prompts are stored in separate files under:
-- `prompts/`
+### Root Context Files
+- AI_CONTEXT.md
+- AI_PROJECT_MAP.md
+- AI_PRODUCT_STRATEGY_LAYER.md
+- AI_GTM_CONTEXT.md
+- AI_GTM_PROJECT_MAP.md
 
-`README.md` does not duplicate them as the primary source.
-Instead, it defines the required execution order.
+### Architecture
+- docs/architecture/system-overview.md
+- docs/architecture/core-algorithm.md
+- docs/architecture/data-flow.md
+- docs/architecture/integration-boundaries.md
+- docs/architecture/real-time-layer.md
 
----
+### Product / Planning / Strategy
+- docs/product/*
+- docs/plans/*
+- docs/strategy/*
 
-## Prompt Execution Sequence
+### Brand / Design
+- docs/brand/*
+- docs/design/*
 
-Use the prompt files in the exact order below when starting a new project.
+### AI Task System
+- ai_tasks/000_ai_task_template.md
 
-### Prompt 01 — Project Intake
-File:
-- `prompts/01_PROJECT_INTAKE.txt`
+### Recovery System
+- project_recovery/*
 
-### Prompt 02 — Architecture Foundation
-File:
-- `prompts/02_ARCHITECTURE_FOUNDATION.txt`
-
-### Prompt 03 — Plan Decomposition
-File:
-- `prompts/03_PLAN_DECOMPOSITION.txt`
-
-### Prompt 04 — Recovery Setup
-File:
-- `prompts/04_RECOVERY_SETUP.txt`
-
-### Prompt 05 — Start Implementation
-File:
-- `prompts/05_START_IMPLEMENTATION.txt`
-
-### Prompt 06 — Standard Working Mode
-File:
-- `prompts/06_STANDARD_WORKING_MODE.txt`
-
-### Prompt 07 — Recovery In A New Chat
-File:
-- `prompts/07_RECOVERY_IN_NEW_CHAT.txt`
+### Cursor Commands
+- .cursor/commands/*
 
 ---
 
-## How to Use This Template
+## Prompt Workflow
 
-### Step 1 — Create a new repository from this template
-Use the GitHub template mechanism or clone this repository into a new project repository.
+### Prompt 1 — Project Intake
 
-### Step 2 — Run Prompt 01
-Describe the project in plain language.
+Use this to describe your project and extract identity, architecture direction and tech stack.
 
-### Step 3 — Run Prompt 02
-Generate the foundation layer.
+### Prompt 2 — Architecture Foundation
 
-### Step 4 — Run Prompt 03
-Generate the full implementation plan and AI task breakdown.
+Generate:
+- context files
+- architecture files
+- planning files
+- recovery base
 
-### Step 5 — Run Prompt 04
-Generate the recovery system.
+NO CODE at this stage.
 
-### Step 6 — Commit the foundation
-Commit the source-of-truth startup state before coding.
+### Prompt 3 — Plan Decomposition
 
-### Step 7 — Run Prompt 05
-Start implementation with the first open AI task.
+Break project into:
+- stages
+- sub-stages
+- AI tasks
 
-### Step 8 — Use Prompt 06
-Continue implementation task by task.
+Each task must include:
+- goal
+- acceptance criteria
+- test plan
 
-### Step 9 — Use Prompt 07 when needed
-Restore context in a new chat if required.
+### Prompt 4 — Recovery Setup
+
+Generate:
+- full recovery prompt
+- recovery files
+- status tracking
+- response format rules
+
+### Prompt 5 — Start Implementation
+
+Start working strictly via AI tasks with:
+
+- full structured responses
+- terminal-based testing
+- minimal changes
+- architecture preservation
+
+### Prompt 6 — Continuous Execution
+
+Continue:
+
+"Continue with next AI task strictly in defined format"
+
+### Prompt 7 — Recovery in New Chat
+
+Paste recovery prompt + upload repo.
+
+System must:
+- reconstruct state
+- detect stage
+- continue work
+
+---
+
+## Core Rules
+
+- Architecture first, then code
+- Small tasks only
+- Every task is testable
+- Always update architecture
+- Recovery must work at any point
+- No breaking numbering
+- No uncontrolled changes
 
 ---
 
-## What Must Be Universal
+## How To Use
 
-The template must preserve:
-- structure
-- workflow
-- governance
-- prompts
-- recovery logic
-- response format
-- testing discipline
-- update commands
-- context projection rules
-
-## What Must Not Be Universal
-
-The template must not preserve:
-- project-specific domain entities
-- project-specific stages
-- project-specific task numbering
-- project-specific architecture content
-- project-specific branding
-- project-specific code structure unless universally reusable
-
+1. Copy this repository
+2. Replace placeholders
+3. Run prompts in order
+4. Start implementation via AI tasks
+5. Maintain architecture + recovery files
 
 ---
 
-## Template Structure Usage Rule (CRITICAL)
+## Goal
 
-This template repository is provided as an **architecture baseline archive**.
+Make every project:
 
-When starting a new project:
+- structured
+- deterministic
+- recoverable
+- scalable
+- understandable by humans and AI
 
-- The archive structure must be treated as **source-of-truth**
-- All architecture generation must be based on this structure
-- The structure must be **extended, not replaced**
-- All future commands like `обнови архитектурные файлы` must reuse this structure
+## Template Operating System Inheritance Rule
 
-AI must:
-- NOT invent new structure if it exists in template
-- strictly follow file paths and layers
-- ensure compatibility with contextJSON projection layer
+The uploaded template repository is the **source-of-truth operating system layer** for any new project created from it.
 
----
+This means the new project must inherit and preserve the template-defined:
+
+- architecture file structure
+- recovery structure
+- planning structure
+- AI task workflow
+- response format rules
+- architecture update procedure
+- archive-first sync workflow
+- contextJSON rules
+- command model
+
+The new project may extend the content for its own domain, product, and technology stack, but it must **not replace the template operating system with a different process model** if the template already defines one.
+
+In practical terms:
+
+- the template structure is reused as the baseline
+- project-specific architecture is added on top of the baseline
+- project-specific planning is added on top of the baseline
+- project-specific recovery content is added on top of the baseline
+- all future architecture updates must continue to preserve the inherited operating-system rules

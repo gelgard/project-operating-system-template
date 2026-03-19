@@ -1,27 +1,14 @@
-If context is lost and a new chat is started, use the following process:
 
-1. upload the project archive
-2. paste the recovery prompt from:
+TEMPLATE OPERATING SYSTEM RECOVERY RULE
 
-project_recovery/09_FULL_PROJECT_RECOVERY_PROMPT.txt
+Recovery in a new chat must restore not only the current project state, but also the template-inherited operating system:
 
-Continue working on the project strictly according to the already established system of rules, formats, and strategy.
+- architecture rules
+- planning rules
+- recovery rules
+- response format rules
+- architecture update procedure
+- contextJSON rules
+- command model
 
-First fully restore the project context from the source-of-truth files, recovery files, ai_tasks, and the current code.
-Do not start implementation until you restore:
-
-- current project state
-- current stage
-- completed task list
-- next task
-- active architecture rules
-- AI task response format
-
-After recovery return only:
-
-1. current project state
-2. where we are in the plan
-3. which tasks are already closed
-4. what the next step is
-5. which architecture rules are active
-6. confirmation that you are ready to continue 1:1 from the current point
+The recovered project must continue inside the same inherited framework, not in a newly improvised one.

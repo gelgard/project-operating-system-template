@@ -1,21 +1,9 @@
-Now, based on the already created architecture and product files, build the full implementation plan.
 
-Requirements:
+TEMPLATE INHERITANCE RULE
 
-- break the project into stages
-- break each stage into small AI tasks
-- numbering must remain linear
-- tasks must be small and verifiable
-- for each task include:
-    - goal
-    - why this matters
-    - files to create/update
-    - acceptance criteria
-    - manual test direction
-- start with architecture and foundation tasks
-- then implementation tasks
-- then API / UI / integration tasks
-- if there is a real-time / live / background layer, separate it as an additive branch
+The implementation plan must be built **inside the inherited template operating system**.
 
-Do not start implementation.
-First generate only the full roadmap and the list of AI tasks.
+This means:
+- stage structure must align with the template process model
+- AI tasks must follow the template execution discipline
+- future recovery and architecture updates must remain compatible with the template-defined rules and commands

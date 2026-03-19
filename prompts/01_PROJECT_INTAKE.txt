@@ -1,34 +1,19 @@
+TEMPLATE OPERATING SYSTEM INHERITANCE
 
-IMPORTANT:
+Together with this prompt, a template repository archive is provided.
 
-Together with this prompt, a TEMPLATE ARCHIVE is provided.
+That archive is the source-of-truth for the development operating system of the new project.
 
-This archive:
-- defines architecture structure
-- defines recovery system
-- defines contextJSON rules
+Everything created in the new project must inherit and preserve the template-defined:
+- architecture file structure
+- recovery structure
+- planning structure
+- AI task workflow
+- response format rules
+- architecture update procedure
+- archive-first sync workflow
+- contextJSON rules
+- command model
 
-All future work must be based on this template.
+You may extend the system for the new project domain, but you must not invent a different operating system if the template already defines one.
 
-
-I am starting a new project and want to run it using the same system as my main project.
-
-The work must not be chaotic. It must follow a project operating system with:
-- architecture first
-- source-of-truth files mandatory
-- recovery files mandatory
-- implementation only through small AI tasks
-- every step must be small, verifiable, and testable
-- architecture files must always stay up to date
-- a new chat must be able to restore full context 1:1 from the recovery prompt
-
-Based on my project description:
-1. extract product identity
-2. propose the correct architectural direction
-3. propose a suitable technology stack
-4. identify the internal engineering name and the public product name if both are needed
-5. identify risks and unknowns
-6. do not start coding
-7. first propose the structure of the source-of-truth files, recovery system, and implementation plan
-
-The response must be structured and professional.
