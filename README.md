@@ -18,6 +18,7 @@ What must remain the same is the method:
 - recovery across chats
 - strict response formats
 - safe architecture / plan / recovery synchronization
+- machine-readable context projection
 - predictable project governance
 
 ---
@@ -27,16 +28,40 @@ What must remain the same is the method:
 Using this repository and the prompt sequence described below, you must be able to create a new project that works according to the same principles, rules, process discipline, and execution model as the reference workflow — **without inheriting the specific architecture of any one project**.
 
 In other words:
-
 - reuse the methodology
 - do not reuse project-specific content
+
+---
+
+## Context Projection Layer
+
+Projects created from this template must also support a machine-readable context projection layer.
+
+That layer must produce:
+
+- `contextJSON/json_spec.md`
+- `contextJSON/json_<timestamp>.json`
+
+The JSON snapshot must be populated, not skeletal.
+
+It must contain enough aggregated information for an external application to visualize:
+
+- architecture file tree
+- file purposes
+- file update rules
+- architecture dependencies
+- plan structure
+- AI task statuses
+- roadmap with current position
+- management summary
+- customer-facing current status summary
+- last-iteration summary
 
 ---
 
 ## Prompt Files
 
 Executable prompts are stored in separate files under:
-
 - `prompts/`
 
 `README.md` does not duplicate them as the primary source.
@@ -52,60 +77,29 @@ Use the prompt files in the exact order below when starting a new project.
 File:
 - `prompts/01_PROJECT_INTAKE.txt`
 
-Purpose:
-- describe the project in plain language
-- extract project identity
-- propose architecture direction
-- propose technology stack
-- identify unknowns and risks
-
 ### Prompt 02 — Architecture Foundation
 File:
 - `prompts/02_ARCHITECTURE_FOUNDATION.txt`
-
-Purpose:
-- generate the initial source-of-truth foundation
-- create architecture, product, planning, and basic recovery files
-- no implementation yet
 
 ### Prompt 03 — Plan Decomposition
 File:
 - `prompts/03_PLAN_DECOMPOSITION.txt`
 
-Purpose:
-- break the project into stages
-- break stages into small AI tasks
-- define acceptance criteria and test direction
-
 ### Prompt 04 — Recovery Setup
 File:
 - `prompts/04_RECOVERY_SETUP.txt`
-
-Purpose:
-- create the recovery layer
-- ensure a new chat can restore the project 1:1
 
 ### Prompt 05 — Start Implementation
 File:
 - `prompts/05_START_IMPLEMENTATION.txt`
 
-Purpose:
-- begin implementation using the established AI task structure and response format
-
 ### Prompt 06 — Standard Working Mode
 File:
 - `prompts/06_STANDARD_WORKING_MODE.txt`
 
-Purpose:
-- continue the next AI task in the established format
-
 ### Prompt 07 — Recovery In A New Chat
 File:
 - `prompts/07_RECOVERY_IN_NEW_CHAT.txt`
-
-Purpose:
-- restore project context after chat loss
-- continue from the exact current point
 
 ---
 
@@ -151,6 +145,7 @@ The template must preserve:
 - response format
 - testing discipline
 - update commands
+- context projection rules
 
 ## What Must Not Be Universal
 
@@ -161,19 +156,3 @@ The template must not preserve:
 - project-specific architecture content
 - project-specific branding
 - project-specific code structure unless universally reusable
-
----
-
-## Operational Rule
-
-If the methodology changes:
-- the template must be updated
-
-If only the project content changes:
-- the template must not be updated
-
----
-
-## Result Rule
-
-The purpose of this template is fulfilled only if a newly created project, after executing the prompt sequence, can operate under the same planning, architecture, recovery, AI task, testing, and response-format discipline as the reference workflow.

@@ -25,22 +25,14 @@ After creating a new project from this template and executing the prompt sequenc
 - response format rules
 - detailed terminal testing discipline
 - architecture / plan / recovery synchronization logic
-
-## What Must Not Be Carried Over
-
-The template must not carry over:
-- project-specific domain entities
-- project-specific stages
-- project-specific AI task numbering
-- project-specific product architecture
-- project-specific product content
+- machine-readable context projection for visualization and reporting
 
 ## Current Project Commands You Should Use After Project Startup
 
 Once a new project is created from this template and the prompt sequence has been executed, the working project should support commands like:
 
 ### 1. `обнови архитектурные файлы`
-Use this to safely synchronize architecture, plan, and recovery files with the current real implementation state.
+Use this to safely synchronize architecture, plan, recovery, and contextJSON snapshots with the current implementation state.
 
 ### 2. `восстанови контекст проекта`
 Use this to restore the project state in a new chat from source-of-truth files and current code.
@@ -48,13 +40,11 @@ Use this to restore the project state in a new chat from source-of-truth files a
 ### 3. `дай следующую AI task`
 Use this to continue implementation strictly in the established AI task format.
 
-These are project-level operating commands, not template-maintenance commands.
+## Context JSON Requirement
 
-## How To Start
+The created project should maintain:
 
-1. create a new repository from this template
-2. execute prompts in the order defined in `README.md`
-3. get the foundation first
-4. then the plan
-5. then the recovery layer
-6. only then begin implementation
+- `contextJSON/json_spec.md`
+- `contextJSON/json_<timestamp>.json`
+
+The timestamped JSON file must be populated with aggregated information about the project and suitable for external visualization systems.

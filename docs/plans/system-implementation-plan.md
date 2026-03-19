@@ -1,27 +1,22 @@
 # System Implementation Plan
 
 ## Current Stage
-{{CURRENT_STAGE}}
+Stage 6 — Real-Time Discipline Guard
 
-## Stage Breakdown
-### Stage 1
-{{STAGE_1}}
+## Progress
 
-### Stage 2
-{{STAGE_2}}
+Completed:
+- Tasks 029–062
 
-### Stage 3
-{{STAGE_3}}
+Current:
+- 063_context_json_generator_design_or_runtime_stub
 
-### Stage 4
-{{STAGE_4}}
+Next:
+- context JSON runtime or design stub
+- live route to UI / notification integration preparation
 
-### Stage 5
-{{STAGE_5}}
-
-## Current Position
-Completed tasks:
-{{COMPLETED_TASKS_SUMMARY}}
-
-Next task:
-{{NEXT_TASK}}
+Cross-cutting architecture notes:
+- contextJSON maintenance is part of architecture synchronization
+- architecture synchronization must be archive-first
+- the latest timestamped context JSON is the authoritative runtime source for the visual application
+- visual state computation must come from JSON, not from markdown parsing

@@ -1,45 +1,60 @@
 # AI_CONTEXT.md
 
-## Template Identity
+Internal architecture name: PropAgent
+Public product name: Disciplia
+Public domain: https://disciplia.trade
 
-Internal template identity:
-Universal Project Operating System Template
+Identity rule:
+- PropAgent is the internal engineering / repository / architecture identity.
+- Disciplia is the public-facing product / brand / GTM identity.
 
-## Main Purpose
+Disciplia is a discipline analytics platform for traders.
 
-This repository is a universal operating system for AI-assisted software projects.
+Implemented analytics slice:
+RuleResults
+→ DisciplineScoreEngine
+→ DisciplineScoreExplanation
+→ DisciplineAnalyticsEngine
+→ DisciplineTrendBuilder
+→ StrategyBehaviorEngine
+→ DisciplineProfileEngine
+→ TraderDisciplineState
+→ DisciplineStateSummary
+→ DisciplineStateContractBuilder
+→ GET /discipline-state
 
-Its main goal is:
-- to enable creation of projects of any complexity
-- to support very different product types, architectures, and technology stacks
-- to preserve the same core project discipline across all of them
+Implemented real-time slice:
+live snapshot
+→ LiveRuleEvaluationEngine
+→ RealTimeAlertEngine
+→ AccountRiskState
+→ LiveDisciplineMonitor
+→ LiveDisciplineMonitorContractBuilder
+→ GET /live-discipline-monitor
+→ automated endpoint tests
+→ stabilized route structure
 
-The template must preserve methodology, not project-specific content.
+Current project stage:
+- Stage 6 — Real-Time Discipline Guard
 
-## What This Template Must Reproduce
+Current next task:
+- 063_context_json_generator_design_or_runtime_stub
 
-This repository must reproduce the reusable operating model for:
-- architecture-first startup
-- source-of-truth file system
-- implementation planning
-- AI task decomposition
-- recovery across chats
-- response format discipline
-- testing workflow discipline
-- architecture / plan / recovery synchronization
-- safe template evolution
+Context Projection Layer rule:
+- Context Projection Layer is part of the architecture set.
+- Architecture synchronization must maintain:
+  - contextJSON/json_spec.md
+  - a new populated contextJSON/json_<timestamp>.json
+- The latest timestamped JSON snapshot is the authoritative runtime source for the external visual application.
+- Markdown files are opened by path only for raw content display and must not be required to compute project structure, status, roadmap, graph, or summaries.
 
-## Non-Goal
+Archive-first architecture sync workflow:
+When architecture files need updating:
+1. first inform that architecture sync is needed
+2. user uploads the current project archive
+3. full project sync is performed against the uploaded archive
+4. only after that the command "обнови архитектурные файлы" is executed
 
-This repository must NOT inherit or preserve project-specific architecture content from any one current project.
-
-It must remain universal.
-
-## Prompt System Rule
-
-Executable prompts live in separate files under `prompts/`.
-
-`README.md` describes:
-- what each prompt does
-- in which order prompts must be executed
-- how to use them to create a new project
+Critical rule:
+Architecture sync is incomplete unless contextJSON artifacts are regenerated, included in the update archive,
+and the newest timestamped JSON becomes the current authoritative visual-app snapshot.
