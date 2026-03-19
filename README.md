@@ -156,3 +156,24 @@ The template must not preserve:
 - project-specific architecture content
 - project-specific branding
 - project-specific code structure unless universally reusable
+
+
+---
+
+## Template Structure Usage Rule (CRITICAL)
+
+This template repository is provided as an **architecture baseline archive**.
+
+When starting a new project:
+
+- The archive structure must be treated as **source-of-truth**
+- All architecture generation must be based on this structure
+- The structure must be **extended, not replaced**
+- All future commands like `обнови архитектурные файлы` must reuse this structure
+
+AI must:
+- NOT invent new structure if it exists in template
+- strictly follow file paths and layers
+- ensure compatibility with contextJSON projection layer
+
+---

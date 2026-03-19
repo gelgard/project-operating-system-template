@@ -1,3 +1,16 @@
+
+IMPORTANT:
+
+Together with this prompt, a TEMPLATE ARCHIVE is provided.
+
+This archive:
+- defines architecture structure
+- defines recovery system
+- defines contextJSON rules
+
+All future work must be based on this template.
+
+
 I am starting a new project and want to run it using the same system as my main project.
 
 The work must not be chaotic. It must follow a project operating system with:
