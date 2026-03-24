@@ -14,3 +14,11 @@ Methodology-level additions may include:
 - new recovery rules
 - new reporting / projection rules
 - new contextJSON generation rules
+- context restore policy (Fast/Full + triggers + command mapping)
+- goal traceability layer (Requirement IDs + AI task gate)
+- response-format execution gates
+
+Mandatory update behavior:
+- transfer only operating-system methodology and process contracts
+- do not transfer project-specific product architecture or implementation plans
+- apply pointwise updates; avoid full rewrites unless explicitly requested

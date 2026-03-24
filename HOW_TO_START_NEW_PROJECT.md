@@ -34,10 +34,13 @@ Once a new project is created from this template and the prompt sequence has bee
 ### 1. `обнови архитектурные файлы`
 Use this to safely synchronize architecture, plan, recovery, and contextJSON snapshots with the current implementation state.
 
-### 2. `восстанови контекст проекта`
-Use this to restore the project state in a new chat from source-of-truth files and current code.
+### 2. `обнови контекст`
+Use this for default Fast restore before each new AI task.
 
-### 3. `дай следующую AI task`
+### 3. `обнови полный контекст`
+Use this to run forced Full restore after architecture sync, stage/merge transition, suspected desync, long pause, or explicit full-context request.
+
+### 4. `дай следующую AI task`
 Use this to continue implementation strictly in the established AI task format.
 
 ## Context JSON Requirement

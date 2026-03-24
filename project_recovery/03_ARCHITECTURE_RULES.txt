@@ -3,19 +3,17 @@ ARCHITECTURE RULES
 1. Architecture-first workflow is mandatory.
 2. Recovery files are part of the active source-of-truth layer.
 3. AI task execution must remain structured and deterministic.
-4. The architecture set includes machine-readable context projection files.
+4. The architecture set includes machine-readable context projection files as part of the formal architecture synchronization contract (not optional).
 5. The command "обнови архитектурные файлы" must synchronize:
    - architecture files
    - plan files
    - recovery files
-   - contextJSON/json_spec.md
-   - a new populated contextJSON/json_<timestamp>.json
-6. contextJSON/json_<timestamp>.json must contain aggregated and structured project context and must not be empty.
-7. json_spec.md must be overwritten whenever JSON schema or generation logic changes.
-8. The latest timestamped JSON snapshot is the authoritative runtime source for the external visual application.
-9. The visual application must use the latest JSON for structure, statuses, roadmap, graph, and summaries.
-10. Markdown files may be opened by path for raw content display only and must not be required to compute project state.
-11. Context JSON must be sufficient for an external visualization application to render:
+   - contextJSON/json_spec.md (emitted/updated when JSON schema or generation logic changes)
+   - a new populated contextJSON/json_<timestamp>.json (emitted on every such sync)
+6. Populated contextJSON/json_<timestamp>.json is mandatory: it must contain aggregated project context and must not be empty, skeletal, or a schema-only stub.
+7. json_spec.md must be regenerated/updated whenever JSON schema or generation logic changes, and included in the sync package.
+8. Architecture synchronization is incomplete if mandatory contextJSON outputs are missing, not populated, or json_spec.md is stale after a schema/generation change.
+9. Context JSON must be sufficient for an external visualization application to render:
    - architecture tree
    - file purposes and update rules
    - architecture dependency graph
@@ -25,9 +23,33 @@ ARCHITECTURE RULES
    - executive summary
    - customer status summary
    - last iteration summary
-12. Architecture sync workflow is archive-first:
-   - first notify that sync is needed
-   - then receive current project archive
-   - then perform full sync
-   - only after that execute "обнови архитектурные файлы"
-13. Architecture sync is incomplete without regenerated contextJSON outputs.
+10. Stage transition workflow is mandatory:
+   - announce start of the new Stage
+   - merge current working branch into `development`
+   - create and continue on `feature/stage<stageNum>`
+11. If the user marks requirements as mandatory, architecture/plan/recovery updates must encode them as obligations (must/mandatory), not recommendations.
+12. Before proposing or applying architecture update packages, run a conflict/duplicate check against existing source-of-truth files and update pointwise (delta-only) to avoid re-adding already implemented architecture blocks.
+13. Context Restore Policy is mandatory:
+   - Fast restore before every new AI task.
+   - Full restore after:
+     - `обнови архитектурные файлы`
+     - merge/stage transition
+     - suspected desync
+     - long pause
+     - explicit `обнови полный контекст`
+14. Command mapping is mandatory:
+   - `обнови контекст` => Fast restore (default)
+   - `обнови полный контекст` => Full restore (forced)
+15. Long pause definition:
+   - session inactivity >= 4 hours OR
+   - new calendar day since last restore OR
+   - context handoff between agents/users
+   => Full restore required.
+16. Goal traceability gate is mandatory:
+   - every AI task must include Goal Alignment with Requirement IDs from docs/plans/product_goal_traceability_matrix.md
+   - task closure requires test evidence for mapped Requirement IDs
+17. Blocked if:
+   - required restore type not executed
+   - source priority violated
+   - AI task missing Goal Alignment mapping when gate is active
+   - Full restore trigger occurred but only Fast restore was done

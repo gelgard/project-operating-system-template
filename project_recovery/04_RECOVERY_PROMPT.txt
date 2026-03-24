@@ -1,9 +1,25 @@
 RECOVERY PROMPT
 
 Before continuing work:
+- read project_recovery/* first
+- read AGENTS.md
 - read architecture files
 - read plan files
 - read current implementation status
 - read response format rules
 - read recent ai_tasks
+- read latest contextJSON/json_<timestamp>.json
 - then reconstruct exact current state
+
+Source priority (strict):
+1. project_recovery/*
+2. AGENTS.md
+3. docs/architecture/*
+4. docs/plans/*
+5. ai_tasks/*
+6. contextJSON/json_<latest>.json
+7. code (validation only)
+
+Context restore commands:
+- `обнови контекст` => Fast restore (default)
+- `обнови полный контекст` => Full restore (forced)

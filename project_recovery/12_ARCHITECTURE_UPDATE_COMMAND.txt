@@ -42,3 +42,13 @@ Visual app rule:
 - use markdown paths only for raw content display
 
 Architecture sync is incomplete without these outputs being included in the update archive.
+
+Context Restore Policy integration:
+- this command is a Full restore trigger
+- command mapping:
+  - `обнови контекст` => Fast restore (default)
+  - `обнови полный контекст` => Full restore (forced)
+- Full restore is also mandatory after:
+  - merge/stage transition
+  - suspected desync
+  - long pause

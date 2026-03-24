@@ -57,6 +57,7 @@ This template ensures:
 
 ### Recovery System
 - project_recovery/*
+- AGENTS.md
 
 ### Cursor Commands
 - .cursor/commands/*
@@ -134,6 +135,10 @@ System must:
 - Recovery must work at any point
 - No breaking numbering
 - No uncontrolled changes
+- Every AI task must include Goal Alignment with Requirement IDs
+- Context restore policy:
+  - `обнови контекст` => Fast restore (default)
+  - `обнови полный контекст` => Full restore (forced)
 
 ---
 

@@ -1,0 +1,200 @@
+{
+  "metadata": {
+    "generated_at_utc": "2026-03-24T11:35:00+00:00",
+    "generated_filename": "json_20260324_133500.json",
+    "schema_version": "1.2.0",
+    "project_internal_name": "{{INTERNAL_PROJECT_NAME}}",
+    "project_public_name": "{{PUBLIC_PRODUCT_NAME}}",
+    "current_stage": "{{CURRENT_STAGE}}",
+    "current_task": "{{CURRENT_AI_TASK}}",
+    "runtime_authority": "latest_timestamped_json"
+  },
+  "architecture_files": [
+    {
+      "id": "agents_contract",
+      "path": "AGENTS.md",
+      "title": "Agent execution contract",
+      "group": "root",
+      "purpose": "Defines execution rules, source priority, restore policy, command model, and failure conditions.",
+      "update_when": "Update when process rules, restore policy, or command model changes.",
+      "status": "active"
+    },
+    {
+      "id": "execution_model",
+      "path": "docs/architecture/core/execution_model.md",
+      "title": "Execution model",
+      "group": "architecture",
+      "purpose": "Defines restore->validate->locate->execute->update->sync lifecycle and stage branch transition behavior.",
+      "update_when": "Update when execution lifecycle or stage transition policy changes.",
+      "status": "active"
+    },
+    {
+      "id": "implementation_plan",
+      "path": "docs/plans/system-implementation-plan.md",
+      "title": "System implementation plan",
+      "group": "plan",
+      "purpose": "Defines stage, current task, and next tasks.",
+      "update_when": "Update when stage/current/next tasks change.",
+      "status": "active"
+    },
+    {
+      "id": "traceability_matrix",
+      "path": "docs/plans/product_goal_traceability_matrix.md",
+      "title": "Product goal traceability matrix",
+      "group": "plan",
+      "purpose": "Defines Requirement IDs and mandatory AI task alignment protocol.",
+      "update_when": "Update when goals, Requirement IDs, or alignment policy changes.",
+      "status": "active"
+    }
+  ],
+  "architecture_tree": {
+    "root": "template_project",
+    "nodes": [
+      {
+        "name": "recovery",
+        "path": "project_recovery",
+        "description": "Source-of-truth recovery layer and command contracts."
+      },
+      {
+        "name": "architecture",
+        "path": "docs/architecture",
+        "description": "System rules, boundaries, and execution model."
+      },
+      {
+        "name": "plans",
+        "path": "docs/plans",
+        "description": "Implementation roadmap and goal traceability."
+      },
+      {
+        "name": "ai_tasks",
+        "path": "ai_tasks",
+        "description": "Execution units with acceptance and tests."
+      },
+      {
+        "name": "context_projection",
+        "path": "contextJSON",
+        "description": "Runtime structured snapshot for visualization/reporting."
+      }
+    ]
+  },
+  "architecture_graph": {
+    "nodes": [
+      "project_recovery/*",
+      "AGENTS.md",
+      "docs/architecture/*",
+      "docs/plans/*",
+      "ai_tasks/*",
+      "contextJSON/json_<latest>.json",
+      "code"
+    ],
+    "edges": [
+      {
+        "from": "project_recovery/*",
+        "to": "AGENTS.md",
+        "type": "priority"
+      },
+      {
+        "from": "AGENTS.md",
+        "to": "docs/architecture/*",
+        "type": "priority"
+      },
+      {
+        "from": "docs/architecture/*",
+        "to": "docs/plans/*",
+        "type": "priority"
+      },
+      {
+        "from": "docs/plans/*",
+        "to": "ai_tasks/*",
+        "type": "priority"
+      },
+      {
+        "from": "ai_tasks/*",
+        "to": "contextJSON/json_<latest>.json",
+        "type": "priority"
+      },
+      {
+        "from": "contextJSON/json_<latest>.json",
+        "to": "code",
+        "type": "priority"
+      }
+    ]
+  },
+  "usage_flow": [
+    "restore",
+    "validate",
+    "locate",
+    "execute",
+    "update",
+    "sync"
+  ],
+  "project_plan": {
+    "current_stage": "{{CURRENT_STAGE}}",
+    "current_task": "{{CURRENT_AI_TASK}}",
+    "next_tasks": [
+      "{{NEXT_AI_TASK_1}}",
+      "{{NEXT_AI_TASK_2}}",
+      "{{NEXT_AI_TASK_3}}"
+    ]
+  },
+  "ai_task_status": {
+    "completed": "{{COMPLETED_TASKS_SUMMARY}}",
+    "current": "{{CURRENT_AI_TASK}}",
+    "next": [
+      "{{NEXT_AI_TASK_1}}",
+      "{{NEXT_AI_TASK_2}}",
+      "{{NEXT_AI_TASK_3}}"
+    ],
+    "goal_alignment_gate": "mandatory"
+  },
+  "roadmap": {
+    "stages": [
+      {
+        "id": "stage_current",
+        "name": "{{CURRENT_STAGE}}",
+        "status": "current"
+      },
+      {
+        "id": "stage_next",
+        "name": "{{NEXT_STAGE}}",
+        "status": "upcoming"
+      }
+    ],
+    "current_pointer": "stage_current"
+  },
+  "summaries": {
+    "system_for_management": {
+      "purpose": "Template operating system for architecture-first AI-assisted delivery.",
+      "how_it_works": "Execution follows source-priority restore, deterministic AI tasks, and architecture synchronization with populated context projection.",
+      "architecture_explained": "Recovery, architecture, plans, and tasks are synchronized and projected into latest contextJSON for runtime truth.",
+      "model_relationships": "Recovery governs execution contract; architecture governs rules; plans govern roadmap; tasks govern implementation."
+    },
+    "project_status_for_customer": {
+      "implemented": "Template operating system files and process gates are in place.",
+      "in_progress": "Project-specific architecture and plan are expected to be filled after intake prompts.",
+      "next": "Define project-specific stages and begin AI task execution with Goal Alignment mapping.",
+      "approximate_completion_percent": 30
+    },
+    "last_iteration": {
+      "completed_tasks": [
+        "template_sync"
+      ],
+      "summary_for_calendar": "Template methodology synchronized with latest execution rules.",
+      "summary_for_status_report": "Fast/Full context restore policy, goal traceability gates, and updated command mapping were integrated."
+    }
+  },
+  "generation_rules": {
+    "source_priority": [
+      "project_recovery/*",
+      "AGENTS.md",
+      "docs/architecture/*",
+      "docs/plans/*",
+      "ai_tasks/*",
+      "contextJSON/json_<latest>.json",
+      "code (validation only)"
+    ],
+    "generated_during_command": "обнови архитектурные файлы",
+    "regeneration_trigger": "Any architecture sync after archive upload, schema change, stage change, task change, or command-model change.",
+    "notes": "Latest timestamped JSON is authoritative runtime snapshot. Markdown files are auxiliary raw-content sources by path."
+  }
+}

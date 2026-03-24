@@ -11,5 +11,7 @@ This command must produce a complete template that supports:
 - recovery-driven continuity
 - AI task workflow
 - response format discipline
+- Fast/Full context restore policy
+- goal traceability gate (Requirement IDs)
 - machine-readable context projection
 - populated contextJSON generation

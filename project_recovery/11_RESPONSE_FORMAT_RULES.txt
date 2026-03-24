@@ -2,25 +2,58 @@ RESPONSE FORMAT RULES
 
 - Always follow AI Task structure
 - Always include terminal testing instructions when terminal testing is involved
+- Testing instructions must be accessible and concise:
+  - use short numbered steps
+  - explain each step in plain language
+  - include the exact command when a command is required
+  - include the exact expected visible result after the step
+  - avoid vague phrases like "prepare environment", "verify application", or "check everything works"
+  - prefer a few clear actionable steps over long exhaustive checklists
+- If the user asks to refine, fix, or continue the current AI task, do not create a new ai_task for that refinement
+- In that case, stay inside the current AI task context and provide only:
+  - updated Prompt for Cursor
+  - updated Test / Verification
+- If validation reveals a gap or defect in the current AI task scope, it must be fixed within the same current AI task before marking it complete
+- Do not defer in-scope validation gaps into a separate ai_task unless the user explicitly requests task splitting
+- When the user asks for the next AI task, the agent must create/save the corresponding ai_task file in ai_tasks/ using the established task format
+- The rest of the response format must remain unchanged
+- At the start of a new Stage, the agent must:
+  - explicitly announce the Stage transition
+  - provide the branch-transition instruction to merge into `development` and create `feature/stage<stageNum>`
 - Always include:
   - changed files
   - full file content
   - test output
-- Always include commit step after successful testing
+- After full validation of the current AI task, the agent must automatically provide commit message in the response (without extra reminder from user)
 - Do not skip numbering
 - No large unstructured responses
+- If the user explicitly states that conditions are mandatory, responses and architecture sync outputs must phrase them as mandatory obligations, not optional recommendations
+- Before proposing an architecture/package update, check existing architecture/plan/recovery for duplicates and conflicts; propose/apply only missing delta changes
+- Context Restore Policy self-check:
+  - before each new AI task: Fast restore
+  - Full restore required after:
+    - `обнови архитектурные файлы`
+    - merge/stage transition
+    - suspected desync
+    - long pause
+    - explicit `обнови полный контекст`
+- Command mapping in responses must stay consistent:
+  - `обнови контекст` => Fast restore
+  - `обнови полный контекст` => Full restore
+- Goal traceability self-check:
+  - every AI task must contain Goal Alignment with Requirement IDs
+  - if mapping is missing, allowed response:
+    - BLOCKED: AI task has no product-goal mapping, add Requirement IDs first.
+- Restore violation blocked response:
+  - BLOCKED: Context restore policy violation.
+  - REQUIRED FIX: Run <Fast|Full> restore and resync required files.
 
 Architecture sync rule:
-When the user asks "обнови архитектурные файлы":
-1. first state that an architecture sync requires the current project archive
-2. wait for archive upload
-3. perform full sync against the uploaded archive
-4. only then execute architecture synchronization
-5. include:
-   - contextJSON/json_spec.md
-   - a new populated contextJSON/json_<timestamp>.json
+When the user asks "обнови архитектурные файлы", perform safe architecture / plan / recovery synchronization and also emit:
+- contextJSON/json_spec.md — updated/regenerated when the JSON schema or generation logic changed
+- a new populated contextJSON/json_<timestamp>.json
 
-The generated context JSON must contain aggregated and structured information, not an empty schema stub.
+Architecture update package rule:
+Whenever architecture files (docs/architecture, docs/plans, project_recovery, or related contract docs) are updated as part of architecture synchronization, the deliverable **must** include the mandatory contextJSON artifacts above; a populated JSON is required (not an empty schema stub).
 
-The newest timestamped JSON must be treated as the authoritative runtime source for the visual application.
-Markdown files are referenced by path for raw content display only.
+The generated context JSON must contain aggregated information, not an empty schema stub.
