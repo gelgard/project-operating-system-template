@@ -2,21 +2,24 @@
 
 ## Purpose
 
-Context Projection Layer converts the current project state into a populated machine-readable JSON bundle.
+Context Projection Layer historically converted project state into populated machine-readable JSON bundles.
 
-It exists so that an external visualization application can display project architecture, execution plan,
-task status, roadmap, and management summaries without parsing markdown files directly.
+Existing outputs are retained as frozen historical external informational exports only.
+They are no longer active architecture synchronization deliverables by default.
 
-## Required Outputs
+It is an external informational projection only. It must not define or redefine the repository's
+architecture, process, methodology, testing rules, validation strategy, or execution model.
+
+## Historical Outputs
 
 1. contextJSON/json_spec.md
 2. contextJSON/json_<timestamp>.json
 
 ## Core Rule
 
-The JSON file must be populated, not skeletal.
+Existing JSON files are archive artifacts only and must not override active source-of-truth files.
 
-It must contain aggregated and structured current project data, including:
+If a future project explicitly reintroduces JSON export generation, generated JSON must be populated, not skeletal, and may contain:
 - architecture file tree
 - file purposes
 - file update rules
@@ -30,11 +33,12 @@ It must contain aggregated and structured current project data, including:
 - last-iteration summary
 - timestamp for history tracking
 
-## Runtime Source Rule
+## External Archive Rule
 
-The latest timestamped JSON snapshot is the authoritative runtime source for the external visual application.
+Existing timestamped JSON snapshots are external visual/reporting archive inputs only.
+They are not internal project authority and cannot override recovery, AGENTS, architecture, plans, or AI tasks.
 
-The visual application must use the newest JSON for:
+External tools may read historical JSON for:
 - architecture tree rendering
 - file-purpose and update-rule rendering
 - architecture dependency graph rendering
@@ -48,19 +52,21 @@ The visual application must use the newest JSON for:
 Markdown files may still be opened by file path for raw content display,
 but they must not be required to compute project structure, status, roadmap, or summaries.
 
-## Generation Inputs
+## Future Generation Inputs
 
-The populated JSON generation pipeline must use sources in this order:
+If a future project explicitly reintroduces JSON export generation, the populated JSON generation pipeline must use sources in this order:
 
 1. project_recovery/*
-2. docs/architecture/*
-3. docs/plans/*
-4. ai_tasks/*
-5. synchronized implementation state already fixed in architecture files
+2. AGENTS.md
+3. docs/architecture/*
+4. docs/plans/*
+5. ai_tasks/*
+6. contextJSON/json_<latest>.json for prior projection metadata only
+7. code for validation only
 
-## Full Structured Snapshot Rule
+## Future Full Structured Snapshot Rule
 
-The JSON must be treated as a full structured snapshot of the current project state.
+If generation is reintroduced, JSON may be treated as a full structured snapshot of the current project state for external reporting only.
 
 This means it must contain enough structured data for the visual application
 to reconstruct project state without markdown parsing.
@@ -72,10 +78,10 @@ This does not mean the JSON must embed the full raw contents of all markdown fil
 Whenever "обнови архитектурные файлы" is executed:
 - first require current project archive upload
 - perform full sync against uploaded archive
-- regenerate the populated JSON snapshot
-- regenerate json_spec.md if schema logic changed
-- include both files into the update archive
-- treat the newest timestamped JSON as the current authoritative visual-app source
+- do not regenerate populated JSON snapshots
+- do not update json_spec.md unless a future architecture decision explicitly reintroduces JSON export generation
+- no contextJSON artifact is required for architecture sync completion
+- keep repository decisions governed by the source-of-truth priority, not by JSON contents
 
 ## Human Summary Rule
 

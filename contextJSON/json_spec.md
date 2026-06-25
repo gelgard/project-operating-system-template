@@ -2,12 +2,13 @@
 
 ## Purpose
 
-Defines the structure, meaning, and generation rules of the populated context projection JSON snapshot.
+Defines the historical structure, meaning, and generation rules of populated context projection JSON snapshots.
 
-The JSON file is not a schema stub.
-It is a fully populated machine-readable project context bundle.
+Existing JSON files are frozen historical external informational exports.
+They are not active architecture synchronization deliverables by default.
 
-The external visual application must use the latest timestamped JSON snapshot as its authoritative runtime source.
+If a future project explicitly reintroduces JSON export generation, generated JSON must not be a schema stub.
+It must be a fully populated machine-readable project context bundle.
 
 Markdown files may still be opened by path for raw content display,
 but they must not be required to compute project structure, task status, roadmap, graph, or summaries.
@@ -27,18 +28,20 @@ but they must not be required to compute project structure, task status, roadmap
 
 ## Key Interpretation Rules
 
-1. The newest json_<timestamp>.json is the current authoritative snapshot.
-2. The JSON is a full structured snapshot of current project state.
+1. Existing json_<timestamp>.json files are frozen historical external informational snapshots.
+2. JSON must not override active markdown source-of-truth files.
 3. The JSON does not need to embed full markdown text.
-4. The JSON must contain enough structure and summaries for the visual application to operate without markdown parsing.
+4. If JSON export generation is explicitly reintroduced, generated JSON must contain enough structure and summaries for the visual application to operate without markdown parsing.
+5. JSON cannot override project_recovery, AGENTS.md, docs/architecture, docs/plans, or ai_tasks.
 
 ## Generation Rule
 
-On each architecture sync:
-1. current project archive must be uploaded
-2. a full sync must be performed against the archive
-3. then generate:
-   - contextJSON/json_spec.md
-   - contextJSON/json_<timestamp>.json
+By default:
+- do not generate new `contextJSON/json_<timestamp>.json` files during architecture sync, context restore, task issue, or task closure
+- do not update `contextJSON/json_spec.md` unless a future architecture decision explicitly reintroduces JSON export generation
+- do not overwrite previous snapshots
 
-The timestamped JSON must be populated with aggregated and structured project information.
+If a future project explicitly reintroduces JSON export generation:
+- current project archive must be uploaded
+- a full sync must be performed against the archive
+- generated timestamped JSON must be populated with aggregated and structured project information

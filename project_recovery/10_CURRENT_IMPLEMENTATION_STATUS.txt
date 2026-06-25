@@ -13,9 +13,14 @@ Next:
 - {{NEXT_CAPABILITY_2}}
 
 Active architecture obligations:
-- architecture sync must maintain populated contextJSON outputs
+- architecture sync must not generate new populated contextJSON outputs
 - architecture sync follows archive-first workflow
-- latest timestamped contextJSON is authoritative runtime source
-- visual/runtime state must come from JSON, not markdown parsing
+- existing timestamped contextJSON files are frozen historical exports only
 - context restore policy must be enforced (Fast/Full)
 - AI task closure requires Goal Alignment mapping + measurable test evidence
+- Cursor prompts are implementation-only; planning, architecture reasoning, validation strategy, manual testing, closure gates, and response packaging remain agent-owned
+- every current/next AI step requires a brief manager-facing summary
+- UI-scope tasks require both Playwright visual validation and user-side manual visual checks
+- Task Closure Hard Gate Checklist must pass before completion, and temporary validation-only artifacts must be deleted unless intentionally kept as evidence
+- every Stage must use its own `feature/stage-<stage-number>-<stage-name-kebab-case>` branch and completed Stages must merge into `develop`
+- new functionality or functional changes must pass docs/architecture/change-management-process.md before implementation

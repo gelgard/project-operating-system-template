@@ -12,6 +12,11 @@ It allows you to start any new project (web, mobile, backend, desktop, hybrid) w
 - strict AI task execution model
 - consistent response format
 - incremental, test-driven development
+- explicit responsibility split between agent-owned planning/validation and Cursor-owned implementation
+- manager-facing summaries for current and next work
+- hard closure gates before tasks are marked complete
+- controlled Change Request intake for new functionality or functional changes
+- Stage feature-branch workflow using `develop` as the completed-stage integration branch
 
 ---
 
@@ -136,9 +141,19 @@ System must:
 - No breaking numbering
 - No uncontrolled changes
 - Every AI task must include Goal Alignment with Requirement IDs
+- Every current/next AI step must include a short plain-language manager-facing summary
+- Cursor prompts must be implementation-only and must not duplicate agent-owned planning, architecture, validation strategy, manual testing, closure evaluation, or response packaging
+- UI-scope tasks require both Playwright visual validation by the agent and manual visual validation steps for the user
+- Task Closure Hard Gate Checklist must pass before a task is marked complete
+- Temporary validation-only artifacts must be deleted after task closure unless intentionally kept as evidence
+- contextJSON is an external informational export for visualization/reporting only; it is not architecture/process authority
+- populated contextJSON snapshots are no longer generated during architecture sync, context refresh, task issue, or task closure unless a future project explicitly reintroduces an export mechanism
+- every Stage must be developed in `feature/stage-<stage-number>-<stage-name-kebab-case>` and merged into `develop` only after Stage completion
+- commands equivalent to `необходимо внести изменения` must start Change Request Intake before plans, tasks, or code are changed
 - Context restore policy:
   - `обнови контекст` => Fast restore (default)
   - `обнови полный контекст` => Full restore (forced)
+  - `обнови полный контест` => Full restore (forced typo alias)
 
 ---
 
@@ -176,6 +191,8 @@ This means the new project must inherit and preserve the template-defined:
 - architecture update procedure
 - archive-first sync workflow
 - contextJSON rules
+- Change Request process
+- Stage branch workflow
 - command model
 
 The new project may extend the content for its own domain, product, and technology stack, but it must **not replace the template operating system with a different process model** if the template already defines one.

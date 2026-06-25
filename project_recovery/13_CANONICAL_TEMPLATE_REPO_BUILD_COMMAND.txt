@@ -13,5 +13,7 @@ This command must produce a complete template that supports:
 - response format discipline
 - Fast/Full context restore policy
 - goal traceability gate (Requirement IDs)
-- machine-readable context projection
-- populated contextJSON generation
+- historical contextJSON archive handling
+- no-new-contextJSON-generation policy
+- Stage feature branch workflow using `develop`
+- controlled Change Request intake

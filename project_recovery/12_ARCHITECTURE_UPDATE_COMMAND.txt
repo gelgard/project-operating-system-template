@@ -25,29 +25,20 @@ Rules:
 - sync stage, tasks, next steps
 - sync real-time / API layers
 - update recovery files
-- regenerate contextJSON outputs
+- do not regenerate contextJSON outputs
 
-Mandatory contextJSON outputs:
-1. contextJSON/json_spec.md
-2. contextJSON/json_<timestamp>.json
-
-JSON requirements:
-- must be populated with aggregated and structured project information
-- must be sufficient for external visualization and reporting
-- must include timestamp for history tracking
-- the newest timestamped JSON becomes the authoritative runtime source for the visual application
-
-Visual app rule:
-- use the newest JSON for structure, status, roadmap, graph, and summaries
-- use markdown paths only for raw content display
-
-Architecture sync is incomplete without these outputs being included in the update archive.
+contextJSON rule:
+- existing contextJSON files are frozen historical external exports only
+- do not create a new contextJSON/json_<timestamp>.json
+- do not update contextJSON/json_spec.md unless a future architecture decision explicitly reintroduces JSON export generation
+- no contextJSON artifact is required for architecture sync completion
 
 Context Restore Policy integration:
 - this command is a Full restore trigger
 - command mapping:
   - `обнови контекст` => Fast restore (default)
   - `обнови полный контекст` => Full restore (forced)
+  - `обнови полный контест` => Full restore (forced, typo alias)
 - Full restore is also mandatory after:
   - merge/stage transition
   - suspected desync
