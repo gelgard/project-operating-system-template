@@ -7,8 +7,10 @@ Before continuing work:
 - read plan files
 - read current implementation status
 - read response format rules
+- read engineering discipline and lean operating mode
+- read credential-security and approved-design contracts when current scope touches them
 - read recent ai_tasks
-- read latest contextJSON/json_<timestamp>.json
+- treat any contextJSON/json_<timestamp>.json only as a frozen historical export
 - then reconstruct exact current state
 
 Source priority (strict):
@@ -16,10 +18,13 @@ Source priority (strict):
 2. AGENTS.md
 3. docs/architecture/*
 4. docs/plans/*
-5. ai_tasks/*
-6. contextJSON/json_<latest>.json
-7. code (validation only)
+5. docs/design/*
+6. approved user-behavior documentation when defined
+7. ai_tasks/*
+8. contextJSON archive
+9. code (validation only)
 
 Context restore commands:
 - `обнови контекст` => Fast restore (default)
 - `обнови полный контекст` => Full restore (forced)
+- `обнови полный контест` => Full restore (forced typo alias)

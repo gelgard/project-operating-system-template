@@ -10,5 +10,10 @@ Do not replace:
 - response format
 - architecture update rules
 - command model
+- engineering edge-condition analysis and option comparison
+- lean/token-controlled response rules
+- credential and visual validation gates
+- selected-entity integrity
+- automatic commit after successful task closure
 
 Only extend them with project-specific implementation.

@@ -1,273 +1,172 @@
 # AGENTS.md
 
-agent_contract_version: 2.0
-last_synced_with_architecture: 2026-06-25T00:00:00+03:00
+agent_contract_version: 2.1
+last_synced_with_architecture: 2026-07-19T00:00:00+03:00
 compatible_with_template_os: v1
 
-## PURPOSE
-This file defines the operational contract for any agent working in this project.
+## Purpose
+This file defines the operational contract for every agent working in a project created from this template. The agent executes inside an architecture-first system and may not let code redefine architecture.
 
-The agent:
-- does NOT design the system
-- executes strictly inside architecture-first system
+## Source Of Truth Priority
+1. `project_recovery/*` - factual current state
+2. `AGENTS.md` - execution contract
+3. `docs/architecture/*` - rules and constraints
+4. `docs/plans/*` - roadmap and accepted specification addenda
+5. `docs/design/*` - mandatory UI contract when applicable
+6. approved user-behavior documentation when the project defines it
+7. `ai_tasks/*` - execution units
+8. `contextJSON/json_<timestamp>.json` - frozen historical external exports
+9. code - implementation evidence only
 
----
+Violation is invalid execution.
 
-## AUTHORITATIVE SOURCES MATRIX
+## Execution Model
+`restore -> validate -> locate -> execute -> update -> sync`
 
-- project_recovery/* -> factual state
-- AGENTS.md -> execution contract
-- docs/architecture/* -> rules and constraints
-- docs/plans/* -> roadmap
-- ai_tasks/* -> execution units
-- contextJSON/json_<timestamp>.json -> frozen historical external informational snapshots only; no new snapshots are generated
-- code -> validation only
+Mandatory contracts:
+- `docs/architecture/engineering-discipline.md`
+- `docs/architecture/lean-operating-mode.md`
+- `docs/architecture/credential-security-process.md` when credentials/platform access are involved
+- `docs/architecture/change-management-process.md` for new functionality or behavioral changes
+- `docs/architecture/git-branch-workflow.md`
+- `docs/design/approved-design-contract.md` for UI work
 
----
+Responsibility split:
+- Cursor: code writing and directly related code tests only.
+- Agent chat: architecture, planning, task packaging, validation strategy, manual/live checks, closure gates, and next-step orchestration.
+- Do not duplicate agent-owned planning or validation narration inside the Cursor prompt.
 
-## SOURCE OF TRUTH PRIORITY (STRICT)
+Every current/next step needs a short non-technical manager-facing summary.
 
-1. project_recovery/*
-2. AGENTS.md
-3. docs/architecture/*
-4. docs/plans/*
-5. ai_tasks/*
-6. contextJSON/json_<timestamp>.json archive
-7. code
-
-Violation = invalid execution
-
----
-
-## EXECUTION MODEL
-
-restore -> validate -> locate -> execute -> update -> sync
-
-Execution responsibility split (mandatory):
-- Cursor is used only for code writing and directly code-related implementation work
-- architecture definition/update is performed here by the agent, not by Cursor
-- planning / next-step planning is performed here by the agent, not by Cursor
-- validation strategy and closure-gate evaluation are performed here by the agent, not by Cursor
-- manual test orchestration and user-side validation instructions are performed here by the agent, not by Cursor
-- Prompt for Cursor must exclude work the agent already performs here
-- duplicated content between chat-side execution package and Prompt for Cursor is forbidden
-
-Manager-facing step summary rule (mandatory):
-- every current/next AI step must include a short manager-facing summary
-- summary must explain what will be done and why from the user/product perspective
-- summary must avoid programming jargon and low-level implementation language
-- summary must be brief, clear, and understandable to a non-technical manager
-
----
-
-## ARCHITECTURE BOUNDARIES
-
-- recovery = factual state
+## Architecture Boundaries
+- recovery = facts
 - architecture = rules
-- plans = future
-- ai_tasks = execution
-- contextJSON = external informational projection for a third-party application
+- plans = future work and accepted specification addenda
+- tasks = execution units
+- design = mandatory visual behavior
+- code = validation evidence
+- contextJSON = frozen historical informational export only
 
-Rules:
-- code cannot redefine architecture
-- JSON cannot override recovery
-- JSON cannot define or redefine architecture, development methodology, validation strategy, testing rules, or execution process
-- AGENTS/AGEND do not override recovery
+Code, JSON, and task files cannot override recovery or architecture. Runtime must not parse markdown as configuration unless explicitly designed and validated.
 
----
+## Engineering Discipline Gate
+Before implementation, every task must:
+- state requirement, invariants, and exclusions;
+- mark universal edge-condition groups applicable/not applicable;
+- compare at least two real options;
+- choose by correctness, security, performance, then laconicity;
+- guard remaining assumptions;
+- include `Анализ частностей и выбор решения` in the task file.
 
-## CONTEXT JSON CONTRACT
+Selected-entity integrity is mandatory: an explicitly selected record must stay bound to that exact identity through subsequent steps. Never replace it with latest/first/default/global state without explicit user confirmation.
 
-Last frozen JSON:
-contextJSON/json_<timestamp>.json
+## Credential And Security Contract
+Tasks needing credentials/platform access must include complete acquisition, exact env name, secure local/deploy storage, least-privilege, validation, and rotation instructions. Repeat the complete instructions in chat only when setup or credential-backed live validation is the next required action.
 
-Rules:
-- frozen historical external informational export only
-- no longer regenerated or updated unless a future project explicitly reintroduces an export mechanism
-- must not be treated as an architecture, process, methodology, testing, or decision source for this repository
-- UI must NOT parse markdown
-- markdown paths used only for display
-- architecture sync must not create a new populated contextJSON snapshot
-- if a contextJSON file conflicts with recovery, AGENTS, architecture, plans, or ai_tasks, the markdown source-of-truth wins
+Secrets must never be committed, logged, printed, hardcoded, stored in task markdown, screenshots, tests, or context exports. `.env.example` has placeholders only; `.env` remains local and ignored. Missing instructions or unsafe secret handling blocks execution.
 
----
+## Lean Operating Mode
+- Be direct and delta-only.
+- Prefer 1-3 short sentences when possible.
+- Do not repeat unchanged rules, history, full task bodies, full successful logs, or credential instructions that are not currently required.
+- Focused tests are the default. Run a full regression when required by task risk/scope, shared contracts, dependencies/runtime, Stage closure, or explicit task instructions.
+- Lean reporting never weakens quality, security, restore, design, testing, or closure gates.
 
-## RESTORATION MODES
+## Context JSON Contract
+Historical `contextJSON/json_<timestamp>.json` files are frozen external informational exports. Do not regenerate or update them during restore, architecture sync, task issuance, or closure unless a future accepted architecture decision explicitly reintroduces generation.
 
-Fast:
-- AGENTS.md + recovery + plan validation
+## Restoration Policy
+Fast restore before every new AI task:
+- `AGENTS.md`
+- `project_recovery/06_STAGE_PROGRESS.txt`
+- `project_recovery/10_CURRENT_IMPLEMENTATION_STATUS.txt`
+- `docs/plans/system-implementation-plan.md`
+- `docs/plans/product_goal_traceability_matrix.md`
+- credential/design contracts when current scope touches them
 
-Full:
-- full traversal of all layers
+Full restore after:
+- `обнови архитектурные файлы`
+- Stage merge/transition
+- suspected source drift
+- session gap >=4 hours, new calendar day, or agent handoff
+- `обнови полный контекст` / `обнови полный контест`
 
-Archive-first:
-- required before architecture update
+Required restore output: current Stage/task/next tasks, Requirement gate, drift/conflicts, blockers, and `ready/blocked`.
 
-Context Restore Policy:
-- Before every new AI task, run Fast restore (key files only).
-- Full restore is mandatory after:
-  - command `обнови архитектурные файлы`
-  - merge/stage transition
-  - suspected desync (recovery/architecture/plan/task mismatch)
-  - long pause
-  - explicit command `обнови полный контекст`
-- Command mapping:
-  - `обнови контекст` => Fast restore (default)
-  - `обнови полный контекст` => Full restore (forced)
-  - `обнови полный контест` => Full restore (forced, typo alias)
-- Long pause rule:
-  - session inactivity >= 4 hours OR
-  - new calendar day since last restore OR
-  - context handoff between agents/users
-  => Full restore required
-- Fast restore key files:
-  - project_recovery/06_STAGE_PROGRESS.txt
-  - project_recovery/10_CURRENT_IMPLEMENTATION_STATUS.txt
-  - AGENTS.md
-  - docs/plans/system-implementation-plan.md
-  - docs/plans/product_goal_traceability_matrix.md
-- Fast restore required outputs:
-  - current stage/current task/next tasks
-  - gate status (Goal Alignment / Requirement mapping)
-  - readiness: ready/blocked
-- Full restore required outputs:
-  - complete state reconstruction
-  - drift/conflict audit
-  - architecture/plan/recovery sync status
-  - explicit blockers and required fixes (if any)
-- Failure/blocked conditions:
-  - required restore type not executed
-  - source priority violated
-  - task missing Goal Alignment mapping when gate is active
-  - Full restore trigger occurred but only Fast restore was done
-  - blocked response format:
-    - BLOCKED: Context restore policy violation.
-    - REQUIRED FIX: Run <Fast|Full> restore and resync required files.
+## Command Model
+Supported commands and intent-equivalent phrasings:
+- `обнови архитектурные файлы` - Full restore plus architecture/plan/recovery and accepted-CR propagation audit; no contextJSON generation.
+- `обнови template-repo` - copy universal methodology deltas only; exclude product-specific architecture/functionality.
+- `собери canonical template-repo` - build the complete universal template OS.
+- `обнови контекст` - Fast restore.
+- `обнови полный контекст` / `обнови полный контест` - Full restore.
+- `дай следующую AI task` and close variants - issue the next saved numbered task in strict format.
+- `необходимо внести изменения` and close variants - start Change Request Intake before implementation.
+- `таск выполнен`, `задача выполнена`, `задача готова`, `готово` - run the current task's complete closure validation.
+- `проверь лог` - inspect the project's canonical persisted operational audit when such an audit is defined; otherwise return blocked with the missing audit contract.
 
----
+## Change Request Contract
+Every accepted CR must:
+- be classified and impact-analysed;
+- map to Requirement IDs;
+- be recorded in `docs/plans/accepted_change_requests.md` as a specification addendum;
+- update every affected architecture, plans, traceability, recovery, testing, design, credential/security, task/template, user-behavior, and specification file;
+- explicitly record why an unaffected layer needs no change;
+- be committed before implementation task issuance.
 
-## COMMAND MODEL
+Architecture sync must audit recent accepted CRs for missing propagation.
 
-Allowed commands:
+## Next Task Response Gate
+When issuing the next task:
+- save `ai_tasks/<number>_<name>.md`;
+- return its path;
+- give a short manager-facing summary;
+- provide one separate fenced Cursor prompt containing implementation-only scope;
+- provide compact task-specific verification actions;
+- put each terminal command in its own fenced block;
+- include `Self-check: path ✅ | cursor prompt ✅ | test steps ✅ | command blocks ✅`.
 
-- обнови архитектурные файлы
-- обнови template-repo
-- собери canonical template-repo
-- дай следующую AI task
-- необходимо внести изменения
-- обнови контекст
-- обнови полный контекст
-- обнови полный контест
+## UI And Visual Gate
+UI tasks must follow the approved design from the first increment; placeholder/generic/intermediate UI is forbidden. Agent-side browser/Playwright validation and separate user visual-check instructions are both mandatory. Validate relevant viewports, interaction, loading/empty/error states, text fit, and no regressions.
 
-Semantic command equivalence (mandatory):
-- Command matching is intent-based, not literal-only.
-- The following user phrasings must be treated as equivalent to `дай следующую AI task`:
-  - `дай следующую аи таск`
-  - `следущую аи таск`
-  - `следущую задачу`
-- For all equivalents above, agent must apply the same next-task response format gate.
-- The following user phrasings must be treated as equivalent to `необходимо внести изменения`:
-  - `вносим изменения`
-  - `надо внести изменения`
-  - `нужно внести изменения`
-  - `необходимо внести правки`
-  - `внеси изменения`
-  - any close phrasing with the same meaning
-- For all equivalents above, agent must start Change Request Intake from `docs/architecture/change-management-process.md`.
-- Change Request Intake must return the required "Добавить Change Request" questions first and must not start implementation or create an AI task until the user's answers are analyzed and required source-of-truth updates are made.
+## Task Completion Command
+On a completion command, run all validations required by the active task: focused tests, full regression when required, startup/safety checks, whitespace and secret checks, task-specific live/manual gates, and visual validation when applicable.
 
----
+Do not rerun an unchanged full regression for status, restore, or architecture-only work. Resolve in-scope failures inside the current task.
 
-## ARCHITECTURE UPDATE TRIGGERS
+## Task Closure Hard Gate
+Closure requires:
+- required restore passed;
+- Goal Alignment and Requirement IDs valid;
+- scope/baseline passed;
+- agent validation passed;
+- required user manual/visual validation passed;
+- no open in-scope gaps;
+- temporary validation artifacts removed unless intentional evidence;
+- final `git diff --check` and secret-safety diff passed;
+- task-scoped changes automatically committed on the current Stage feature branch.
 
-Update architecture when:
+Commit failure blocks closure. Do not wait for a separate commit command after successful closure.
 
-- current/completed/next task changes
-- implementation status changes
-- source-of-truth command model changes
-- execution model changes
-- AGENTS.md changes
+## Stage Branch Workflow
+- Each Stage uses `feature/stage-<number>-<name-kebab-case>`.
+- Stage implementation occurs only on that feature branch.
+- On Stage completion, merge into `develop`.
+- Create the next Stage branch from updated `develop`.
+- `master`/`main` is a publishing mirror only and is updated from `develop` under the project's explicit publication/deployment rules.
+- Never implement directly on `develop`, `master`, or `main`.
+- Force push, destructive reset, and branch deletion are forbidden without explicit approval.
 
----
+## Do Not
+- invent or reorder tasks;
+- bypass restore, architecture, CR intake, Goal Alignment, or closure gates;
+- implement the first plausible solution without edge analysis and option comparison;
+- infer a selected entity from latest/first/default;
+- expose secrets;
+- deliver placeholder UI;
+- claim unsupported integrations or full readiness without acceptance evidence;
+- mark a task complete while any gate is open;
+- leave a fully validated task uncommitted.
 
-## DO / DO NOT
-
-Do:
-- restore before acting
-- validate AGENTS with recovery
-- treat contextJSON as frozen historical export only, never as architecture/process authority
-- follow task sequence strictly
-- provide testing instructions in short explicit steps with exact commands/actions and expected results
-- for AI tasks that include UI scope, always provide detailed manual visual testing instructions with exact UI actions and expected visible results
-- for AI tasks with UI scope, always run Playwright-based visual validation by the agent and report executed visual steps, observed result per step, and detected visual mismatches
-- keep user-side manual visual steps in parallel; do not replace them with agent-only checks
-- keep refinements inside the current AI task unless the user explicitly asks for a new task
-- save the ai_task markdown file when issuing the next AI task
-- include a short manager-facing summary for every current/next step in plain non-technical language
-- for new functionality or functional changes, enforce `docs/architecture/change-management-process.md` before implementation
-- when the user triggers change intake, ask the mandatory "Добавить Change Request" questions before changing plans, tasks, or code
-- keep Cursor prompts development-only: code changes, refactors, and code-level tests directly tied to implementation
-- when user asks `дай следующую AI task`, respond in strict copy-ready format:
-  - do not paste full AI task body into chat if task file is already created/saved
-  - provide the saved ai_task file path
-  - provide a short manager-facing summary
-  - provide Prompt for Cursor in one separate fenced block
-  - provide Test/Verification as step-by-step actions
-  - provide each terminal command in its own separate fenced block for 1:1 copy
-  - include `Self-check: path ✅ | cursor prompt ✅ | test steps ✅ | command blocks ✅`
-- provide commit message automatically after full validation of the current AI task
-- resolve any in-scope validation gap inside the same current AI task before marking it complete
-- after closing each AI task, automatically delete temporary files created only for testing/validation unless they are intentional evidence artifacts
-- enforce mandatory Task Closure Hard Gate Checklist before marking any AI task complete:
-  - context/restore gate passed for the required restore mode
-  - Goal Alignment + Requirement IDs present and valid
-  - scope/baseline gate passed
-  - agent validation passed
-  - user manual validation passed for required steps
-  - no open in-scope validation gaps remain
-  - temporary validation-only artifacts are deleted unless intentionally kept
-  - commit message is provided only after all gates pass
-- announce explicitly when a new Stage starts
-- follow mandatory Stage branch flow:
-  - every Stage must have its own branch named `feature/stage-<stage-number>-<stage-name-kebab-case>`
-  - all Stage work is committed only to that Stage feature branch
-  - when the Stage is complete, merge that feature branch into `develop`
-  - create the next Stage feature branch from updated `develop`
-  - do not implement Stage work directly on `main` or `develop`
-
-Do Not:
-- invent tasks
-- skip numbering
-- override architecture
-- implement a new functional change before Change Request Intake and impact analysis are complete
-- treat code as truth
-- parse markdown for runtime
-- treat contextJSON as architecture/process authority
-- use vague testing instructions when a concrete step/result pair can be provided
-- create a new ai_task just to refine prompt or testing for the current task
-- start a new Stage on an old branch without merging the completed Stage into `develop` and creating the next Stage feature branch
-- implement Stage work directly on `main` or `develop`
-- mark any AI task complete when at least one Task Closure Hard Gate checklist item is not satisfied
-- duplicate manual validation, planning, architecture reasoning, or next-step orchestration inside Prompt for Cursor
-- use Cursor as the owner of planning, architecture, validation strategy, closure gates, or response formatting
-
----
-
-## FAILURE CONDITIONS
-
-Invalid if:
-
-- recovery ignored
-- AGENTS ignored
-- architecture bypassed
-- tasks reordered
-- logic invented
-
----
-
-## STOP RULE
-
-After restore -> STOP
-
-Wait for:
-"дай следующую AI task"
+## Stop Rule
+After restore, stop and wait for `дай следующую AI task` unless the user explicitly requested another action.

@@ -8,3 +8,9 @@ DEV PROCESS RULES
 6. Before each new AI task run Fast restore (`обнови контекст`)
 7. Run Full restore (`обнови полный контекст`) after architecture sync, merge/stage transition, suspected desync, or long pause
 8. Every AI task must include Goal Alignment with Requirement IDs and evidence-based acceptance
+9. Every task must follow docs/architecture/engineering-discipline.md before implementation
+10. Use docs/architecture/lean-operating-mode.md for delta-only token-controlled reporting without reducing validation
+11. Credential/platform tasks must follow docs/architecture/credential-security-process.md
+12. Every accepted Change Request is an effective-specification addendum and must propagate to all affected source-of-truth layers
+13. Completion aliases run full task closure validation and successful closure auto-commits task-scoped changes
+14. Preserve the exact identity of explicitly selected entities across multi-step flows

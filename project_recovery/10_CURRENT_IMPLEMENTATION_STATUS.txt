@@ -24,3 +24,9 @@ Active architecture obligations:
 - Task Closure Hard Gate Checklist must pass before completion, and temporary validation-only artifacts must be deleted unless intentionally kept as evidence
 - every Stage must use its own `feature/stage-<stage-number>-<stage-name-kebab-case>` branch and completed Stages must merge into `develop`
 - new functionality or functional changes must pass docs/architecture/change-management-process.md before implementation
+- every task must follow docs/architecture/engineering-discipline.md and preserve selected-entity integrity
+- responses must follow docs/architecture/lean-operating-mode.md without weakening quality gates
+- credential/platform work must follow docs/architecture/credential-security-process.md
+- accepted Change Requests must be recorded as effective-specification addenda and propagated to every affected source-of-truth layer
+- UI work must follow docs/design/approved-design-contract.md from the first increment
+- successful task closure automatically commits task-scoped changes on the current Stage feature branch

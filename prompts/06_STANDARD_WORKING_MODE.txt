@@ -9,3 +9,7 @@ All next AI tasks must preserve:
 - the planning discipline
 - the response format
 - the command model
+- engineering discipline and selected-entity integrity
+- lean/token-controlled reporting without reduced validation
+- credential/design/Change Request gates
+- automatic task closure commit

@@ -1,62 +1,112 @@
-# AI Task XXX — {{TASK_NAME}}
+# AI Task XXX - {{TASK_NAME}}
+
+Status: {{ISSUED_OR_PLANNED}}
 
 ## Stage
 {{STAGE}}
 
-## Substage
-{{SUBSTAGE}}
-
 ## Goal
 {{GOAL}}
 
-## Why This Matters
-{{WHY_THIS_TASK_EXISTS}}
-
 ## Manager-Facing Summary
-{{SHORT_NON_TECHNICAL_SUMMARY_OF_WHAT_IMPROVES_AND_WHY_IT_MATTERS}}
+{{SHORT_NON_TECHNICAL_SUMMARY_OF_WHAT_IMPROVES_AND_WHY}}
 
 ## Goal Alignment
-Requirement IDs (from docs/plans/product_goal_traceability_matrix.md):
 - {{REQUIREMENT_ID_1}}
 - {{REQUIREMENT_ID_2}}
 
-## Files to Create / Update
+## Scope
 Create:
-- {{FILE_TO_CREATE_1}}
+- {{FILE_TO_CREATE}}
 
 Update:
-- {{FILE_TO_UPDATE_1}}
+- {{FILE_TO_UPDATE}}
 
 Do not update:
-- contextJSON files unless a future architecture decision explicitly reintroduces JSON export generation
+- {{OUT_OF_SCOPE_BOUNDARY}}
+- contextJSON unless an accepted architecture decision explicitly reintroduces generation
+
+## Required Behavior
+1. {{BEHAVIOR_1}}
+2. {{BEHAVIOR_2}}
 
 ## Acceptance Criteria
-- {{CRITERIA_1}} (maps to {{REQUIREMENT_ID_1}})
-- {{CRITERIA_2}} (maps to {{REQUIREMENT_ID_2}})
-- {{CRITERIA_3}}
+- {{CRITERION_1}}
+- {{CRITERION_2}}
+- Applicable edge conditions are tested or guarded.
 
-## Manual Test
-{{MANUAL_TEST_SUMMARY}}
+## Анализ частностей и выбор решения
+Task understanding:
+- Required: {{EXACT_REQUIREMENT}}
+- Invariants: {{INVARIANTS}}
+- Out of scope: {{EXCLUSIONS}}
 
-## UI Visual Test
-Required when task has UI scope:
-- User action: {{EXACT_UI_ACTION}}
-- Expected visible result: {{EXPECTED_VISIBLE_RESULT}}
-- Negative/error-state check: {{EXPECTED_ERROR_OR_EMPTY_STATE_RESULT}}
+Edge conditions (`applicable` / `not applicable` with reason):
+- Zero/one/many/duplicates: {{STATUS_AND_REASON}}
+- Explicit non-latest entity selection: {{STATUS_AND_REASON}}
+- Entry points/callers: {{STATUS_AND_REASON}}
+- Delayed/repeated/out-of-order events: {{STATUS_AND_REASON}}
+- Concurrency/redeploy overlap: {{STATUS_AND_REASON}}
+- Restart/lost in-memory state: {{STATUS_AND_REASON}}
+- Partial failure/retry/idempotency: {{STATUS_AND_REASON}}
+- Invalid/boundary/hostile input: {{STATUS_AND_REASON}}
+
+Options:
+- Option A: {{OPTION_A_CORRECTNESS_SECURITY_PERFORMANCE_COMPLEXITY}}
+- Option B: {{OPTION_B_CORRECTNESS_SECURITY_PERFORMANCE_COMPLEXITY}}
+
+Chosen solution:
+- {{CHOICE_AND_WHY}}
+
+Assumptions and guards:
+- {{ASSUMPTION_OR_NONE}}
+
+## Credentials And Security Instructions
+Include this section only when credentials/platform access are required. State
+provider acquisition, exact env names, ignored local storage, deploy-side secret
+storage, least privilege, validation, rotation/revocation, and non-commit rules.
+If no credentials are needed: `No new credential or platform setup is required.`
 
 ## Agent Validation
-- {{TERMINAL_OR_CODE_TEST_COMMAND_AND_EXPECTED_RESULT}}
-- Playwright visual validation required for UI-scope tasks:
-  - Step: {{PLAYWRIGHT_VISUAL_STEP}}
-  - Observed result: {{PASS_OR_FAIL}}
-  - Visual mismatches: {{NONE_OR_LIST}}
+Focused:
+```bash
+{{FOCUSED_TEST_COMMAND}}
+```
+
+Full regression when required by risk/scope:
+```bash
+{{FULL_REGRESSION_COMMAND_OR_NOT_REQUIRED}}
+```
+
+```bash
+git diff --check
+```
+
+## Agent Visual Check
+Required for UI scope:
+- viewports/pages/states: {{CHECKED_SCOPE}}
+- result: {{PASS_FAIL}}
+- mismatches/fixes: {{NONE_OR_LIST}}
+
+## User Visual Check Instructions
+Required for UI scope:
+1. {{EXACT_USER_ACTION}}
+   Expected: {{EXPECTED_RESULT}}
+2. {{NEGATIVE_OR_ERROR_STATE_ACTION}}
+   Expected: {{EXPECTED_RESULT}}
 
 ## Closure Gate
-- Context/restore gate passed for required restore mode: {{YES_NO}}
-- Goal Alignment + Requirement IDs present and valid: {{YES_NO}}
-- Scope/baseline gate passed: {{YES_NO}}
+- Required restore passed: {{YES_NO}}
+- Requirement mapping valid: {{YES_NO}}
+- Scope/baseline passed: {{YES_NO}}
 - Agent validation passed: {{YES_NO}}
-- User manual validation passed: {{YES_NO}}
-- No open in-scope validation gaps remain: {{YES_NO}}
-- Temporary validation-only artifacts deleted or intentionally kept as evidence: {{YES_NO}}
-- Commit message provided after all gates pass: {{YES_NO}}
+- Required user/manual/visual validation passed: {{YES_NO}}
+- No open in-scope gaps: {{YES_NO}}
+- Temporary artifacts removed/retained as intentional evidence: {{YES_NO}}
+- `git diff --check` and secret-safety diff passed: {{YES_NO}}
+- Task changes auto-committed on Stage feature branch: {{YES_NO}}
+
+## Cursor Scope
+Implement only code and directly related code tests in this task. Do not own
+architecture, plans, recovery, manual/live validation, deployment, closure, or
+next-task packaging unless explicitly listed as code scope.

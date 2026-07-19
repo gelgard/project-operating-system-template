@@ -3,8 +3,14 @@ STAGE PROGRESS
 Current stage:
 {{CURRENT_STAGE}}
 
+Current Stage branch:
+feature/stage-{{STAGE_NUMBER}}-{{STAGE_NAME_KEBAB_CASE}}
+
 Completed:
 {{COMPLETED_TASKS_SUMMARY}}
 
+Current:
+{{CURRENT_TASK_OR_NONE}}
+
 Next:
-{{NEXT_TASK}}
+{{NEXT_TASKS}}

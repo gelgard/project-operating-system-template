@@ -31,6 +31,11 @@ After creating a new project from this template and executing the prompt sequenc
 - hard task-closure gates and validation artifact cleanup
 - controlled Change Request intake before new functionality or functional changes
 - Stage feature-branch workflow using `develop` and `feature/stage-<stage-number>-<stage-name-kebab-case>`
+- mandatory engineering edge-case analysis and comparison of solution options
+- lean/token-controlled delta-only reporting without weaker validation
+- credential acquisition/storage/rotation instructions when secrets are needed
+- automatic task commit after every successful closure gate
+- selected-entity integrity across multi-step flows
 
 ## Current Project Commands You Should Use After Project Startup
 
@@ -59,6 +64,27 @@ Equivalent user phrasings such as `дай следующую аи таск`, `с
 Use this when new functionality, refinements, defect fixes, design deltas, architecture changes, or reprioritization are requested.
 
 Equivalent user phrasings such as `вносим изменения`, `надо внести изменения`, `нужно внести изменения`, `необходимо внести правки`, and `внеси изменения` must start Change Request Intake.
+
+### 6. `готово`
+Aliases `таск выполнен`, `задача выполнена`, `задача готова`, and `готово`
+must run every validation required by the current task. Successful closure
+automatically commits task-scoped changes on the current Stage feature branch.
+
+### 7. `проверь лог`
+When the project defines a canonical persisted operational audit, inspect that
+evidence against the effective specification and documented user behavior. If
+the project has no such audit contract, return a precise blocker instead of
+inventing one.
+
+## Project Bootstrap Obligations
+
+When copying this template:
+- replace identity and product placeholders without deleting process contracts;
+- register the baseline specification and accepted-CR addendum files;
+- populate the approved design contract before UI implementation;
+- initialize Requirement IDs, Stage 1, no completed/current task, and logical next tasks;
+- create `.env.example` placeholders only; never copy real `.env` values;
+- keep contextJSON historical/frozen unless export generation is explicitly reintroduced.
 
 ## Context JSON Archive Rule
 

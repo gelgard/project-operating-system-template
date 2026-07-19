@@ -38,7 +38,7 @@ The agent must first return this intake form:
 9. Есть ли ограничения, примеры, ссылки, скриншоты или желаемое поведение:
 ```
 
-After the user answers, the agent must perform analysis and update the necessary source-of-truth files before issuing or changing implementation tasks.
+After the user answers, the agent must perform analysis and update all necessary source-of-truth files before issuing or changing implementation tasks.
 
 ## Change Classification
 Every requested change must be classified as one or more:
@@ -65,6 +65,11 @@ Before implementation, the agent must analyze impact on:
 - git Stage branch workflow
 - manager-facing delivery story
 
+If the change touches credentials, platform accounts, secrets, env vars, API
+keys, database/cache URLs, authentication, deployment variables, RPC endpoints,
+monitoring tokens, or integration access, also apply
+`docs/architecture/credential-security-process.md`.
+
 The decision must be one of:
 - `fits current task`
 - `new AI task in current Stage`
@@ -80,6 +85,10 @@ If a change affects UI:
 
 Temporary UI shapes are forbidden.
 
+The project-populated design authority is
+`docs/design/approved-design-contract.md` plus its approved source references
+and `docs/design/design-tokens.json`.
+
 ## Traceability Gate
 Every accepted change must map to existing Requirement IDs or create a new Requirement ID in `docs/plans/product_goal_traceability_matrix.md`.
 
@@ -94,6 +103,26 @@ If a change affects order, scope, Stage boundaries, or delivery sequence:
 - state how quality and final scope remain protected
 
 Plan changes must be controlled deltas, not informal task drift.
+
+## Source-Of-Truth Propagation Rule
+Every accepted Change Request is a technical-specification addendum and must be
+recorded in `docs/plans/accepted_change_requests.md`.
+
+Update every affected layer:
+- baseline/effective specification and spec-alignment gap plan;
+- architecture, system overview, data flow, and assumptions;
+- implementation/release/testing plans;
+- Requirement IDs and traceability;
+- recovery/current status;
+- design and user-behavior documentation;
+- credential/security process;
+- AI tasks/templates and response/process rules.
+
+If a layer needs no change, record that as an explicit impact-analysis result.
+Missing propagation blocks implementation and closure.
+
+`обнови архитектурные файлы` must audit recent accepted CRs against every
+applicable layer and apply missing deltas without full rewrites.
 
 ## Task Packaging Rule
 After analysis, an accepted change must be packaged as exactly one of:
@@ -140,8 +169,12 @@ If ready, the agent then updates all necessary source-of-truth files and commits
 - Do not bypass the approved design contract.
 - Do not weaken integration/security boundaries.
 - Do not store credentials insecurely.
+- Do not issue credential-affecting work without complete acquisition and safe
+  storage instructions.
+- Do not expose secrets in source, markdown, tests, logs, screenshots, or
+  committed examples.
 - Do not break isolation boundaries.
 - Do not turn short visible increments into long invisible backend phases.
-- Do not implement Stage work on `main` or `develop`.
+- Do not implement Stage work on `master`, `main`, or `develop`.
 - Do not generate new populated contextJSON snapshots.
 - Do not mark tasks complete while closure gates are open.

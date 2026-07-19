@@ -12,5 +12,11 @@ Short summary:
 Current stage:
 {{CURRENT_STAGE}}
 
-Current next task:
-{{NEXT_TASK}}
+Current task:
+{{CURRENT_TASK_OR_NONE}}
+
+Next tasks:
+{{NEXT_TASKS}}
+
+Readiness:
+{{READY_OR_BLOCKED}}

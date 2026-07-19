@@ -6,4 +6,7 @@ The implementation plan must be built **inside the inherited template operating 
 This means:
 - stage structure must align with the template process model
 - AI tasks must follow the template execution discipline
+- every task must map Requirement IDs and include edge-condition/solution-option analysis
+- credential and UI tasks must include their mandatory security/visual gates
+- accepted Change Requests must be planned as effective-specification addenda
 - future recovery and architecture updates must remain compatible with the template-defined rules and commands

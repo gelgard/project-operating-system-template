@@ -14,7 +14,15 @@ ARCHITECTURE FOUNDATION PROMPT
         - archive-first sync workflow
         - contextJSON rules
         - command model
+        - engineering discipline and assumptions registry
+        - lean/token-controlled reporting
+        - credential-security process
+        - accepted Change Request addendum/propagation rules
+        - task closure validation and automatic commit
+        - project-populated approved-design contract
 
         The project may extend content for its own domain, but it must not replace the inherited operating system.
 
-        Prepare the full foundation layer ready for 1:1 insertion.
+        Replace product placeholders from the supplied specification, but keep
+        all operating-system contracts domain-neutral and intact. Prepare the
+        full foundation layer ready for 1:1 insertion.

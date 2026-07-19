@@ -10,5 +10,8 @@ Recovery in a new chat must restore not only the current project state, but also
 - architecture update procedure
 - contextJSON rules
 - command model
+- engineering, lean, credential-security, and design contracts
+- accepted Change Request addenda and propagation state
+- task-completion aliases and automatic-commit closure behavior
 
 The recovered project must continue inside the same inherited framework, not in a newly improvised one.

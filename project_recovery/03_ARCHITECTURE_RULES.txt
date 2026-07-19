@@ -19,7 +19,7 @@ ARCHITECTURE RULES
    - when the Stage is complete, merge the Stage feature branch into `develop`
    - create the next Stage feature branch from updated `develop`
    - continue the next Stage only on that new feature branch
-   - never implement Stage work directly on `main` or `develop`
+   - never implement Stage work directly on `master`, `main`, or `develop`
 11. If the user marks requirements as mandatory, architecture/plan/recovery updates must encode them as obligations (must/mandatory), not recommendations.
 12. Before proposing or applying architecture update packages, run a conflict/duplicate check against existing source-of-truth files and update pointwise (delta-only) to avoid re-adding already implemented architecture blocks.
 13. Context Restore Policy is mandatory:
@@ -46,7 +46,7 @@ ARCHITECTURE RULES
    - contextJSON is a frozen historical external informational export only
    - no new contextJSON snapshots are generated during architecture sync, context refresh, task issue, or task closure
    - it must not define or redefine architecture, process, methodology, testing, validation, or execution rules
-   - source-of-truth decisions must continue to follow project_recovery -> AGENTS -> architecture -> plans -> ai_tasks -> contextJSON -> code
+   - source-of-truth decisions must continue to follow project_recovery -> AGENTS -> architecture -> plans -> design -> approved user-behavior docs -> ai_tasks -> contextJSON -> code
 18. Execution responsibility split is mandatory:
    - Cursor owns code writing and directly code-related implementation only
    - the agent owns planning, architecture reasoning, validation strategy, manual-test orchestration, closure evaluation, and response packaging
@@ -61,14 +61,15 @@ ARCHITECTURE RULES
    - required manual validation passed
    - no in-scope validation gaps remain
    - temporary validation-only files are deleted unless intentionally kept as evidence
-   - commit message is provided only after all gates pass
+   - final whitespace and secret-safety checks pass
+   - task-scoped changes are automatically committed after all gates pass
 21. UI-scope AI tasks require both agent-side Playwright visual validation and user-side manual visual test steps with expected visible results.
 22. Change Management Process is mandatory:
    - docs/architecture/change-management-process.md governs all new functionality, refinements, requirement extensions, design deltas, architecture changes, defect fixes, and reprioritization
    - commands equivalent to `необходимо внести изменения` must start Change Request Intake
    - the first response must ask the mandatory `Добавить Change Request` questions
    - implementation must not start until classification, impact analysis, Requirement ID mapping, design impact, architecture impact, plan impact, and task placement are complete
-   - accepted changes must be recorded in source-of-truth files before implementation tasks are issued or changed
+   - accepted changes must be recorded in docs/plans/accepted_change_requests.md as effective-specification addenda and propagated to every affected source-of-truth layer before implementation tasks are issued or changed
    - changes must be packaged as current-task refinement, new numbered AI task, future AI task, architecture update package, or blocked decision
 23. Blocked if:
    - required restore type not executed
@@ -78,3 +79,12 @@ ARCHITECTURE RULES
    - task closure is attempted while any hard-gate checklist item is missing or failed
    - implementation starts on a branch that violates docs/architecture/git-branch-workflow.md
    - new functional change bypasses docs/architecture/change-management-process.md
+24. Engineering Discipline is mandatory:
+   - classify edge conditions before implementation
+   - compare at least two real options
+   - choose by correctness, security, performance, then laconicity
+   - preserve explicitly selected entity identity
+25. Lean Operating Mode is mandatory and changes reporting density only; it never weakens quality or closure gates.
+26. Credential/security instructions are mandatory when credentials or platform access are required; secrets must never enter source, markdown, tests, logs, screenshots, or commits.
+27. UI tasks must use docs/design/approved-design-contract.md from the first delivered increment; placeholder/generic/intermediate UI is forbidden.
+28. Task-completion aliases run the active task's validation checklist, required visual/manual gates, cleanup, and automatic commit.

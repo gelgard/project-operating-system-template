@@ -7,10 +7,14 @@ Behavior:
 - triggers safe architecture / plan / recovery synchronization
 - uses priority:
   1. project_recovery
-  2. docs/architecture
-  3. docs/plans
-  4. ai_tasks
-  5. code
+  2. AGENTS.md
+  3. docs/architecture
+  4. docs/plans
+  5. docs/design
+  6. approved user-behavior documentation
+  7. ai_tasks
+  8. contextJSON archive
+  9. code
 
 Archive-first workflow:
 1. detect that architecture sync is needed
@@ -24,6 +28,11 @@ Rules:
 - preserve all valid data
 - sync stage, tasks, next steps
 - sync real-time / API layers
+- sync approved design gates when UI obligations change
+- audit recent/accepted Change Requests against specification addenda,
+  architecture, plans, traceability, recovery, testing, design,
+  credential/security, task files/templates, and user-behavior documentation
+- apply only missing propagation deltas and explicitly record unaffected layers
 - update recovery files
 - do not regenerate contextJSON outputs
 
@@ -39,6 +48,8 @@ Context Restore Policy integration:
   - `обнови контекст` => Fast restore (default)
   - `обнови полный контекст` => Full restore (forced)
   - `обнови полный контест` => Full restore (forced, typo alias)
+  - `таск выполнен`, `задача выполнена`, `задача готова`, `готово`
+    => run current AI task closure validation
 - Full restore is also mandatory after:
   - merge/stage transition
   - suspected desync

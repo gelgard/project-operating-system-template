@@ -22,6 +22,12 @@ Before continuing any work:
 - for UI-scope tasks, require both Playwright visual validation by the agent and explicit user-side manual visual checks
 - enforce docs/architecture/git-branch-workflow.md for Stage branches
 - enforce docs/architecture/change-management-process.md before new functionality or functional changes
+- enforce docs/architecture/engineering-discipline.md for edge analysis, option comparison, assumptions, and selected-entity integrity
+- enforce docs/architecture/lean-operating-mode.md for concise delta-only reporting without weaker validation
+- enforce docs/architecture/credential-security-process.md when credentials/platform access are involved
+- enforce docs/design/approved-design-contract.md for every UI task
+- audit accepted Change Requests for complete source-of-truth propagation
+- treat task-completion aliases as full current-task validation and auto-commit commands
 
 Context restore policy:
 - Fast restore before each new AI task

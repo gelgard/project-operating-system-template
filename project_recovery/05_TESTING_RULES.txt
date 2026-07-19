@@ -1,6 +1,15 @@
 TESTING RULES
 
-- every task must include testing instructions
-- terminal tests must be fully executable from terminal
-- prefer deterministic outputs
-- clean up temporary files after testing
+- Every task includes executable task-specific validation.
+- Tests cover applicable edge conditions from engineering-discipline.md.
+- Use focused tests by default; add one full regression for shared behavior,
+  dependencies/runtime, broad user flows, Stage/release closure, or explicit task requirements.
+- Do not rerun an unchanged full regression for documentation/status/restore-only work.
+- UI scope requires agent Playwright/browser validation plus user visual steps,
+  relevant viewports, interaction, loading/empty/error states, and design checks.
+- Credential/security scope requires fake test values, git-diff secret scan,
+  sanitized logs, and dependency/security checks appropriate to exposure.
+- Live validation must be bounded, reversible, sanitized, and tied to the exact deployed commit.
+- Run git diff --check before commit.
+- Delete temporary validation artifacts unless intentionally retained as evidence.
+- Never close a task with an open validation gap.

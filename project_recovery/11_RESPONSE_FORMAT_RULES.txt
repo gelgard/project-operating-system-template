@@ -1,133 +1,42 @@
 RESPONSE FORMAT RULES
 
-- Always follow AI Task structure
-- Every assistant response must start with the project-specific required prefix when AGENTS.md defines one
-- Every current/next AI step must include a short manager-facing summary:
-  - what will be improved or delivered
-  - why it matters for the user/product
-  - written without technical jargon
-- Always include terminal testing instructions when terminal testing is involved
-- Testing instructions must be accessible and concise:
-  - use short numbered steps
-  - explain each step in plain language
-  - include the exact command when a command is required
-  - include the exact expected visible result after the step
-  - avoid vague phrases like "prepare environment", "verify application", or "check everything works"
-  - prefer a few clear actionable steps over long exhaustive checklists
-- If the user asks to refine, fix, or continue the current AI task, do not create a new ai_task for that refinement
-- In that case, stay inside the current AI task context and provide only:
-  - updated Prompt for Cursor
-  - updated Test / Verification
-- If validation reveals a gap or defect in the current AI task scope, it must be fixed within the same current AI task before marking it complete
-- Do not defer in-scope validation gaps into a separate ai_task unless the user explicitly requests task splitting
-- When the user asks for the next AI task, the agent must create/save the corresponding ai_task file in ai_tasks/ using the established task format
-- When the user asks for the next AI task, respond in strict copy-ready format:
-  - do not paste full AI task body into chat if task file is already created/saved
-  - provide the saved ai_task file path
-  - provide a short manager-facing summary
-  - provide Prompt for Cursor in one separate fenced block
-  - provide Test/Verification as step-by-step actions
-  - provide each terminal command in its own separate fenced block for 1:1 copy
-  - run mandatory preflight before sending:
-    - path section present
-    - manager-facing summary present
-    - Prompt for Cursor section present
-    - Test/Verification section present
-    - per-command copy blocks present
-  - if preflight fails, use:
-    - BLOCKED: Next-task response format violation.
-    - REQUIRED FIX: regenerate response with full 3-part copy-ready format.
-  - include self-check line:
-    - `Self-check: path ✅ | cursor prompt ✅ | test steps ✅ | command blocks ✅`
-- Prompt for Cursor must not duplicate:
-  - manual user test steps
-  - agent-side validation/Playwright plan
-  - next-step planning
-  - architecture update instructions already handled by the agent
-  - explanatory sections the agent already owns in chat
-- At the start of a new Stage, the agent must:
-  - explicitly announce the Stage transition
-  - provide the branch-transition instruction to merge the completed Stage feature branch into `develop`
-  - create the next branch named `feature/stage-<stage-number>-<stage-name-kebab-case>` from updated `develop`
-  - state that Stage work must not happen directly on `main` or `develop`
-- Always include:
-  - changed files
-  - full file content
-  - test output
-- After full validation of the current AI task, the agent must automatically provide commit message in the response (without extra reminder from user)
-- Do not skip numbering
-- No large unstructured responses
-- If the user explicitly states that conditions are mandatory, responses and architecture sync outputs must phrase them as mandatory obligations, not optional recommendations
-- Before proposing an architecture/package update, check existing architecture/plan/recovery for duplicates and conflicts; propose/apply only missing delta changes
-- For UI-scope tasks, include detailed manual visual testing instructions:
-  - exact step-by-step user actions in the UI
-  - exact expected visible result for each step
-  - positive and negative/error-state checks when applicable
-- For UI-scope tasks, the agent must run Playwright-based visual validation and report:
-  - list of executed visual steps
-  - observed result per step (pass/fail)
-  - detected visual mismatches, if any
-- User-side manual visual steps remain required; agent-side Playwright checks do not replace them
-- Task Closure Hard Gate Checklist must pass before marking a task complete:
-  - context/restore gate passed for the required restore mode
-  - Goal Alignment + Requirement IDs present and valid
-  - scope/baseline gate passed
-  - agent validation passed
-  - user manual validation passed
-  - no open in-scope validation gaps remain
-  - temporary validation-only files deleted unless intentionally kept as evidence
-  - commit message provided only after all gates pass
-- If any closure gate is missing or failed, completion is forbidden and response must be BLOCKED
-- After closing each AI task, delete temporary files created only for testing/validation unless they are intentional kept evidence artifacts
-- Context Restore Policy self-check:
-  - before each new AI task: Fast restore
-  - Full restore required after:
-    - `обнови архитектурные файлы`
-    - merge/stage transition
-    - suspected desync
-    - long pause
-    - explicit `обнови полный контекст`
-- Command mapping in responses must stay consistent:
-  - `обнови контекст` => Fast restore
-  - `обнови полный контекст` => Full restore
-  - `обнови полный контест` => Full restore
-- Treat `дай следующую аи таск`, `следущую аи таск`, and `следущую задачу` as equivalent to `дай следующую AI task`
-- Treat `необходимо внести изменения`, `вносим изменения`, `надо внести изменения`, `нужно внести изменения`, `необходимо внести правки`, `внеси изменения`, and close intent-equivalent phrasings as Change Request Intake triggers.
-- When Change Request Intake is triggered, respond first with:
-  - `Добавить Change Request:`
-  - `1. Название изменения:`
-  - `2. Что нужно добавить или изменить:`
-  - `3. Почему это нужно пользователю или продукту:`
-  - `4. К какому экрану, модулю, сценарию или Stage относится:`
-  - `5. Это уже есть в ТЗ или это расширение ТЗ:`
-  - `6. Это уже есть в утвержденном дизайне или требует design delta:`
-  - `7. Влияет ли на integrations, credentials, rules, protection, persistence, account isolation, API/WebSocket, security, or runtime flow:`
-  - `8. Срочность: сейчас / текущий Stage / позже:`
-  - `9. Есть ли ограничения, примеры, ссылки, скриншоты или желаемое поведение:`
-- Do not start implementation, create an AI task, or change task order until the user answers the Change Request questions and the agent completes classification, impact analysis, Requirement ID mapping, design impact, architecture impact, plan impact, and decision.
-- After user answers a Change Request, respond with:
-  - `Change classification:`
-  - `Impact analysis:`
-  - `Requirement IDs:`
-  - `Design impact:`
-  - `Architecture impact:`
-  - `Plan impact:`
-  - `Decision:`
-  - `Required architecture/source-of-truth updates:`
-  - `Proposed task placement:`
-  - `Readiness: ready/blocked`
-- Goal traceability self-check:
-  - every AI task must contain Goal Alignment with Requirement IDs
-  - if mapping is missing, allowed response:
-    - BLOCKED: AI task has no product-goal mapping, add Requirement IDs first.
-- Restore violation blocked response:
-  - BLOCKED: Context restore policy violation.
-  - REQUIRED FIX: Run <Fast|Full> restore and resync required files.
-
-Architecture sync rule:
-When the user asks "обнови архитектурные файлы", perform safe architecture / plan / recovery synchronization.
-
-Architecture update package rule:
-Architecture synchronization must not generate a new populated contextJSON snapshot. Existing contextJSON files are frozen historical exports only.
-
-Do not update or regenerate `contextJSON/json_spec.md` unless a future architecture decision explicitly reintroduces a JSON export mechanism.
+- Apply docs/architecture/lean-operating-mode.md to every response.
+- Default to direct, delta-only output: new/changed facts, validation result,
+  blocker/fix, and next required action.
+- Prefer 1-3 short sentences; do not repeat unchanged history, complete task
+  bodies, full successful logs, or credentials that are not currently needed.
+- Every current/next step includes a brief non-technical manager summary.
+- Next-task response contains: saved task path, manager summary, one fenced
+  implementation-only Cursor prompt, compact verification actions, one command
+  per fenced block, and:
+  Self-check: path ✅ | cursor prompt ✅ | test steps ✅ | command blocks ✅
+- Cursor prompt must not duplicate agent-owned planning, architecture, manual
+  testing, live validation, closure, or next-step packaging.
+- Refinements and in-scope validation defects remain in the current task unless
+  the user explicitly approves splitting.
+- UI tasks require separate concise sections `Agent visual check` and
+  `User visual check instructions`; both are mandatory for closure.
+- UI must match docs/design/approved-design-contract.md from the first increment;
+  placeholder/generic/intermediate UI blocks closure.
+- Credential/platform tasks follow
+  docs/architecture/credential-security-process.md. Repeat complete instructions
+  in chat only when setup or credential-backed live validation is the next user
+  action.
+- Completion aliases `таск выполнен`, `задача выполнена`, `задача готова`, and
+  `готово` run all active-task validations and the Task Closure Hard Gate.
+- Run focused validation by default and one full regression when required by
+  risk/scope, shared contracts, dependency/runtime changes, Stage closure, or
+  explicit task instructions. Do not repeat an unchanged full regression for
+  status, restore, or architecture-only work.
+- Closure requires restore, Requirement IDs, scope, agent validation, required
+  user/manual/visual validation, no open gaps, temp cleanup, whitespace and
+  secret-safety checks, then automatic commit on the Stage feature branch.
+- Commit failure blocks closure.
+- Accepted Change Requests must be recorded as specification addenda and
+  propagated to every affected source-of-truth layer before implementation.
+- `обнови архитектурные файлы` runs Full restore and CR propagation audit.
+- `обнови контекст` runs Fast restore.
+- `обнови полный контекст` and `обнови полный контест` run Full restore.
+- `дай следующую аи таск`, `следущую аи таск`, and `следущую задачу` are next-task aliases.
+- New-functionality/change intent starts Change Request Intake.
+- No architecture sync regenerates contextJSON.

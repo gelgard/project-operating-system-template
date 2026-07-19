@@ -14,6 +14,11 @@ Everything created in the new project must inherit and preserve the template-def
 - archive-first sync workflow
 - contextJSON rules
 - command model
+- engineering discipline and selected-entity integrity
+- lean/token-controlled reporting
+- credential-security process
+- accepted Change Request addendum/propagation rules
+- task closure validation and automatic commit
+- approved-design and visual-validation gates
 
 You may extend the system for the new project domain, but you must not invent a different operating system if the template already defines one.
-

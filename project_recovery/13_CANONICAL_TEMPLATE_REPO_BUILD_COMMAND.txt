@@ -17,3 +17,10 @@ This command must produce a complete template that supports:
 - no-new-contextJSON-generation policy
 - Stage feature branch workflow using `develop`
 - controlled Change Request intake
+- accepted Change Requests as effective-specification addenda with full propagation
+- engineering edge-condition analysis and real option comparison
+- selected-entity integrity across multi-step flows
+- lean/token-controlled reporting without weaker gates
+- credential acquisition/storage/rotation and secret-safety process
+- approved-design plus agent/user visual validation gates
+- completion-command validation and automatic task commit

@@ -6,8 +6,11 @@ RECOVERY SETUP PROMPT
         - recovery files
         - architecture update procedure
         - archive-first sync workflow
-        - contextJSON regeneration rules
+        - frozen contextJSON archive rules
         - response format rules
         - command model
+        - engineering/lean/credential/design contracts
+        - completion aliases and automatic-commit closure behavior
+        - accepted Change Request propagation audit
 
         Adapt the inherited recovery system to the new project's domain while preserving the template operating-system behavior.
