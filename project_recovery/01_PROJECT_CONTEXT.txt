@@ -1,4 +1,9 @@
-PROJECT CONTEXT
+PROJECT CONTEXT PROJECTION
+
+state_id: {{UNIQUE_MONOTONIC_STATE_ID}}
+
+This is a concise identity/outcome projection. The current-state manifest is
+authoritative for factual state; conflicts block work.
 
 Project internal identity:
 {{INTERNAL_PROJECT_NAME}}
@@ -6,17 +11,17 @@ Project internal identity:
 Public product identity:
 {{PUBLIC_PRODUCT_NAME}}
 
-Short summary:
-{{PROJECT_SHORT_SUMMARY}}
+Canonical goal:
+{{CANONICAL_PRODUCT_OR_SYSTEM_GOAL}}
 
-Current stage:
-{{CURRENT_STAGE}}
+Current Stage/capability:
+{{CURRENT_STAGE_OR_CAPABILITY}}
 
-Current task:
-{{CURRENT_TASK_OR_NONE}}
+Current Outcome Slice/task:
+{{CURRENT_OUTCOME_AND_TASK_OR_NONE}}
 
-Next tasks:
-{{NEXT_TASKS}}
+Next authorized action:
+{{ONE_NEXT_ACTION}}
 
 Readiness:
-{{READY_OR_BLOCKED}}
+{{READY_OR_BLOCKED_WITH_REASON}}

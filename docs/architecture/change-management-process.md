@@ -6,7 +6,9 @@ Mandatory.
 ## Purpose
 Projects created from this template can accept new functionality, refinements, corrections, and plan changes without breaking the approved technical specification, design contract, implementation plan, Stage branch workflow, or final product goal.
 
-No new functionality or functional change may go directly into implementation until it passes the Change Request process in this file.
+No material functionality or authority change may go directly into
+implementation until it passes this Change Request process. In-scope defects
+and clarifications use bounded TASK-AMENDMENT under the current task.
 
 ## Trigger Commands
 The following user commands start Change Request Intake:
@@ -49,6 +51,15 @@ Every requested change must be classified as one or more:
 - `Architecture Change` - affects data flow, persistence, security, integrations, rules, protection, API, WebSocket, runtime flow, or isolation boundaries.
 - `Defect Fix` - corrects a bug or mismatch in accepted functionality.
 - `Reprioritization` - changes the order of Stage or AI task execution.
+
+## TASK-AMENDMENT
+
+No full CR is needed for an in-scope defect or clarification that preserves the
+accepted outcome and boundaries: missing implied edge test, parser/schema
+hardening without public-contract change, approved-design correction,
+cleanup/lifecycle fix or implementation simplification. Record cause, exact
+delta, files and validation in the current closure record; it consumes the
+normal correction budget.
 
 ## Impact Analysis Gate
 Before implementation, the agent must analyze impact on:
@@ -108,6 +119,11 @@ Plan changes must be controlled deltas, not informal task drift.
 Every accepted Change Request is a technical-specification addendum and must be
 recorded in `docs/plans/accepted_change_requests.md`.
 
+It must also have one matching `rule_bindings` entry in
+`docs/architecture/governance-trigger-registry.json` defining when the accepted
+decision executes. Approval without both projections is not effective
+propagation.
+
 Update every affected layer:
 - baseline/effective specification and spec-alignment gap plan;
 - architecture, system overview, data flow, and assumptions;
@@ -123,6 +139,13 @@ Missing propagation blocks implementation and closure.
 
 `обнови архитектурные файлы` must audit recent accepted CRs against every
 applicable layer and apply missing deltas without full rewrites.
+
+Before the propagation commit, run
+`python3 scripts/validate_governance_contract.py` plus affected
+traceability/spec/source checks. Product implementation is a later task/commit.
+
+Rules retained only in a proposed CR or historical recovery file do not
+control implementation.
 
 ## Task Packaging Rule
 After analysis, an accepted change must be packaged as exactly one of:
@@ -145,7 +168,8 @@ The agent owns:
 - closure gate evaluation
 - task packaging
 
-Cursor owns only code implementation after the change is accepted and packaged.
+The configured implementation agent owns only authorized code implementation
+and directly related tests after the change is accepted and packaged.
 
 ## Required Response After User Answers
 After receiving a completed Change Request, the agent must respond with:

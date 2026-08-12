@@ -1,42 +1,16 @@
-RESPONSE FORMAT RULES
+RESPONSE FORMAT RULES — UNIVERSAL MODE 3.0
 
-- Apply docs/architecture/lean-operating-mode.md to every response.
-- Default to direct, delta-only output: new/changed facts, validation result,
-  blocker/fix, and next required action.
-- Prefer 1-3 short sentences; do not repeat unchanged history, complete task
-  bodies, full successful logs, or credentials that are not currently needed.
-- Every current/next step includes a brief non-technical manager summary.
-- Next-task response contains: saved task path, manager summary, one fenced
-  implementation-only Cursor prompt, compact verification actions, one command
-  per fenced block, and:
-  Self-check: path ✅ | cursor prompt ✅ | test steps ✅ | command blocks ✅
-- Cursor prompt must not duplicate agent-owned planning, architecture, manual
-  testing, live validation, closure, or next-step packaging.
-- Refinements and in-scope validation defects remain in the current task unless
-  the user explicitly approves splitting.
-- UI tasks require separate concise sections `Agent visual check` and
-  `User visual check instructions`; both are mandatory for closure.
-- UI must match docs/design/approved-design-contract.md from the first increment;
-  placeholder/generic/intermediate UI blocks closure.
-- Credential/platform tasks follow
-  docs/architecture/credential-security-process.md. Repeat complete instructions
-  in chat only when setup or credential-backed live validation is the next user
-  action.
-- Completion aliases `таск выполнен`, `задача выполнена`, `задача готова`, and
-  `готово` run all active-task validations and the Task Closure Hard Gate.
-- Run focused validation by default and one full regression when required by
-  risk/scope, shared contracts, dependency/runtime changes, Stage closure, or
-  explicit task instructions. Do not repeat an unchanged full regression for
-  status, restore, or architecture-only work.
-- Closure requires restore, Requirement IDs, scope, agent validation, required
-  user/manual/visual validation, no open gaps, temp cleanup, whitespace and
-  secret-safety checks, then automatic commit on the Stage feature branch.
-- Commit failure blocks closure.
-- Accepted Change Requests must be recorded as specification addenda and
-  propagated to every affected source-of-truth layer before implementation.
-- `обнови архитектурные файлы` runs Full restore and CR propagation audit.
-- `обнови контекст` runs Fast restore.
-- `обнови полный контекст` and `обнови полный контест` run Full restore.
-- `дай следующую аи таск`, `следущую аи таск`, and `следущую задачу` are next-task aliases.
-- New-functionality/change intent starts Change Request Intake.
-- No architecture sync regenerates contextJSON.
+- Apply configured project prefix and lean delta-only reporting.
+- Report outcome, failed/blocked fact and next action; do not repeat full logs.
+- Full Restore reports state_id, actual repository facts, correction count,
+  delivery/acceptance, CR-trigger coverage, budgets, blockers and readiness.
+- Next-task output includes path, manager summary and one complete copyable
+  implementation prompt with Outcome Slice, mappings, risk, criteria,
+  exclusions, commands, automated proof and self-review.
+- Implementation reports are handoff input, not canonical PASS.
+- OWNER manual instructions are only for ready running UI/device functionality
+  or explicit external authority actions; automatable validation stays agent-owned.
+- In-scope defects use TASK-AMENDMENT; material changes use CR.
+- Closure records traceability, evidence, cleanup, commit and push.
+- Fast/Full/architecture/completion commands route through the trigger registry.
+- No restore/sync/task/closure regenerates frozen historical context exports.

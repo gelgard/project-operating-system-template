@@ -1,16 +1,26 @@
-DEV PROCESS RULES
+DEV PROCESS RULES — UNIVERSAL MODE 3.0
 
-1. Architecture first, then code
-2. Work only through small AI tasks
-3. Test every task immediately
-4. Keep architecture files synchronized
-5. Preserve ability to recover context in a new chat
-6. Before each new AI task run Fast restore (`обнови контекст`)
-7. Run Full restore (`обнови полный контекст`) after architecture sync, merge/stage transition, suspected desync, or long pause
-8. Every AI task must include Goal Alignment with Requirement IDs and evidence-based acceptance
-9. Every task must follow docs/architecture/engineering-discipline.md before implementation
-10. Use docs/architecture/lean-operating-mode.md for delta-only token-controlled reporting without reducing validation
-11. Credential/platform tasks must follow docs/architecture/credential-security-process.md
-12. Every accepted Change Request is an effective-specification addendum and must propagate to all affected source-of-truth layers
-13. Completion aliases run full task closure validation and successful closure auto-commits task-scoped changes
-14. Preserve the exact identity of explicitly selected entities across multi-step flows
+1. Architecture and approved requirements govern implementation.
+2. One task normally equals one observable vertical Outcome Slice.
+3. Pass practical DoR before issue; file/line targets are advisory.
+4. Validate by Standard, Sensitive or Integration/Release risk.
+5. Producer/implementer PASS is input; manager verifies actual diff and gates.
+6. Every UI Outcome has automated proof; OWNER audits only ready milestone UI
+   directly in the running application/device with detailed instructions.
+7. Maximum two valid corrective implementation passes. Invalid transport with
+   no authorized edit consumes no pass.
+8. In-scope defects use TASK-AMENDMENT; material authority/behavior/order
+   changes use CR.
+9. Accepted CRs require accepted-register plus trigger binding and pointwise
+   source-of-truth propagation before implementation.
+10. Delivery, Requirement acceptance, milestone and release are distinct.
+11. Selected entity identity is preserved across every later step.
+12. Credentials/external/live/destructive work requires explicit authority,
+    least privilege, bounded budget, rollback and secret safety.
+13. Fast Restore precedes task issue; Full Restore follows registered triggers.
+14. Full Restore is manifest-first, reconciles actual version control and
+    treats archives as non-normative evidence.
+15. Every executable rule has a command/event trigger, authority, action,
+    evidence and fail-closed disposition in the trigger registry.
+16. Closure requires independent validation, traceability, cleanup and
+    commit/push unless explicit local-only mode applies.

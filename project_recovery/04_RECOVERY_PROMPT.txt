@@ -1,30 +1,20 @@
-RECOVERY PROMPT
+RECOVERY PROMPT — UNIVERSAL MODE 3.0
 
-Before continuing work:
-- read project_recovery/* first
-- read AGENTS.md
-- read architecture files
-- read plan files
-- read current implementation status
-- read response format rules
-- read engineering discipline and lean operating mode
-- read credential-security and approved-design contracts when current scope touches them
-- read recent ai_tasks
-- treat any contextJSON/json_<timestamp>.json only as a frozen historical export
-- then reconstruct exact current state
+Fast Restore reads AGENTS, trigger registry, current-state manifest,
+Stage/status, implementation plan, traceability and applicable overlays.
 
-Source priority (strict):
-1. project_recovery/*
-2. AGENTS.md
-3. docs/architecture/*
-4. docs/plans/*
-5. docs/design/*
-6. approved user-behavior documentation when defined
-7. ai_tasks/*
-8. contextJSON archive
-9. code (validation only)
+Full Restore follows docs/architecture/full-context-restore-contract.md. It is
+read-only, manifest-first, reconciles actual version control and opens
+historical evidence only through current pointers or conflict investigation.
 
-Context restore commands:
-- `обнови контекст` => Fast restore (default)
-- `обнови полный контекст` => Full restore (forced)
-- `обнови полный контест` => Full restore (forced typo alias)
+Run python3 scripts/validate_governance_contract.py. Return the completeness
+certificate with state_id, actual repository facts, current/corrective/next
+task, Outcome Slice, Requirement delivery/acceptance, CR-trigger coverage,
+design/security/external boundaries, evidence, human walkthrough state,
+budgets, drift and separate readiness verdicts.
+
+Contradictory current projections, missing accepted-CR binding, stale
+placeholders in project mode or manifest/repository drift are BLOCKED.
+
+After restore, stop unless the same OWNER message explicitly requests another
+authorized action.

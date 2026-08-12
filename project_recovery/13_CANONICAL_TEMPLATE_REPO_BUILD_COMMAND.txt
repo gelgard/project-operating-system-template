@@ -22,5 +22,10 @@ This command must produce a complete template that supports:
 - selected-entity integrity across multi-step flows
 - lean/token-controlled reporting without weaker gates
 - credential acquisition/storage/rotation and secret-safety process
-- approved-design plus agent/user visual validation gates
+- approved-design, automated visual proof and ready milestone OWNER walkthrough gates
 - completion-command validation and automatic task commit
+- Outcome Slice / practical DoR / risk-class validation
+- current-state manifest and actual version-control reconciliation
+- command/event/accepted-CR trigger registry with validator
+- independent implementation-handoff audit and two-correction stop
+- archive non-authority and explicit historical-rule activation

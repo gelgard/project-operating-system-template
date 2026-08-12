@@ -11,7 +11,7 @@ Everything created in the new project must inherit and preserve the template-def
 - AI task workflow
 - response format rules
 - architecture update procedure
-- archive-first sync workflow
+- workspace/manifest-first sync with archive fallback
 - contextJSON rules
 - command model
 - engineering discipline and selected-entity integrity
@@ -20,5 +20,15 @@ Everything created in the new project must inherit and preserve the template-def
 - accepted Change Request addendum/propagation rules
 - task closure validation and automatic commit
 - approved-design and visual-validation gates
+- Outcome Slice, practical DoR and risk-proportional validation
+- current-state manifest, trigger registry and manifest-first Full Restore
+- implementation-agent transport, independent audit and two-correction stop
+- archive non-authority and explicit rule activation
 
 You may extend the system for the new project domain, but you must not invent a different operating system if the template already defines one.
+
+Intake must explicitly capture product/domain authorities, intended technology
+and architecture, repository/release model, requirement registry, UI/non-UI
+surfaces, external/live/destructive boundaries, implementation agent and
+transport mode. These populate project overlays; they do not rewrite universal
+governance.

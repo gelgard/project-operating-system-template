@@ -11,7 +11,7 @@ ARCHITECTURE FOUNDATION PROMPT
         - AI task workflow
         - response format rules
         - architecture update procedure
-        - archive-first sync workflow
+        - workspace/manifest-first sync with archive fallback
         - contextJSON rules
         - command model
         - engineering discipline and assumptions registry
@@ -20,9 +20,20 @@ ARCHITECTURE FOUNDATION PROMPT
         - accepted Change Request addendum/propagation rules
         - task closure validation and automatic commit
         - project-populated approved-design contract
+        - Outcome Slice, practical DoR and risk-class validation
+        - governance trigger registry and current-state manifest
+        - Full Restore completeness/actual-repository reconciliation
+        - implementation-agent transport, independent audit and two-correction stop
+        - archive non-authority
 
         The project may extend content for its own domain, but it must not replace the inherited operating system.
 
         Replace product placeholders from the supplied specification, but keep
         all operating-system contracts domain-neutral and intact. Prepare the
         full foundation layer ready for 1:1 insertion.
+
+        Populate stack-specific build/test/package/deploy/device commands only
+        after deriving them from the chosen architecture. Do not copy source-
+        project technologies, providers, task IDs, branches, credentials or
+        evidence. Set template_mode=false only after all mandatory placeholders
+        are replaced, then run the governance validator.

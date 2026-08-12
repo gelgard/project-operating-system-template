@@ -22,10 +22,12 @@ Examples:
 
 When a Stage is complete:
 1. finish validation and closure gates for the Stage
-2. commit all Stage work on that Stage feature branch
-3. merge the Stage feature branch into `develop`
-4. create the next Stage feature branch from updated `develop`
-5. continue work only on the new Stage feature branch
+2. commit/push all accepted Stage work
+3. validate an isolated candidate from current integration branch plus Stage
+4. merge the Stage feature branch normally into `develop`
+5. run the bounded post-merge canary and Full Restore
+6. create the next Stage feature branch from updated `develop`
+7. continue only on the new Stage branch
 
 ## Publishing Branch
 `master` or `main` is a publishing mirror only. Update it from validated
@@ -50,3 +52,7 @@ block publication.
 
 ## Authority
 This file defines the mandatory git workflow for all future development unless explicitly superseded by a newer architecture rule.
+
+A project may accept another version-control strategy only through an explicit
+architecture decision preserving isolated implementation, review,
+non-destructive normal integration, exact commit identity, canary and recovery.

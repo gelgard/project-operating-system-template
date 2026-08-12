@@ -1,112 +1,136 @@
-# AI Task XXX - {{TASK_NAME}}
+# AI Task XXX — {{OUTCOME_SLICE_NAME}}
 
-Status: {{ISSUED_OR_PLANNED}}
+Status: {{PLANNED_OR_ISSUED}}
 
-## Stage
-{{STAGE}}
+Chain ID: {{CHAIN_ID}}
 
-## Goal
-{{GOAL}}
+## Stage / Capability
 
-## Manager-Facing Summary
-{{SHORT_NON_TECHNICAL_SUMMARY_OF_WHAT_IMPROVES_AND_WHY}}
+{{STAGE_OR_CAPABILITY}}
+
+## User/System Outcome
+
+{{ONE_OBSERVABLE_OUTCOME_AND_WHY_IT_MATTERS}}
+
+## Manager Summary
+
+{{SHORT_NON_TECHNICAL_VALUE_SUMMARY}}
 
 ## Goal Alignment
-- {{REQUIREMENT_ID_1}}
-- {{REQUIREMENT_ID_2}}
+
+- Requirement/Journey/Surface: {{IDS}}
+- Delivery state at issue: {{STATE}}
+- Acceptance state at issue: {{STATE}}
+
+## Practical DoR
+
+- authoritative input: {{INPUT}}
+- exact selected identity: {{IDENTITY_OR_NA}}
+- production entry/path: {{ENTRY_TO_OBSERVABLE_RESULT}}
+- risk: {{STANDARD_SENSITIVE_OR_INTEGRATION_RELEASE}}
+- applicable design/accessibility: {{CONTRACT_OR_NA}}
+- external prerequisite/authority now: {{READY_OR_BLOCKER}}
+- rollback for persistent/destructive change: {{ROLLBACK_OR_NA}}
+- automated observable proof: {{SCENARIO}}
+- milestone/OWNER walkthrough: {{REQUIRED_NOW_LATER_OR_NA}}
 
 ## Scope
-Create:
-- {{FILE_TO_CREATE}}
 
-Update:
-- {{FILE_TO_UPDATE}}
+Create/update:
+- {{AUTHORIZED_PATH_OR_BOUNDARY}}
 
-Do not update:
-- {{OUT_OF_SCOPE_BOUNDARY}}
-- contextJSON unless an accepted architecture decision explicitly reintroduces generation
+Do not update/do:
+- {{EXCLUSIONS}}
+- historical exports/archives unless explicitly authorized
+- architecture/plans/recovery unless this is a documentation task
 
-## Required Behavior
-1. {{BEHAVIOR_1}}
-2. {{BEHAVIOR_2}}
+Advisory size: 80–180 task lines and normally <=20 related files.
 
-## Acceptance Criteria
-- {{CRITERION_1}}
-- {{CRITERION_2}}
-- Applicable edge conditions are tested or guarded.
+Indivisibility reason if exceeded: {{REASON_OR_NA}}
+
+## Required Behavior / Acceptance
+
+1. {{CRITERION_WITH_OBSERVABLE_EVIDENCE}}
+2. {{CRITERION_WITH_OBSERVABLE_EVIDENCE}}
+3. {{NEGATIVE_OR_FAIL_CLOSED_CRITERION}}
 
 ## Анализ частностей и выбор решения
-Task understanding:
-- Required: {{EXACT_REQUIREMENT}}
-- Invariants: {{INVARIANTS}}
-- Out of scope: {{EXCLUSIONS}}
 
-Edge conditions (`applicable` / `not applicable` with reason):
-- Zero/one/many/duplicates: {{STATUS_AND_REASON}}
-- Explicit non-latest entity selection: {{STATUS_AND_REASON}}
-- Entry points/callers: {{STATUS_AND_REASON}}
-- Delayed/repeated/out-of-order events: {{STATUS_AND_REASON}}
-- Concurrency/redeploy overlap: {{STATUS_AND_REASON}}
-- Restart/lost in-memory state: {{STATUS_AND_REASON}}
-- Partial failure/retry/idempotency: {{STATUS_AND_REASON}}
-- Invalid/boundary/hostile input: {{STATUS_AND_REASON}}
+- invariants/unavailable scope: {{DETAILS}}
+- applicable input/zero-one-many/duplicate risks: {{DETAILS_OR_NA}}
+- selected identity/entry points: {{DETAILS_OR_NA}}
+- ordering/concurrency/restart/persistence: {{DETAILS_OR_NA}}
+- provider/external/partial/hostile failure: {{DETAILS_OR_NA}}
+- material options: {{OPTIONS_OR_NO_MATERIAL_CHOICE}}
+- minimum sufficient choice: {{CHOICE}}
+- new abstraction and second consumer: {{CONSUMERS_OR_NONE}}
+- assumptions and guards: {{ASSUMPTIONS_OR_NONE}}
 
-Options:
-- Option A: {{OPTION_A_CORRECTNESS_SECURITY_PERFORMANCE_COMPLEXITY}}
-- Option B: {{OPTION_B_CORRECTNESS_SECURITY_PERFORMANCE_COMPLEXITY}}
+## Credentials / External Authority
 
-Chosen solution:
-- {{CHOICE_AND_WHY}}
+{{NO_NEW_CREDENTIAL_OR_COMPLETE_ACQUISITION_STORAGE_LEAST_PRIVILEGE_VALIDATION_BUDGET_ROLLBACK_ROTATION}}
 
-Assumptions and guards:
-- {{ASSUMPTION_OR_NONE}}
+## Implementation-Agent Scope
 
-## Credentials And Security Instructions
-Include this section only when credentials/platform access are required. State
-provider acquisition, exact env names, ignored local storage, deploy-side secret
-storage, least privilege, validation, rotation/revocation, and non-commit rules.
-If no credentials are needed: `No new credential or platform setup is required.`
+Implement only the authorized production change and directly related tests.
+Do not own architecture, planning, independent validation, live/manual actions,
+closure, commits beyond explicit scope or next-task issue.
 
-## Agent Validation
-Focused:
-```bash
-{{FOCUSED_TEST_COMMAND}}
-```
+Transport mode: {{OWNER_MEDIATED_OR_DIRECT_ALLOWED}}.
 
-Full regression when required by risk/scope:
-```bash
-{{FULL_REGRESSION_COMMAND_OR_NOT_REQUIRED}}
-```
+## Layered Validation
+
+Focused/static/build:
 
 ```bash
-git diff --check
+{{COMMAND}}
 ```
 
-## Agent Visual Check
-Required for UI scope:
-- viewports/pages/states: {{CHECKED_SCOPE}}
-- result: {{PASS_FAIL}}
-- mismatches/fixes: {{NONE_OR_LIST}}
+Affected regression/adversarial/native/live only when required by risk:
 
-## User Visual Check Instructions
-Required for UI scope:
-1. {{EXACT_USER_ACTION}}
-   Expected: {{EXPECTED_RESULT}}
-2. {{NEGATIVE_OR_ERROR_STATE_ACTION}}
-   Expected: {{EXPECTED_RESULT}}
+```bash
+{{COMMAND_OR_NOT_REQUIRED}}
+```
+
+Automated observable/UI proof:
+
+```bash
+{{COMMAND_OR_NA}}
+```
+
+Final diff/secret/cleanup:
+
+```bash
+{{COMMAND}}
+```
+
+## Required Implementer Handoff
+
+```text
+SELF-REVIEW
+Outcome and production path: PASS/BLOCKED -> evidence
+Criterion matrix: each criterion -> PASS/BLOCKED -> file/test/evidence
+Failed or unrun gates: exact list
+Allowed/forbidden diff: verdict and actual changed files
+Hardcoded/fixture-only success scan: verdict
+Secret/identity/raw-error scan: verdict
+Cleanup/rollback/residuals: verdict
+Abstractions and consumers: list/none
+Over-engineering scan: verdict
+Staging/commit state: exact
+Exact blocker: none or one precise blocker
+```
+
+Implementer PASS is handoff input only. Independent manager audit decides the
+next canonical state. Maximum two valid corrective implementation passes.
 
 ## Closure Gate
-- Required restore passed: {{YES_NO}}
-- Requirement mapping valid: {{YES_NO}}
-- Scope/baseline passed: {{YES_NO}}
-- Agent validation passed: {{YES_NO}}
-- Required user/manual/visual validation passed: {{YES_NO}}
-- No open in-scope gaps: {{YES_NO}}
-- Temporary artifacts removed/retained as intentional evidence: {{YES_NO}}
-- `git diff --check` and secret-safety diff passed: {{YES_NO}}
-- Task changes auto-committed on Stage feature branch: {{YES_NO}}
 
-## Cursor Scope
-Implement only code and directly related code tests in this task. Do not own
-architecture, plans, recovery, manual/live validation, deployment, closure, or
-next-task packaging unless explicitly listed as code scope.
+- Full/Fast Restore and governance validator passed;
+- actual branch/worktree/authorized diff verified;
+- production Outcome Slice works;
+- risk-proportional validation and automated proof pass;
+- applicable direct OWNER UI walkthrough passes;
+- no in-scope gap or unsafe residual remains;
+- delivery/acceptance traceability updated separately;
+- commit/push succeeds unless explicit local-only mode applies.

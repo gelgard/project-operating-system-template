@@ -1,4 +1,11 @@
 # implement-feature.mdc
 
 Goal:
-Implement one small task.
+Implement only the currently authorized saved AI task as one Outcome Slice.
+
+Before editing, read `AGENTS.md`, the trigger registry, current-state manifest
+and active task. Verify transport authority, DoR, risk, allowlist and correction
+count. Do not invent scope, architecture, CRs, live runs or acceptance.
+
+Run the task's proportional gates and return criterion evidence plus exact
+changed files and blockers. A self-review is producer input, not task closure.

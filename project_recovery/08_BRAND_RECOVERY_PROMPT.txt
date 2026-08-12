@@ -1,7 +1,10 @@
 BRAND RECOVERY PROMPT
 
 Before generating public-facing brand materials:
+- run Fast Restore, or Full Restore when its trigger applies
+- verify current product identity and implemented-versus-planned state
 - read brand-system.md
 - read design-tokens.json
-- read AI_CONTEXT.md
+- read approved design and product authorities
 - preserve public product identity
+- do not activate archive-only brand rules or claim unavailable functionality

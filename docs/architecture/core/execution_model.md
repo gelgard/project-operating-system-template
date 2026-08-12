@@ -14,7 +14,9 @@ Context Restore Policy:
   - reads key files only:
     - project_recovery/06_STAGE_PROGRESS.txt
     - project_recovery/10_CURRENT_IMPLEMENTATION_STATUS.txt
+    - project_recovery/00_CURRENT_STATE_MANIFEST.md
     - AGENTS.md
+    - docs/architecture/governance-trigger-registry.json
     - docs/plans/system-implementation-plan.md
     - docs/plans/product_goal_traceability_matrix.md
 - Full restore:
@@ -23,6 +25,9 @@ Context Restore Policy:
   - required on suspected desync
   - required after long pause
   - required on explicit command `обнови полный контекст`
+  - follows docs/architecture/full-context-restore-contract.md
+  - reconciles actual version-control state against the current manifest
+  - reads archive evidence only through current pointers/conflict audit
 - Command mapping:
   - `обнови контекст` => Fast restore (default)
   - `обнови полный контекст` => Full restore (forced)
@@ -31,7 +36,15 @@ Context Restore Policy:
   - inactivity >= 4 hours OR new calendar day OR context handoff
   - Full restore required
 - Failure gate:
-  - if required restore type is skipped => BLOCKED
+  - skipped restore, projection conflict, manifest/repository drift or failed
+    governance validation => BLOCKED
+
+Governance trigger gate:
+- every executable command/event rule and accepted CR has a unique binding in
+  docs/architecture/governance-trigger-registry.json
+- archive evidence is non-normative until projected into active architecture
+- run scripts/validate_governance_contract.py after architecture/CR
+  propagation, before post-Full-Restore task issue and before Stage merge
 
 ContextJSON archive rule:
 - existing contextJSON files are frozen historical external exports only
@@ -39,4 +52,12 @@ ContextJSON archive rule:
 - contextJSON cannot override recovery, AGENTS, architecture, plans, or ai_tasks
 
 Change management rule:
-- new functionality or functional changes must pass docs/architecture/change-management-process.md before implementation
+- material changes pass the CR process; in-scope defects use TASK-AMENDMENT
+- task issue also requires docs/architecture/delivery-slice-governance.md
+
+Delivery rule:
+- one task normally equals one vertical Outcome Slice
+- pass practical DoR and classify Standard/Sensitive/Integration-Release risk
+- implementation handoff is independently audited against actual diff/gates
+- maximum two valid corrective implementation passes
+- delivery, Requirement acceptance, milestone and release remain separate

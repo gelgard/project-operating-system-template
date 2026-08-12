@@ -1,172 +1,217 @@
 # AGENTS.md
 
-agent_contract_version: 2.1
-last_synced_with_architecture: 2026-07-19T00:00:00+03:00
-compatible_with_template_os: v1
+agent_contract_version: 3.0
+last_synced_with_architecture: 2026-08-12T00:00:00+03:00
+compatible_with_template_os: v2
 
 ## Purpose
-This file defines the operational contract for every agent working in a project created from this template. The agent executes inside an architecture-first system and may not let code redefine architecture.
 
-## Source Of Truth Priority
-1. `project_recovery/*` - factual current state
-2. `AGENTS.md` - execution contract
-3. `docs/architecture/*` - rules and constraints
-4. `docs/plans/*` - roadmap and accepted specification addenda
-5. `docs/design/*` - mandatory UI contract when applicable
-6. approved user-behavior documentation when the project defines it
-7. `ai_tasks/*` - execution units
-8. `contextJSON/json_<timestamp>.json` - frozen historical external exports
-9. code - implementation evidence only
+This is the technology-neutral operating contract for every agent in a project
+created from this template. Project architecture and domain content are
+overlays; they must not replace the operating method silently.
 
-Violation is invalid execution.
+## Source-of-truth priority
 
-## Execution Model
+1. `project_recovery/00_CURRENT_STATE_MANIFEST.md` and its current projections — factual state only;
+2. `AGENTS.md` — execution contract;
+3. `docs/architecture/*` — durable rules and constraints;
+4. `docs/plans/*` — roadmap, traceability and accepted CR addenda;
+5. `docs/design/*` — mandatory UI/experience contract when applicable;
+6. project-approved product/domain/user-behavior authorities;
+7. active `ai_tasks/*` — execution units;
+8. frozen historical exports such as `contextJSON/*`;
+9. code/runtime — implementation evidence only.
+
+Recovery facts cannot change requirements. Code, task text, chat and archive
+evidence cannot override a higher authority. Same-priority contradiction is
+`BLOCKED / CONTEXT_CONFLICT`.
+
+## Execution model
+
 `restore -> validate -> locate -> execute -> update -> sync`
 
-Mandatory contracts:
-- `docs/architecture/engineering-discipline.md`
-- `docs/architecture/lean-operating-mode.md`
-- `docs/architecture/credential-security-process.md` when credentials/platform access are involved
-- `docs/architecture/change-management-process.md` for new functionality or behavioral changes
-- `docs/architecture/git-branch-workflow.md`
-- `docs/design/approved-design-contract.md` for UI work
+Mandatory universal contracts:
 
-Responsibility split:
-- Cursor: code writing and directly related code tests only.
-- Agent chat: architecture, planning, task packaging, validation strategy, manual/live checks, closure gates, and next-step orchestration.
-- Do not duplicate agent-owned planning or validation narration inside the Cursor prompt.
+- `docs/architecture/governance-trigger-registry.md` and JSON projection;
+- `docs/architecture/full-context-restore-contract.md`;
+- `docs/architecture/delivery-slice-governance.md`;
+- `docs/architecture/engineering-discipline.md`;
+- `docs/architecture/lean-operating-mode.md`;
+- `docs/architecture/change-management-process.md`;
+- `docs/architecture/credential-security-process.md` when applicable;
+- `docs/architecture/git-branch-workflow.md`;
+- `docs/design/approved-design-contract.md` for UI/experience work.
 
-Every current/next step needs a short non-technical manager-facing summary.
+The bootstrap must explicitly set the implementation agent and transport mode:
 
-## Architecture Boundaries
-- recovery = facts
-- architecture = rules
-- plans = future work and accepted specification addenda
-- tasks = execution units
-- design = mandatory visual behavior
-- code = validation evidence
-- contextJSON = frozen historical informational export only
+- planning/manager agent owns architecture, task packaging, validation
+  strategy, independent audit, closure and next-step orchestration;
+- implementation agent owns authorized code and directly related tests;
+- `OWNER_MEDIATED` means the manager returns a standalone prompt and OWNER
+  transports it manually; the manager must not proxy-send or operate the
+  implementer UI;
+- `DIRECT_ALLOWED` requires an explicit project rule and still preserves
+  independent manager validation.
 
-Code, JSON, and task files cannot override recovery or architecture. Runtime must not parse markdown as configuration unless explicitly designed and validated.
+Every current/next step includes a short non-technical outcome summary.
 
-## Engineering Discipline Gate
-Before implementation, every task must:
-- state requirement, invariants, and exclusions;
-- mark universal edge-condition groups applicable/not applicable;
-- compare at least two real options;
-- choose by correctness, security, performance, then laconicity;
-- guard remaining assumptions;
-- include `Анализ частностей и выбор решения` in the task file.
+## Architecture boundaries
 
-Selected-entity integrity is mandatory: an explicitly selected record must stay bound to that exact identity through subsequent steps. Never replace it with latest/first/default/global state without explicit user confirmation.
+- manifest/recovery = current facts;
+- architecture = rules;
+- plans = future work and accepted addenda;
+- tasks = execution units;
+- design = mandatory experience behavior;
+- runtime/code = evidence;
+- archive/export = historical information only.
 
-## Credential And Security Contract
-Tasks needing credentials/platform access must include complete acquisition, exact env name, secure local/deploy storage, least-privilege, validation, and rotation instructions. Repeat the complete instructions in chat only when setup or credential-backed live validation is the next required action.
+Runtime must not parse governance Markdown as product configuration unless an
+explicit architecture decision designs and validates that behavior.
 
-Secrets must never be committed, logged, printed, hardcoded, stored in task markdown, screenshots, tests, or context exports. `.env.example` has placeholders only; `.env` remains local and ignored. Missing instructions or unsafe secret handling blocks execution.
+## Outcome Slice and DoR
 
-## Lean Operating Mode
-- Be direct and delta-only.
-- Prefer 1-3 short sentences when possible.
-- Do not repeat unchanged rules, history, full task bodies, full successful logs, or credential instructions that are not currently required.
-- Focused tests are the default. Run a full regression when required by task risk/scope, shared contracts, dependencies/runtime, Stage closure, or explicit task instructions.
-- Lean reporting never weakens quality, security, restore, design, testing, or closure gates.
+One implementation task normally delivers one Outcome Slice:
 
-## Context JSON Contract
-Historical `contextJSON/json_<timestamp>.json` files are frozen external informational exports. Do not regenerate or update them during restore, architecture sync, task issuance, or closure unless a future accepted architecture decision explicitly reintroduces generation.
+`entry/action -> production boundary -> processing/persistence -> observable result`.
 
-## Restoration Policy
-Fast restore before every new AI task:
-- `AGENTS.md`
-- `project_recovery/06_STAGE_PROGRESS.txt`
-- `project_recovery/10_CURRENT_IMPLEMENTATION_STATUS.txt`
-- `docs/plans/system-implementation-plan.md`
-- `docs/plans/product_goal_traceability_matrix.md`
-- credential/design contracts when current scope touches them
+Before issue, record outcome, Requirement/Journey/Surface mapping,
+authoritative input, exact selected identity, production path, acceptance,
+risk class, automated observable proof, applicable design, external
+prerequisite, rollback and unavailable scope.
 
-Full restore after:
-- `обнови архитектурные файлы`
-- Stage merge/transition
-- suspected source drift
-- session gap >=4 hours, new calendar day, or agent handoff
-- `обнови полный контекст` / `обнови полный контест`
+Task size is advisory: normally 80–180 specification lines and no more than 20
+related files. Split by independently demonstrable outcomes, not arbitrary
+layer/file limits.
 
-Required restore output: current Stage/task/next tasks, Requirement gate, drift/conflicts, blockers, and `ready/blocked`.
+## Engineering and identity
 
-## Command Model
-Supported commands and intent-equivalent phrasings:
-- `обнови архитектурные файлы` - Full restore plus architecture/plan/recovery and accepted-CR propagation audit; no contextJSON generation.
-- `обнови template-repo` - copy universal methodology deltas only; exclude product-specific architecture/functionality.
-- `собери canonical template-repo` - build the complete universal template OS.
-- `обнови контекст` - Fast restore.
-- `обнови полный контекст` / `обнови полный контест` - Full restore.
-- `дай следующую AI task` and close variants - issue the next saved numbered task in strict format.
-- `необходимо внести изменения` and close variants - start Change Request Intake before implementation.
-- `таск выполнен`, `задача выполнена`, `задача готова`, `готово` - run the current task's complete closure validation.
-- `проверь лог` - inspect the project's canonical persisted operational audit when such an audit is defined; otherwise return blocked with the missing audit contract.
+Analyze only applicable input, zero/one/many/duplicate, selected-identity,
+ordering/concurrency, restart, persistence, provider, hostile and partial
+failure risks. Compare alternatives only when the choice materially affects
+correctness, security, performance, maintainability or approved design. Choose
+the minimum sufficient implementation and name a concrete second consumer for
+new abstractions.
 
-## Change Request Contract
-Every accepted CR must:
-- be classified and impact-analysed;
-- map to Requirement IDs;
-- be recorded in `docs/plans/accepted_change_requests.md` as a specification addendum;
-- update every affected architecture, plans, traceability, recovery, testing, design, credential/security, task/template, user-behavior, and specification file;
-- explicitly record why an unaffected layer needs no change;
-- be committed before implementation task issuance.
+An explicitly selected record/entity/artifact stays bound to that exact
+identity. Never substitute latest/first/default/global state without explicit
+confirmation.
 
-Architecture sync must audit recent accepted CRs for missing propagation.
+## Validation
 
-## Next Task Response Gate
-When issuing the next task:
-- save `ai_tasks/<number>_<name>.md`;
-- return its path;
-- give a short manager-facing summary;
-- provide one separate fenced Cursor prompt containing implementation-only scope;
-- provide compact task-specific verification actions;
-- put each terminal command in its own fenced block;
-- include `Self-check: path ✅ | cursor prompt ✅ | test steps ✅ | command blocks ✅`.
+Classify tasks as Standard, Sensitive or Integration/Release and apply
+`delivery-slice-governance.md`. Failed lower gates block higher gates; skipped
+is `NOT RUN`. Existing coverage thresholds may not regress; universal 100%
+coverage is not a template rule.
 
-## UI And Visual Gate
-UI tasks must follow the approved design from the first increment; placeholder/generic/intermediate UI is forbidden. Agent-side browser/Playwright validation and separate user visual-check instructions are both mandatory. Validate relevant viewports, interaction, loading/empty/error states, text fit, and no regressions.
+An implementer `DONE/PASS`, self-review or pasted log is untrusted input until
+the manager verifies actual worktree, authorized diff and mandatory gates.
+Maximum two valid corrective implementation passes. Invalid prompt transport
+with no authorized edit consumes no pass.
 
-## Task Completion Command
-On a completion command, run all validations required by the active task: focused tests, full regression when required, startup/safety checks, whitespace and secret checks, task-specific live/manual gates, and visual validation when applicable.
+## Human UI audit
 
-Do not rerun an unchanged full regression for status, restore, or architecture-only work. Resolve in-scope failures inside the current task.
+The OWNER personally validates only ready functionality that requires direct
+actions in a running UI. Before that, the manager completes every automatable
+test, log, API, DB, CLI, native/package, security, accessibility, evidence,
+cleanup and residual check.
 
-## Task Closure Hard Gate
-Closure requires:
-- required restore passed;
-- Goal Alignment and Requirement IDs valid;
-- scope/baseline passed;
-- agent validation passed;
-- required user manual/visual validation passed;
-- no open in-scope gaps;
-- temporary validation artifacts removed unless intentional evidence;
-- final `git diff --check` and secret-safety diff passed;
-- task-scoped changes automatically committed on the current Stage feature branch.
+Every required walkthrough gives exact candidate/path, prerequisites, launch,
+actions, expected visible results, failure criteria, cleanup and verdict.
+Media supports but never replaces direct in-app/device validation. Non-UI work
+records `OWNER UI walkthrough: not applicable`.
 
-Commit failure blocks closure. Do not wait for a separate commit command after successful closure.
+## Credential, external and destructive authority
 
-## Stage Branch Workflow
-- Each Stage uses `feature/stage-<number>-<name-kebab-case>`.
-- Stage implementation occurs only on that feature branch.
-- On Stage completion, merge into `develop`.
-- Create the next Stage branch from updated `develop`.
-- `master`/`main` is a publishing mirror only and is updated from `develop` under the project's explicit publication/deployment rules.
-- Never implement directly on `develop`, `master`, or `main`.
-- Force push, destructive reset, and branch deletion are forbidden without explicit approval.
+Affected tasks document why access is required, acquisition, exact variable or
+credential name, ignored local storage, platform secret storage, least
+privilege, safe validation, budget/retry, rollback and rotation/revocation.
+Secrets never enter source, tasks, logs, screenshots, fixtures or exports.
 
-## Do Not
-- invent or reorder tasks;
-- bypass restore, architecture, CR intake, Goal Alignment, or closure gates;
-- implement the first plausible solution without edge analysis and option comparison;
-- infer a selected entity from latest/first/default;
-- expose secrets;
-- deliver placeholder UI;
-- claim unsupported integrations or full readiness without acceptance evidence;
-- mark a task complete while any gate is open;
-- leave a fully validated task uncommitted.
+External/live/destructive actions require explicit authority and a recorded
+bounded budget. Absence of authority is `BLOCKED`, not permission by inference.
 
-## Stop Rule
-After restore, stop and wait for `дай следующую AI task` unless the user explicitly requested another action.
+## Restoration policy
+
+Fast Restore before a new task reads AGENTS, trigger registry, current-state
+manifest, Stage/status, implementation plan, traceability and scope overlays.
+
+Full Restore follows `docs/architecture/full-context-restore-contract.md` and
+is mandatory after architecture update, accepted CR propagation, Stage/major
+merge or transition, suspected drift/conflicting report, agent handoff,
+context compaction, new day, inactivity >=4 hours or explicit command.
+
+Full Restore is manifest-first and reconciles actual version control. It never
+selects state by reading every historical recovery file. Missing/contradictory
+state or failed governance validation blocks issue and closure.
+
+## Command model
+
+Commands and event triggers live in
+`docs/architecture/governance-trigger-registry.json`. Guaranteed aliases:
+
+- `обнови контекст` -> Fast Restore;
+- `обнови полный контекст` / `обнови полный контест` -> Full Restore;
+- `обнови архитектурные файлы` -> Full Restore plus propagation audit;
+- `дай следующую AI task` and registered variants -> DoR and task issue;
+- `необходимо внести изменения` / `внеси изменения` -> CR intake;
+- completion aliases including `готово` -> independent current-task audit;
+- `проверь лог` -> inspect canonical persisted audit or return a missing-contract blocker.
+
+The longer/more-specific command wins. Ambiguous intent blocks rather than
+silently choosing an action.
+
+Run `python3 scripts/validate_governance_contract.py` after architecture/CR
+propagation, before task issue following Full Restore and before Stage merge.
+
+## Change requests
+
+A full CR is required for material product/Requirement, domain rule,
+architecture/security/persistence authority, design direction, provider/
+license/spend, Stage order, OWNER authority or release/platform changes.
+
+In-scope defect, missing implied edge test, parser hardening, approved-design
+correction or lifecycle fix uses `TASK-AMENDMENT` in the current closure record.
+
+An accepted CR is effective only after its accepted-register entry, matching
+trigger binding, affected source-of-truth propagation, validation and separate
+documentation commit. Implementation is a later task/commit.
+
+## Next-task response gate
+
+Issue only after DoR. Save `ai_tasks/<number>_<name>.md`; return path, manager
+summary and one complete copyable implementer prompt. The prompt declares one
+Outcome Slice, mappings, production path, risk, criteria, exclusions, focused
+commands, automated proof and fill-in self-review. State milestone/manual UI
+placement and unavailable scope.
+
+If another task is active, a critical prerequisite is unknown or correction
+budget is exhausted, return the exact blocker/recomposition instead of
+inventing a task.
+
+## Closure and Git
+
+Closure requires restore, valid mapping, working production outcome,
+proportional independent validation, automated observable proof, applicable
+OWNER UI PASS, no open in-scope gaps, cleanup, diff/secret checks, traceability
+update and task-scoped commit/push unless OWNER explicitly selected local-only.
+
+Producer PASS never closes a task. Commit/push failure blocks closure. Delivery,
+Requirement acceptance, milestone and release state are updated separately.
+
+Stage work uses `feature/stage-<number>-<name>` unless the project accepts an
+equivalent branch model. Never implement directly on integration/publishing
+branches. Stage completion uses isolated candidate validation, normal merge,
+post-merge canary and Full Restore. No force/destructive Git action without
+explicit approval.
+
+## Archive boundary
+
+Numbered recovery evidence, closed tasks, superseded/rejected branches,
+proposed CR sources and historical exports are non-normative. A historical
+rule executes only after active architecture plus trigger-registry projection.
+Otherwise classify it historical or return `BLOCKED / GOVERNANCE_DRIFT`.
+
+## Stop rule
+
+After restore, stop unless the same OWNER message explicitly requests another
+authorized action.

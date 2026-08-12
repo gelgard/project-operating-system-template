@@ -54,15 +54,16 @@ but they must not be required to compute project structure, status, roadmap, or 
 
 ## Future Generation Inputs
 
-If a future project explicitly reintroduces JSON export generation, the populated JSON generation pipeline must use sources in this order:
+If a future project explicitly reintroduces JSON export generation, the
+populated JSON generation pipeline must use sources in this order:
 
-1. project_recovery/*
-2. AGENTS.md
-3. docs/architecture/*
-4. docs/plans/*
-5. ai_tasks/*
-6. contextJSON/json_<latest>.json for prior projection metadata only
-7. code for validation only
+1. `project_recovery/00_CURRENT_STATE_MANIFEST.md` and matching current projections;
+2. `AGENTS.md` and the governance trigger registry;
+3. active `docs/architecture/*`;
+4. active `docs/plans/*` and accepted CR addenda;
+5. the one active task/closure and manifest-linked evidence;
+6. frozen context JSON for prior projection metadata only;
+7. code/runtime for validation only.
 
 ## Future Full Structured Snapshot Rule
 
@@ -76,8 +77,10 @@ This does not mean the JSON must embed the full raw contents of all markdown fil
 ## Update Rule
 
 Whenever "обнови архитектурные файлы" is executed:
-- first require current project archive upload
-- perform full sync against uploaded archive
+- run Full Restore against the live workspace and current-state manifest
+- reconcile actual version-control facts and preserve dirty user changes
+- use an explicitly supplied archive only as comparison evidence when the live
+  workspace is unavailable or the OWNER names that archive as the audit source
 - do not regenerate populated JSON snapshots
 - do not update json_spec.md unless a future architecture decision explicitly reintroduces JSON export generation
 - no contextJSON artifact is required for architecture sync completion

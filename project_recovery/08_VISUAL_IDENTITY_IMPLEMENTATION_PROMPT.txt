@@ -1,6 +1,10 @@
 VISUAL IDENTITY IMPLEMENTATION PROMPT
 
 Before implementing visuals:
+- require an authorized active Outcome Slice and applicable transport authority
+- run the required restore and verify the current state_id
 - read brand-system.md
 - read design tokens
+- read the approved design contract and applicable screen/device authority
 - keep public UI aligned with brand docs
+- include automated UI evidence; reserve OWNER actions for the ready milestone walkthrough
