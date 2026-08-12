@@ -1,90 +1,77 @@
 # Product Goal Traceability Matrix
 
 ## Purpose
-Guarantee that every AI task directly contributes to canonical product goals and can be audited.
 
-## Canonical Product Goal
-Define and deliver the intended end-state product behavior with architecture-first control, measurable acceptance, and recoverable execution.
+Guarantee that every task contributes to the canonical project goal and that
+delivery, Requirement acceptance, milestone and release state can be audited.
 
-## UI Target (End-State)
-- User-facing dashboard/surfaces reflect real system state from runtime truth.
-- Key status, progress, alerts, and history are visible and testable.
-- Localization and UX consistency are preserved across screens.
+## Project-populated product goal
 
-## Constraint Baseline (Non-Negotiable)
-- Architecture-first workflow
-- Recovery layer is mandatory
-- Source-of-truth priority is strict
-- Git Stage branch workflow is mandatory: Stage work happens on `feature/stage-<stage-number>-<stage-name-kebab-case>`, completed Stages merge into `develop`, and next Stage branches are created from updated `develop`
-- contextJSON is a frozen historical external export only and is no longer generated during sync
-- contextJSON must not define architecture, process, methodology, testing, validation, or execution rules
-- AI tasks are executable units with deterministic acceptance and test evidence
-- Cursor prompts are implementation-only; planning, architecture, validation strategy, manual-test orchestration, closure gates, and response packaging remain agent-owned
-- every current/next AI step includes a brief manager-facing summary
-- task closure is forbidden until the Task Closure Hard Gate Checklist passes
-- every task follows engineering edge-condition analysis and real option comparison
-- lean/token-controlled reporting cannot reduce validation quality
-- credential/platform work follows the mandatory credential-security process
-- accepted Change Requests are effective-specification addenda propagated to every affected source-of-truth layer
-- successful task closure automatically commits task-scoped changes on the Stage feature branch
+{{CANONICAL_PRODUCT_OR_SYSTEM_GOAL}}
 
-## Requirement IDs
-- PG-RT-001 Runtime truth and projection integrity
-- PG-OV-001 User-visible operational overview
-- PG-AR-001 Alerting and risk/status visibility
-- PG-HI-001 History/timeline visibility
-- PG-UX-001 UX/i18n consistency
-- PG-EX-001 Execution discipline and recoverability
-- PG-CTX-001 Historical contextJSON archive integrity and no-new-generation policy
-- PG-CHANGE-001 Controlled change intake, impact analysis, traceability, and plan insertion process
-- PG-SEC-001 Credential, secret, dependency, and public-runtime security discipline
-- PG-DESIGN-001 Approved-design and agent/user visual-validation discipline
+## Project-populated Requirement IDs
 
-## Stage Coverage Map
-| Requirement ID | Stage | Implementing AI Tasks | Current Coverage |
-| --- | --- | --- | --- |
-| PG-RT-001 | Stage X | AI Task XXX | pending |
-| PG-OV-001 | Stage X | AI Task XXX | pending |
-| PG-AR-001 | Stage X | AI Task XXX | pending |
-| PG-HI-001 | Stage X | AI Task XXX | pending |
-| PG-UX-001 | Stage X | AI Task XXX | pending |
-| PG-EX-001 | Stage X | AI Task XXX | pending |
-| PG-CTX-001 | All architecture syncs | AI Task XXX | pending |
-| PG-CHANGE-001 | All stages | architecture process active | pending |
-| PG-SEC-001 | All affected stages | AI Task XXX | pending |
-| PG-DESIGN-001 | Every UI stage | AI Task XXX | pending |
+{{PRODUCT_DOMAIN_SECURITY_DATA_UX_OPERATION_REQUIREMENT_IDS}}
 
-## AI Task Alignment Protocol (Mandatory)
-- Every AI task must map to one or more Requirement IDs from this file.
-- Missing mapping => task is BLOCKED.
-- Acceptance must include measurable checks/evidence for each mapped Requirement ID.
-- Every AI task must include a manager-facing summary explaining the user/product value in non-technical language.
-- Prompt for Cursor must stay development-only and must not duplicate agent-owned planning, architecture, validation strategy, manual testing, closure, or response-format work.
-- UI-scope tasks require both Playwright visual validation by the agent and manual user-side visual validation steps.
-- Any new functionality or functional change must pass `docs/architecture/change-management-process.md` before implementation.
-- Change requests must map to existing Requirement IDs or create a new Requirement ID before implementation.
-- Every task includes `Анализ частностей и выбор решения`.
-- Credential and UI tasks include PG-SEC-001 / PG-DESIGN-001 when applicable.
+Do not inherit product Requirement IDs from the template or source project.
+Create IDs from the new project's approved specification. A non-UI project
+does not create UI/screen requirements merely because the template supports UI
+work.
 
-## Current Task Anchor
-- Current AI task: AI Task XXX
-- Requirement IDs:
-  - PG-EX-001
+## Universal governance IDs
 
-## Audit Checklist
-1. Current stage/task in recovery matches plan and ai_tasks.
-2. Every active/completed AI task has Goal Alignment mapping.
-3. Acceptance evidence exists for mapped Requirement IDs.
-4. contextJSON is not regenerated and is treated only as a frozen historical archive.
-5. No drift between architecture rules and response format rules.
-6. Stage branch flow was respected when Stage changed.
-7. Task-scoped changes automatically committed after successful closure validation.
-8. Context Restore Policy is respected:
-   - Fast restore before each new AI task
-   - Full restore after architecture sync / merge/stage transition / desync / long pause / `обнови полный контекст`
-   - typo alias `обнови полный контест` also forces Full restore
-9. Task Closure Hard Gate Checklist fully passed before completion.
-10. Temporary validation-only files deleted unless intentionally kept as evidence.
-11. Change Request process was enforced for any new functionality or functional change.
-12. Accepted Change Requests were recorded in accepted_change_requests.md and fully propagated.
-13. Credential/design/engineering/lean contracts were applied where relevant.
+- GOV-EX-001 — execution discipline, independent validation and recoverability;
+- GOV-CTX-001 — current-state manifest, Full Restore and archive integrity;
+- GOV-CHANGE-001 — CR intake, trigger binding and propagation;
+- GOV-SEC-001 — credential/external/destructive authority and secret safety;
+- GOV-DESIGN-001 — approved design and direct ready-product human validation
+  when a user-facing surface exists; otherwise explicitly N/A.
+
+These governance IDs prove process compliance. They do not substitute for the
+new project's product requirements.
+
+## Stage / Capability Coverage
+
+| Requirement ID | Stage/Capability | Outcome Slice | Delivery | Acceptance | Evidence |
+|---|---|---|---|---|---|
+| {{REQ_ID}} | {{STAGE}} | {{TASK_OR_OUTCOME}} | pending | pending | none |
+| GOV-EX-001 | all | governance process | active | pending | none |
+| GOV-CTX-001 | all | restore/sync | active | pending | none |
+| GOV-CHANGE-001 | all | CR process | active | pending | none |
+| GOV-SEC-001 | affected work | security authority | pending | pending | none |
+| GOV-DESIGN-001 | user-facing work or N/A | design/validation | pending/N/A | pending/N/A | none |
+
+## Task Alignment Protocol
+
+- Every task maps to at least one project Requirement plus applicable GOV IDs.
+- Missing mapping blocks issue.
+- Each mapped row has measurable evidence and separates delivery/acceptance.
+- One task normally equals one vertical Outcome Slice with practical DoR and
+  declared Standard/Sensitive/Integration-Release risk.
+- Exact selected identity is preserved through the production path.
+- Implementation prompts stay implementation-only; manager-agent owns
+  planning, independent validation, closure and orchestration.
+- UI/device work gets automated proof; OWNER manually checks only ready
+  milestone behavior directly in the running product.
+- Material changes use CR; in-scope defects use TASK-AMENDMENT.
+
+## Current anchor
+
+- state_id: {{UNIQUE_MONOTONIC_STATE_ID}}
+- current Stage/capability: {{CURRENT_STAGE_OR_CAPABILITY}}
+- active task: {{TASK_ID_OR_NONE}}
+- correction count: {{COUNT}}/2
+- current delivery/acceptance: {{SEPARATE_STATES}}
+
+## Audit checklist
+
+1. Manifest, Stage/status, plan and actual repository agree.
+2. Active/completed tasks have valid Requirement mappings and evidence.
+3. Delivery, acceptance, milestone and release are not conflated.
+4. Accepted CR IDs equal trigger bindings and affected propagation passed.
+5. Archive/context exports did not activate rules or override current state.
+6. Required restore type and governance validator passed.
+7. Branch/integration/canary workflow or accepted equivalent was respected.
+8. Implementation handoff was independently audited; correction count valid.
+9. Applicable credential/design/security contracts passed.
+10. Cleanup, diff/secret checks, commit/push and evidence identity passed.

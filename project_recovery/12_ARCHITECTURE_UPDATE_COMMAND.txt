@@ -16,11 +16,13 @@ Behavior:
   8. contextJSON archive
   9. code
 
-Archive-first workflow:
-1. detect that architecture sync is needed
-2. request the current project archive
-3. perform full synchronization against the uploaded archive
-4. only after that execute the architecture update command
+Workspace-first workflow:
+1. run manifest-first Full Restore in the current project workspace
+2. reconcile actual version control and preserve dirty/user artifacts
+3. request an archive only when the workspace is inaccessible or OWNER makes
+   the archive authoritative input
+4. identify and apply pointwise architecture/plan/recovery drift
+5. validate before commit
 
 Rules:
 - no full rewrites unless explicitly requested
@@ -35,6 +37,9 @@ Rules:
 - apply only missing propagation deltas and explicitly record unaffected layers
 - update recovery files
 - do not regenerate contextJSON outputs
+- verify every executable rule and accepted CR has a trigger binding
+- make current-state projections share one state_id
+- run python3 scripts/validate_governance_contract.py
 
 contextJSON rule:
 - existing contextJSON files are frozen historical external exports only
@@ -51,6 +56,7 @@ Context Restore Policy integration:
   - `таск выполнен`, `задача выполнена`, `задача готова`, `готово`
     => run current AI task closure validation
 - Full restore is also mandatory after:
+  - accepted CR propagation
   - merge/stage transition
   - suspected desync
-  - long pause
+  - agent handoff, context compaction, new day or long pause

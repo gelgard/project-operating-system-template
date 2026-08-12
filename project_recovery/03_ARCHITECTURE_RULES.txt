@@ -1,90 +1,34 @@
-ARCHITECTURE RULES
+ARCHITECTURE RULES — UNIVERSAL MODE 3.0
 
-1. Architecture-first workflow is mandatory.
-2. Recovery files are part of the active source-of-truth layer.
-3. AI task execution must remain structured and deterministic.
-4. The architecture set may retain historical machine-readable context projection files as archival external exports only. They are no longer part of the active architecture synchronization deliverable.
-5. The command "обнови архитектурные файлы" must synchronize:
-   - architecture files
-   - plan files
-   - recovery files
-6. The command "обнови архитектурные файлы" must not generate a new populated contextJSON/json_<timestamp>.json.
-7. contextJSON/json_spec.md and existing contextJSON/json_<timestamp>.json files are retained only as historical/export artifacts.
-8. Architecture synchronization is complete when active source-of-truth files are synchronized and committed; no contextJSON artifact is required.
-9. External visualization/reporting applications must use active source-of-truth files or another future export mechanism, not a newly generated contextJSON snapshot.
-10. Stage transition workflow is mandatory:
-   - announce start of the new Stage
-   - every Stage must be developed in its own branch named `feature/stage-<stage-number>-<stage-name-kebab-case>`
-   - all changes for that Stage must be committed to the corresponding Stage feature branch
-   - when the Stage is complete, merge the Stage feature branch into `develop`
-   - create the next Stage feature branch from updated `develop`
-   - continue the next Stage only on that new feature branch
-   - never implement Stage work directly on `master`, `main`, or `develop`
-11. If the user marks requirements as mandatory, architecture/plan/recovery updates must encode them as obligations (must/mandatory), not recommendations.
-12. Before proposing or applying architecture update packages, run a conflict/duplicate check against existing source-of-truth files and update pointwise (delta-only) to avoid re-adding already implemented architecture blocks.
-13. Context Restore Policy is mandatory:
-   - Fast restore before every new AI task.
-   - Full restore after:
-     - `обнови архитектурные файлы`
-     - merge/stage transition
-     - suspected desync
-     - long pause
-     - explicit `обнови полный контекст`
-14. Command mapping is mandatory:
-   - `обнови контекст` => Fast restore (default)
-   - `обнови полный контекст` => Full restore (forced)
-   - `обнови полный контест` => Full restore (forced, typo alias)
-15. Long pause definition:
-   - session inactivity >= 4 hours OR
-   - new calendar day since last restore OR
-   - context handoff between agents/users
-   => Full restore required.
-16. Goal traceability gate is mandatory:
-   - every AI task must include Goal Alignment with Requirement IDs from docs/plans/product_goal_traceability_matrix.md
-   - task closure requires test evidence for mapped Requirement IDs
-17. Context JSON archive boundary is mandatory:
-   - contextJSON is a frozen historical external informational export only
-   - no new contextJSON snapshots are generated during architecture sync, context refresh, task issue, or task closure
-   - it must not define or redefine architecture, process, methodology, testing, validation, or execution rules
-   - source-of-truth decisions must continue to follow project_recovery -> AGENTS -> architecture -> plans -> design -> approved user-behavior docs -> ai_tasks -> contextJSON -> code
-18. Execution responsibility split is mandatory:
-   - Cursor owns code writing and directly code-related implementation only
-   - the agent owns planning, architecture reasoning, validation strategy, manual-test orchestration, closure evaluation, and response packaging
-   - Prompt for Cursor must not duplicate content already handled by the agent
-19. Manager-facing step summary is mandatory:
-   - every current/next AI step must include a brief plain-language summary of what improves and why it matters
-20. Task Closure Hard Gate Checklist is mandatory:
-   - required restore mode passed
-   - Goal Alignment and Requirement IDs are present and valid
-   - scope/baseline gate passed
-   - required agent validation passed
-   - required manual validation passed
-   - no in-scope validation gaps remain
-   - temporary validation-only files are deleted unless intentionally kept as evidence
-   - final whitespace and secret-safety checks pass
-   - task-scoped changes are automatically committed after all gates pass
-21. UI-scope AI tasks require both agent-side Playwright visual validation and user-side manual visual test steps with expected visible results.
-22. Change Management Process is mandatory:
-   - docs/architecture/change-management-process.md governs all new functionality, refinements, requirement extensions, design deltas, architecture changes, defect fixes, and reprioritization
-   - commands equivalent to `необходимо внести изменения` must start Change Request Intake
-   - the first response must ask the mandatory `Добавить Change Request` questions
-   - implementation must not start until classification, impact analysis, Requirement ID mapping, design impact, architecture impact, plan impact, and task placement are complete
-   - accepted changes must be recorded in docs/plans/accepted_change_requests.md as effective-specification addenda and propagated to every affected source-of-truth layer before implementation tasks are issued or changed
-   - changes must be packaged as current-task refinement, new numbered AI task, future AI task, architecture update package, or blocked decision
-23. Blocked if:
-   - required restore type not executed
-   - source priority violated
-   - AI task missing Goal Alignment mapping when gate is active
-   - Full restore trigger occurred but only Fast restore was done
-   - task closure is attempted while any hard-gate checklist item is missing or failed
-   - implementation starts on a branch that violates docs/architecture/git-branch-workflow.md
-   - new functional change bypasses docs/architecture/change-management-process.md
-24. Engineering Discipline is mandatory:
-   - classify edge conditions before implementation
-   - compare at least two real options
-   - choose by correctness, security, performance, then laconicity
-   - preserve explicitly selected entity identity
-25. Lean Operating Mode is mandatory and changes reporting density only; it never weakens quality or closure gates.
-26. Credential/security instructions are mandatory when credentials or platform access are required; secrets must never enter source, markdown, tests, logs, screenshots, or commits.
-27. UI tasks must use docs/design/approved-design-contract.md from the first delivered increment; placeholder/generic/intermediate UI is forbidden.
-28. Task-completion aliases run the active task's validation checklist, required visual/manual gates, cleanup, and automatic commit.
+Authority and routing:
+- AGENTS.md;
+- docs/architecture/governance-trigger-registry.md and JSON projection;
+- docs/architecture/full-context-restore-contract.md;
+- docs/architecture/delivery-slice-governance.md;
+- project_recovery/00_CURRENT_STATE_MANIFEST.md for current facts.
+
+Boundaries:
+- manifest/recovery = facts;
+- architecture = rules;
+- plans = roadmap/traceability/accepted addenda;
+- design = mandatory experience contract;
+- tasks = execution units;
+- code/runtime = evidence;
+- archives/context exports = historical information only.
+
+Projects may use any product architecture, technology stack, deployment model
+or domain. They must populate overlays without deleting the inherited
+governance, restoration, validation, change, identity, authority and closure
+mechanisms.
+
+Current-state projections share one state_id. Archive records cannot compete
+with current state or activate rules. Same-priority conflict blocks work.
+
+Stage/branch workflow defaults to feature Stage branches, `develop`
+integration and publishing mirror. A different strategy needs an accepted
+project architecture decision preserving isolation, review, normal integration,
+canary and recovery semantics.
+
+Frozen contextJSON or equivalent historical exports are informational-only and
+are not regenerated by restore/sync/task/closure unless an accepted project
+decision explicitly introduces an export pipeline.

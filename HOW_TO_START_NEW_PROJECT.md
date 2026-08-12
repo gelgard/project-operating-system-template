@@ -26,7 +26,8 @@ After creating a new project from this template and executing the prompt sequenc
 - detailed terminal testing discipline
 - architecture / plan / recovery synchronization logic
 - frozen historical contextJSON archive handling; no new populated contextJSON snapshots by default
-- implementation-only Cursor prompts, with planning/architecture/validation ownership kept in agent chat
+- implementation-only prompts for the configured implementation agent, with
+  planning/architecture/validation ownership kept in manager-agent chat
 - manager-facing summaries for current and next implementation steps
 - hard task-closure gates and validation artifact cleanup
 - controlled Change Request intake before new functionality or functional changes
@@ -36,6 +37,11 @@ After creating a new project from this template and executing the prompt sequenc
 - credential acquisition/storage/rotation instructions when secrets are needed
 - automatic task commit after every successful closure gate
 - selected-entity integrity across multi-step flows
+- Outcome Slice delivery and practical DoR
+- Standard/Sensitive/Integration-Release risk validation
+- current-state manifest plus actual version-control reconciliation
+- machine-checked command/event/CR triggers and archive non-authority
+- independent implementation-handoff audit and two-correction budget
 
 ## Current Project Commands You Should Use After Project Startup
 
@@ -85,6 +91,35 @@ When copying this template:
 - initialize Requirement IDs, Stage 1, no completed/current task, and logical next tasks;
 - create `.env.example` placeholders only; never copy real `.env` values;
 - keep contextJSON historical/frozen unless export generation is explicitly reintroduced.
+- populate current-state `state_id`, branch/worktree/HEAD, active task, risk,
+  correction count, evidence pointers and external/live budget;
+- set implementation agent and transport mode (`OWNER_MEDIATED` or
+  `DIRECT_ALLOWED`);
+- replace stack placeholders with project commands while preserving risk-class
+  meaning and closure semantics;
+- run `python3 scripts/validate_governance_contract.py` before the initial
+  project commit.
+- complete `template_governance/06_INHERITANCE_ACCEPTANCE_CHECKLIST.md` and
+  retain its project-mode validator result as bootstrap evidence;
+- during template sync, pass source-specific identities/providers/technologies
+  as repeated `--forbid TOKEN` arguments to prove no leakage into universal
+  contracts.
+
+## Technology-Neutral Mapping Audit
+
+Before implementation, confirm the derived project maps all universal concepts:
+
+- “build” to its actual compiler/bundler/package step or explicit N/A;
+- “real scenario” to browser, device, CLI, API, worker, data pipeline, firmware
+  or infrastructure behavior appropriate to the product;
+- persistence/rollback to its actual storage and deployment model;
+- UI walkthrough to a running product surface, or explicit non-UI N/A;
+- external/live authority to real providers/accounts/devices/environments;
+- branch/canary model to the chosen version-control/release architecture;
+- requirement IDs and evidence to the project specification.
+
+Do not copy a source project's framework, provider, screen, task number,
+Requirement ID, branch name, credential, URL or live evidence.
 
 ## Context JSON Archive Rule
 

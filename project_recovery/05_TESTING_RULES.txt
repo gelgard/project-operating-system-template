@@ -1,15 +1,21 @@
-TESTING RULES
+TESTING RULES — UNIVERSAL MODE 3.0
 
-- Every task includes executable task-specific validation.
-- Tests cover applicable edge conditions from engineering-discipline.md.
-- Use focused tests by default; add one full regression for shared behavior,
-  dependencies/runtime, broad user flows, Stage/release closure, or explicit task requirements.
-- Do not rerun an unchanged full regression for documentation/status/restore-only work.
-- UI scope requires agent Playwright/browser validation plus user visual steps,
-  relevant viewports, interaction, loading/empty/error states, and design checks.
-- Credential/security scope requires fake test values, git-diff secret scan,
-  sanitized logs, and dependency/security checks appropriate to exposure.
-- Live validation must be bounded, reversible, sanitized, and tied to the exact deployed commit.
-- Run git diff --check before commit.
-- Delete temporary validation artifacts unless intentionally retained as evidence.
-- Never close a task with an open validation gap.
+1. Map work to Requirement/TEST IDs and separate delivery from acceptance.
+2. Standard: focused behavior, static/type/format, relevant build, real
+   scenario, diff and secret/path scan.
+3. Sensitive: Standard plus adversarial boundary, affected regression,
+   ownership/security/persistence, cleanup/rollback and relevant native/live.
+4. Integration/Release: fresh deploy/package, full applicable regression,
+   cumulative journeys, security/accessibility, rollback and merge canaries.
+5. Lower-gate failure blocks higher gates; skipped is NOT RUN.
+6. Existing coverage thresholds do not regress. Critical decisions need
+   positive/negative evidence; universal 100% is not required.
+7. Implementer PASS is untrusted until manager verification.
+8. UI gets automated proof. OWNER validates only ready milestone UI directly
+   in the running app/device; media is support-only.
+9. External/live checks are bounded, explicitly authorized, reversible,
+   sanitized and tied to exact candidate identity.
+10. Architecture/CR propagation, post-Full-Restore issue and Stage merge run
+    scripts/validate_governance_contract.py.
+11. Temporary artifacts are removed or intentionally retained as evidence.
+12. Diff/whitespace/secret checks pass before commit.

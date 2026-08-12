@@ -1,4 +1,8 @@
 # review-current-module.mdc
 
 Goal:
-Review current module state.
+Perform a read-only audit of the named current module against active
+architecture, Requirement mappings and the actual worktree.
+
+Do not edit, accept or close work. Separate verified facts from claims and
+return exact blockers, affected paths and the smallest authorized next action.

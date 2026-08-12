@@ -1,56 +1,22 @@
-FULL PROJECT RECOVERY PROMPT
+FULL PROJECT RECOVERY PROMPT — UNIVERSAL MODE 3.0
 
-Before continuing any work:
-- read AI context files
-- read architecture files
-- read plan files
-- read recovery files
-- read current implementation status
-- read response format rules
-- read recent AI tasks
-- then reconstruct exact current project state
-- detect already-implemented items to avoid duplicate/conflicting re-planning
-- if the user marks constraints as mandatory, preserve them as mandatory in architecture/plan/recovery outputs
-- enforce Goal Alignment gate for AI tasks using docs/plans/product_goal_traceability_matrix.md Requirement IDs
-- enforce the Cursor/agent responsibility split:
-  - Cursor prompt is development-only
-  - planning, architecture, validation strategy, manual testing, closure gates, and response packaging stay with the agent
-- include manager-facing summaries for current and next AI steps
-- treat contextJSON as a frozen historical external export only, never as architecture/process authority
-- do not generate new contextJSON snapshots during restore, architecture sync, task issue, or task closure
-- enforce Task Closure Hard Gate Checklist before any task is marked complete
-- for UI-scope tasks, require both Playwright visual validation by the agent and explicit user-side manual visual checks
-- enforce docs/architecture/git-branch-workflow.md for Stage branches
-- enforce docs/architecture/change-management-process.md before new functionality or functional changes
-- enforce docs/architecture/engineering-discipline.md for edge analysis, option comparison, assumptions, and selected-entity integrity
-- enforce docs/architecture/lean-operating-mode.md for concise delta-only reporting without weaker validation
-- enforce docs/architecture/credential-security-process.md when credentials/platform access are involved
-- enforce docs/design/approved-design-contract.md for every UI task
-- audit accepted Change Requests for complete source-of-truth propagation
-- treat task-completion aliases as full current-task validation and auto-commit commands
+state_id: {{UNIQUE_MONOTONIC_STATE_ID}}
 
-Context restore policy:
-- Fast restore before each new AI task
-- Full restore after:
-  - `обнови архитектурные файлы`
-  - merge/stage transition
-  - suspected desync
-  - long pause
-  - explicit `обнови полный контекст`
-- command mapping:
-  - `обнови контекст` => Fast restore (default)
-  - `обнови полный контекст` => Full restore (forced)
-  - `обнови полный контест` => Full restore (forced, typo alias)
+1. Apply the project response prefix when configured.
+2. Full Restore is read-only and follows the Full Context Restore Contract.
+3. Read AGENTS, trigger registry and current-state manifest first.
+4. Verify Stage/status projections share the same state_id and task state.
+5. Reconcile actual worktree/repository, branch, HEAD, staging and dirty state;
+   preserve all user changes.
+6. Read active architecture, accepted CR register, plans, traceability, active
+   task/closure and applicable design/security/domain overlays.
+7. Open historical evidence only through current manifest pointers or to
+   resolve a named conflict.
+8. Run python3 scripts/validate_governance_contract.py and project-specific
+   source/spec validators when drift is possible.
+9. Return the complete restore certificate and READY/BLOCKED verdict.
+10. Stop unless the same OWNER message requests another authorized action.
 
-Next-task command equivalence:
-- Treat `дай следующую аи таск`, `следущую аи таск`, and `следущую задачу` as equivalent to `дай следующую AI task`.
-- Apply the same next-task response format gate for all equivalents.
-
-Template governance note:
-If the project was created from the universal template repository, the command
-"обнови template-repo" must be interpreted as:
-- update template methodology/process/prompts only
-- use the official prompt from:
-  project_recovery/12_TEMPLATE_REPO_UPDATE_COMMAND.txt
-- do not transfer project-specific content
-- do not auto-update governance files unless explicitly requested
+Never infer current truth from archive order, mtime, chat recency, code or an
+implementer PASS. Never mutate, issue work, run external actions or regenerate
+historical exports merely because restore succeeded.

@@ -15,6 +15,11 @@ Transfer only:
 - Change Request addendum/propagation changes
 - task closure and automatic-commit changes
 - visual-validation and design-contract changes
+- Outcome Slice/DoR/risk-class changes
+- governance trigger and Full Restore manifest changes
+- implementation-agent transport and independent audit changes
+- correction budget and state-machine changes
+- archive authority/non-authority changes
 
 Do not transfer:
 - project-specific domain logic
@@ -26,4 +31,5 @@ Do not transfer:
   branches, requirement IDs, task numbers, or live acceptance evidence
 
 Before commit, scan for source-project identity/functionality leakage and
-validate all new cross-references.
+validate all new cross-references. Run the template governance validator in
+template mode, then run it again after project bootstrap in project mode.

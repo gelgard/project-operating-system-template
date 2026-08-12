@@ -1,0 +1,30 @@
+{
+  "schema_version": 2,
+  "template_mode": true,
+  "project_bindings": {
+    "message_prefix": "{{PROJECT_MESSAGE_PREFIX_OR_NONE}}",
+    "implementation_agent": "{{IMPLEMENTATION_AGENT}}",
+    "transport_mode": "{{OWNER_MEDIATED_OR_DIRECT_ALLOWED}}"
+  },
+  "commands": [
+    {"id": "TRG-CMD-FAST-CONTEXT", "phrases": ["обнови контекст"], "action": "FAST_RESTORE", "authority": ["AGENTS.md", "docs/architecture/full-context-restore-contract.md"], "evidence": "bounded restore certificate with state_id and actual VCS facts", "fail_closed": true},
+    {"id": "TRG-CMD-FULL-CONTEXT", "phrases": ["обнови полный контекст", "обнови полный контест"], "action": "FULL_RESTORE", "authority": ["AGENTS.md", "docs/architecture/full-context-restore-contract.md"], "evidence": "complete restore certificate and READY/BLOCKED verdict", "fail_closed": true},
+    {"id": "TRG-CMD-ARCH-SYNC", "phrases": ["обнови архитектурные файлы"], "action": "FULL_RESTORE_AND_ARCHITECTURE_PROPAGATION_AUDIT", "authority": ["AGENTS.md", "docs/architecture/core/execution_model.md"], "evidence": "propagation audit, synchronized state_id and governance validator result", "fail_closed": true},
+    {"id": "TRG-CMD-NEXT-TASK", "phrases": ["дай следующую аи таск", "дай следующую ai task", "дай следующую задачу"], "action": "RESTORE_DOR_AND_ISSUE_IMPLEMENTER_PROMPT", "authority": ["AGENTS.md", "docs/architecture/delivery-slice-governance.md"], "evidence": "saved task path, DoR verdict and copyable implementer prompt", "fail_closed": true},
+    {"id": "TRG-CMD-TASK-HANDOFF", "phrases": ["готово", "задача готова", "задача выполнена", "таск выполнен"], "action": "INDEPENDENT_CURRENT_TASK_AUDIT", "authority": ["AGENTS.md", "docs/architecture/engineering-discipline.md"], "evidence": "actual-diff audit and mandatory gate results", "fail_closed": true},
+    {"id": "TRG-CMD-CR-INTAKE", "phrases": ["необходимо внести изменения", "внеси изменения"], "action": "CHANGE_REQUEST_INTAKE_AND_IMPACT_ANALYSIS", "authority": ["AGENTS.md", "docs/architecture/change-management-process.md"], "evidence": "classified proposed CR with impact and propagation map", "fail_closed": true},
+    {"id": "TRG-CMD-LOG-AUDIT", "phrases": ["проверь лог"], "action": "INSPECT_CANONICAL_AUDIT_OR_BLOCK", "authority": ["AGENTS.md"], "evidence": "canonical-audit verdict or exact missing-contract blocker", "fail_closed": true}
+  ],
+  "events": [
+    {"id": "TRG-EVT-FULL-RESTORE", "when": "architecture or accepted CR update, merge/transition, handoff, compaction, new day, gap >=4h, drift or conflicting state", "action": "FULL_RESTORE", "authority": ["docs/architecture/full-context-restore-contract.md"], "evidence": "complete restore certificate", "fail_closed": true},
+    {"id": "TRG-EVT-IMPLEMENTER-REPORT", "when": "implementation handoff or completion log received", "action": "VERIFY_ACTUAL_DIFF_AND_GATES", "authority": ["docs/architecture/engineering-discipline.md"], "evidence": "independent worktree, diff and gate audit", "fail_closed": true},
+    {"id": "TRG-EVT-CORRECTION", "when": "independent audit finds in-scope defects", "action": "CONSOLIDATE_CORRECTION_MAX_TWO_VALID_PASSES", "authority": ["docs/architecture/delivery-slice-governance.md"], "evidence": "closure-record correction counter and consolidated blocker list", "fail_closed": true},
+    {"id": "TRG-EVT-HUMAN-UI", "when": "ready UI capability milestone, UX decision, Stage merge or release", "action": "AUTOMATE_TECHNICAL_GATES_THEN_DIRECT_RUNNING_APP_WALKTHROUGH", "authority": ["docs/architecture/delivery-slice-governance.md", "docs/design/approved-design-contract.md"], "evidence": "OWNER walkthrough verdict plus supporting media when required", "fail_closed": true},
+    {"id": "TRG-EVT-EXTERNAL", "when": "credential, provider, live, destructive or external-state action is required", "action": "REQUIRE_RECORDED_AUTHORITY_BUDGET_AND_ROLLBACK", "authority": ["docs/architecture/credential-security-process.md"], "evidence": "authority, budget, result, cleanup and rollback record", "fail_closed": true},
+    {"id": "TRG-EVT-CLOSE", "when": "all proportional and applicable human gates pass", "action": "TRACEABILITY_COMMIT_PUSH_CLOSE", "authority": ["AGENTS.md", "docs/architecture/git-branch-workflow.md"], "evidence": "closure record, traceability delta and commit/push identity", "fail_closed": true},
+    {"id": "TRG-EVT-STAGE", "when": "Stage or major integration completion proposed", "action": "ISOLATED_CANDIDATE_NORMAL_MERGE_CANARY_FULL_RESTORE", "authority": ["docs/architecture/git-branch-workflow.md"], "evidence": "candidate validation, merge commit, canary and post-merge state_id", "fail_closed": true},
+    {"id": "TRG-EVT-ARCHIVE", "when": "rule-like statement exists only in archive/rejected/superseded material", "action": "CLASSIFY_HISTORICAL_OR_PROPAGATE_ACTIVE_BINDING", "authority": ["docs/architecture/governance-trigger-registry.md"], "evidence": "historical classification or active propagation and trigger binding", "fail_closed": true},
+    {"id": "TRG-EVT-SELECTED-IDENTITY", "when": "record/entity/artifact is selected", "action": "PRESERVE_EXACT_IDENTITY", "authority": ["docs/architecture/engineering-discipline.md"], "evidence": "identity-bound production-path assertion and regression proof", "fail_closed": true}
+  ],
+  "rule_bindings": []
+}

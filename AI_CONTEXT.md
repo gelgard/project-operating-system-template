@@ -10,9 +10,12 @@ Next tasks: `{{NEXT_TASKS}}`
 Readiness: `{{READY_OR_BLOCKED}}`
 
 Operating contracts:
+- current-state manifest and machine-checked command/event triggers;
 - recovery before action and strict source priority;
 - architecture-first execution;
-- Requirement ID / Goal Alignment gate;
+- project Requirement IDs plus universal governance IDs;
+- vertical Outcome Slice / practical DoR / risk-class validation;
+- independent implementation handoff audit and two-correction stop;
 - engineering-discipline analysis before implementation;
 - lean/token-controlled delta-only reporting;
 - credential/design/Change Request gates when applicable;

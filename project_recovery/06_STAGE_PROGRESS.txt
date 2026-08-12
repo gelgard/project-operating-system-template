@@ -1,16 +1,26 @@
-STAGE PROGRESS
+STAGE PROGRESS — CURRENT PROJECTION
 
-Current stage:
-{{CURRENT_STAGE}}
+state_id: {{UNIQUE_MONOTONIC_STATE_ID}}
 
-Current Stage branch:
-feature/stage-{{STAGE_NUMBER}}-{{STAGE_NAME_KEBAB_CASE}}
+as_of: {{ISO_8601_WITH_TIMEZONE}}
+
+Current Stage/capability:
+{{CURRENT_STAGE_OR_CAPABILITY}}
+
+Active branch/worktree/HEAD:
+{{ACTIVE_BRANCH_WORKTREE_HEAD}}
 
 Completed:
 {{COMPLETED_TASKS_SUMMARY}}
 
-Current:
-{{CURRENT_TASK_OR_NONE}}
+Current task and correction count:
+{{CURRENT_TASK_OR_NONE}} / {{VALID_CORRECTIVE_COUNT}}/2
 
-Next:
-{{NEXT_TASKS}}
+Next authorized action:
+{{ONE_NEXT_ACTION}}
+
+Requirement delivery/acceptance and release:
+{{SEPARATE_STATES}}
+
+Canonical current-state manifest:
+project_recovery/00_CURRENT_STATE_MANIFEST.md

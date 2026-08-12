@@ -5,8 +5,11 @@ The implementation plan must be built **inside the inherited template operating 
 
 This means:
 - stage structure must align with the template process model
-- AI tasks must follow the template execution discipline
+- AI tasks must be vertical observable Outcome Slices with practical DoR
+- every task must declare Standard/Sensitive/Integration-Release risk
 - every task must map Requirement IDs and include edge-condition/solution-option analysis
 - credential and UI tasks must include their mandatory security/visual gates
 - accepted Change Requests must be planned as effective-specification addenda
 - future recovery and architecture updates must remain compatible with the template-defined rules and commands
+- implementation handoffs are independently audited; maximum two valid corrections
+- milestone/manual UI placement is explicit; automatable checks stay agent-owned

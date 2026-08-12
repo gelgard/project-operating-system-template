@@ -13,5 +13,9 @@ Recovery in a new chat must restore not only the current project state, but also
 - engineering, lean, credential-security, and design contracts
 - accepted Change Request addenda and propagation state
 - task-completion aliases and automatic-commit closure behavior
+- current-state manifest, state_id and actual repository facts
+- governance trigger registry and accepted-CR bindings
+- Outcome Slice/risk/correction state and external budgets
+- archive non-authority and pointer-driven evidence
 
 The recovered project must continue inside the same inherited framework, not in a newly improvised one.

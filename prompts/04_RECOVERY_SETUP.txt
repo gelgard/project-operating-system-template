@@ -5,12 +5,16 @@ RECOVERY SETUP PROMPT
         Do not design recovery from scratch if the template already defines:
         - recovery files
         - architecture update procedure
-        - archive-first sync workflow
+        - workspace/manifest-first sync workflow; archives only when workspace is unavailable
         - frozen contextJSON archive rules
         - response format rules
         - command model
         - engineering/lean/credential/design contracts
         - completion aliases and automatic-commit closure behavior
         - accepted Change Request propagation audit
+        - current-state manifest and same-state projections
+        - command/event/accepted-CR trigger registry and validator
+        - actual repository/worktree reconciliation and completeness certificate
+        - archive non-authority
 
         Adapt the inherited recovery system to the new project's domain while preserving the template operating-system behavior.

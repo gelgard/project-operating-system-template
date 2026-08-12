@@ -1,4 +1,9 @@
 # plan-stage.mdc
 
 Goal:
-Create or refine a stage plan without implementing code.
+Create or refine a Stage plan only when the configured transport mode and an
+explicit OWNER task authorize the implementation agent to plan.
+
+Otherwise return `BLOCKED / MANAGER_AUTHORITY_REQUIRED`. Planning must preserve
+Requirement traceability, Outcome Slices, risk gates, external authority and
+normal integration/canary/restore; it may not issue implementation work.

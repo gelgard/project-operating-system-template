@@ -15,5 +15,12 @@ Do not replace:
 - credential and visual validation gates
 - selected-entity integrity
 - automatic commit after successful task closure
+- Outcome Slice / DoR / risk-class validation
+- current-state and trigger-registry gates
+- independent handoff audit and two-correction limit
+- archive non-authority
 
 Only extend them with project-specific implementation.
+
+Before implementation, run the governance validator and confirm template_mode
+is false with no unresolved mandatory placeholders.

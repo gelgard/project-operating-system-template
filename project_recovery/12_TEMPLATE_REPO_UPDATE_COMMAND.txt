@@ -24,6 +24,11 @@ Methodology-level additions may include:
 - automatic task closure commit behavior
 - UI design/agent-visual/user-visual closure gates
 - selected-entity integrity and multi-step-flow safety
+- Outcome Slice, practical DoR and risk-proportional validation
+- governance trigger registry and current-state manifest
+- Full Restore completeness and actual version-control reconciliation
+- implementation-agent transport, independent audit and correction budget
+- archive non-authority and rule activation
 
 Mandatory update behavior:
 - transfer only operating-system methodology and process contracts
@@ -34,3 +39,4 @@ Mandatory update behavior:
   runtime specifics, and product functionality
 - validate template cross-references, git diff/whitespace, secret safety, and
   source-project leakage before committing the template update
+- run python3 scripts/validate_governance_contract.py in template mode

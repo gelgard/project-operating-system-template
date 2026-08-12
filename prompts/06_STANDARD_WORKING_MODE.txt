@@ -13,3 +13,7 @@ All next AI tasks must preserve:
 - lean/token-controlled reporting without reduced validation
 - credential/design/Change Request gates
 - automatic task closure commit
+- Outcome Slice/DoR and risk-proportional validation
+- manifest-first restore and command/event triggers
+- independent handoff audit and correction budget
+- archive non-authority

@@ -14,3 +14,8 @@ A change must update the template repository if it changes:
 - Change Request propagation rules
 - automatic closure/commit rules
 - design and visual-validation gates
+- Outcome Slice, DoR or validation-risk model
+- command/event trigger registry
+- current-state manifest or Full Restore completeness contract
+- implementation-agent transport or correction budget
+- archive authority and activation rules

@@ -1,4 +1,9 @@
 # prepare-release.mdc
 
 Goal:
-Prepare a release candidate.
+Prepare an isolated release candidate only under an explicit active task.
+
+Read the current-state manifest and release plan; require Integration/Release
+gates, exact candidate identity, rollback, security/secret checks, cumulative
+scenario evidence and post-action cleanup. Never deploy, merge, tag or publish
+without recorded authority.

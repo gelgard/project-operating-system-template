@@ -17,8 +17,13 @@ Next:
 - {{NEXT_AI_TASK_3}}
 
 Cross-cutting architecture notes:
+- current state originates in project_recovery/00_CURRENT_STATE_MANIFEST.md;
+  Stage/status are same-state projections reconciled against actual version control
+- executable rules/accepted CRs have bindings in the governance trigger registry
+- archives are non-normative evidence and are read only through active pointers
 - contextJSON maintenance is no longer part of architecture synchronization
-- architecture synchronization must be archive-first
+- architecture synchronization is workspace/manifest-first; use an archive
+  only when the workspace is inaccessible or explicitly authoritative
 - existing timestamped context JSON files are frozen historical external exports only
 - no new populated contextJSON snapshots should be generated during architecture sync, context refresh, task issue, or task closure
 - contextJSON must not be treated as architecture, process, methodology, testing, validation, or execution authority for the repository
@@ -28,11 +33,16 @@ Cross-cutting architecture notes:
 - every Stage must be implemented on its own branch named `feature/stage-<stage-number>-<stage-name-kebab-case>`
 - completed Stage branches merge into `develop`; the next Stage feature branch is created from updated `develop`
 - new functionality and functional changes must pass `docs/architecture/change-management-process.md` before implementation
+- each task is one vertical Outcome Slice with practical DoR and declared risk
+- implementer handoffs are independently audited; maximum two valid corrections
+- delivery, Requirement acceptance, milestone and release are separate
 
 Cross-cutting execution responsibility notes:
-- Cursor is implementation-only and should receive only code writing, refactor, and directly code-related test instructions
+- configured implementation agent receives only authorized code/refactor and
+  directly related test instructions
 - planning, architecture reasoning, validation strategy, manual-test orchestration, closure-gate evaluation, next-step planning, and response packaging remain agent-chat responsibilities
-- Prompt for Cursor must not duplicate manual validation, agent-side validation plans, architecture ownership, or next-step orchestration handled by the agent
+- Implementation prompt must not duplicate manual validation, agent-side
+  validation plans, architecture ownership or next-step orchestration
 
 Cross-cutting stakeholder summary notes:
 - every current/next step must include a short manager-facing summary
@@ -40,5 +50,6 @@ Cross-cutting stakeholder summary notes:
 
 Cross-cutting closure notes:
 - Task Closure Hard Gate Checklist must pass before any AI task is marked complete
-- UI-scope tasks require both Playwright visual validation by the agent and user-side manual visual checks
+- every UI Outcome gets automated proof; OWNER manually checks only ready
+  milestone UI directly in the running app/device
 - temporary validation-only artifacts must be deleted after closure unless intentionally kept as evidence
